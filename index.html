@@ -727,22 +727,24 @@
       switchView('submit');
     }
 
-    // Admin Authentication (Credenciais: Lipe / q1234567)
     function handleAdminLogin(e) {
-      e.preventDefault();
-      const u = document.getElementById('admin-user').value.trim();
-      const p = document.getElementById('admin-pass').value.trim();
-      const errEl = document.getElementById('admin-login-error');
+  e.preventDefault();
+  const u = document.getElementById('admin-user').value.trim();
+  const p = document.getElementById('admin-pass').value.trim();
+  const errEl = document.getElementById('admin-login-error');
 
-      if (u === 'Lipe' && p === 'q1234567') {
-        errEl.classList.add('hidden-screen');
-        switchView('admin-dashboard');
-        renderAdminDashboard();
-      } else {
-        errEl.classList.remove('hidden-screen');
-        errEl.textContent = "❌ Usuário ou senha incorretos!";
-      }
-    }
+  const isValidLipe = (u === 'Lipe' && p === 'q1234567');
+  const isValidMatheus = (u === 'matheus' && p === 'Conexao123@');
+
+  if (isValidLipe || isValidMatheus) {
+    errEl.classList.add('hidden-screen');
+    switchView('admin-dashboard');
+    renderAdminDashboard();
+  } else {
+    errEl.classList.remove('hidden-screen');
+    errEl.textContent = "❌ Usuário ou senha incorretos!";
+  }
+}
 
     function logoutAdmin() {
       switchView('quiz');
