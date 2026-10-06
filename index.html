@@ -38,6 +38,7 @@
       background-color: #0d0102; 
     }
 
+    /* Pixel Grid Background Overlay Inspired by Conexao Logo */
     .pixel-bg {
       background-color: #990000;
       background-image: 
@@ -73,17 +74,24 @@
   <header class="bg-slate-950/95 text-white shadow-2xl border-b border-rose-900/50 sticky top-0 z-50 backdrop-blur-md">
     <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center flex-wrap gap-3">
       
-      <!-- LOGO -->
+      <!-- LOGO FIEL À IMAGEM -->
       <div class="flex items-center space-x-3 cursor-pointer group" onclick="switchView('quiz')">
+        <!-- Ícone do Símbolo dos Anéis (SVG Vetorial Fiel) -->
         <div class="relative w-11 h-11 sm:w-12 sm:h-12 flex-shrink-0 group-hover:scale-105 transition-transform">
           <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-lg" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Arco Externo Gradiente Cinza Escuro -->
             <path d="M 82 22 A 42 42 0 1 0 82 78" stroke="#333138" stroke-width="12" stroke-linecap="round"/>
             <path d="M 82 22 A 42 42 0 1 0 82 78" stroke="#524e5a" stroke-width="4" stroke-linecap="round" opacity="0.6"/>
+            
+            <!-- Arco Intermediário Vermelho -->
             <path d="M 72 32 A 28 28 0 1 0 72 68" stroke="#EE2B2E" stroke-width="7.5" stroke-linecap="round"/>
+            
+            <!-- Arco Interno Vermelho -->
             <path d="M 62 42 A 15 15 0 1 0 62 58" stroke="#EE2B2E" stroke-width="6" stroke-linecap="round"/>
           </svg>
         </div>
 
+        <!-- Tipografia Nome + Subtítulo -->
         <div class="flex flex-col justify-center">
           <div class="flex items-center">
             <span class="text-2xl sm:text-3xl font-black text-[#EE2B2E] tracking-wider leading-none" style="font-family: Arial, sans-serif;">
@@ -96,7 +104,7 @@
         </div>
       </div>
 
-      <!-- Header Action Buttons -->
+      <!-- Header Admin Action Button -->
       <div class="flex items-center gap-2">
         <button id="nav-quiz-btn" onclick="switchView('quiz')" class="bg-white/10 hover:bg-white/20 text-white font-semibold text-xs px-3.5 py-2 rounded-lg backdrop-blur border border-white/20 transition flex items-center gap-1.5 shadow">
           <span>📝</span> Responder Teste
@@ -112,6 +120,7 @@
 
     <!-- VIEW 1: CANDIDATO - QUESTIONÁRIO DEDICADO -->
     <div id="view-quiz" class="space-y-6">
+      <!-- Candidate Welcome Card -->
       <div class="bg-slate-900/90 border border-rose-900/40 p-6 rounded-2xl shadow-2xl relative overflow-hidden">
         <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-rose-600/10 rounded-full blur-2xl pointer-events-none"></div>
         
@@ -120,8 +129,8 @@
             <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-rose-950/80 border border-rose-800 text-rose-300 text-xs font-semibold mb-2">
               <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span> Sistema Corporativo de Seleção
             </div>
-            <h2 class="text-2xl font-black text-white tracking-wide" id="active-test-title">Avaliação Técnica</h2>
-            <p class="text-xs text-slate-300 mt-1">Responda às questões selecionadas. Preste atenção aos valores e pesos decimais de cada pergunta.</p>
+            <h2 class="text-2xl font-black text-white tracking-wide">Avaliação de Informática e Redes</h2>
+            <p class="text-xs text-slate-300 mt-1">Responda às questões selecionadas. Preste atenção aos valores e pesos de cada pergunta.</p>
           </div>
           
           <div class="bg-gradient-to-br from-rose-950 to-slate-900 border border-rose-800/60 p-3.5 rounded-xl text-right min-w-[170px] shadow-lg">
@@ -131,18 +140,22 @@
           </div>
         </div>
 
+        <!-- CAMPO DE NOME DO CANDIDATO -->
         <div class="pt-4 mt-4 border-t border-slate-800 relative z-10">
           <label class="block text-xs font-bold text-rose-200 uppercase tracking-wider mb-1.5">Nome Completo do Candidato <span class="text-rose-400">*</span></label>
           <input type="text" id="candidate-name-initial" placeholder="Digite seu nome completo para iniciar o teste..." class="w-full text-sm px-4 py-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-rose-500 font-medium transition shadow-inner">
         </div>
       </div>
 
+      <!-- Barra de Progresso Visual -->
       <div class="w-full bg-slate-900 rounded-full h-3 p-0.5 border border-rose-950 shadow-inner overflow-hidden">
         <div id="progress-bar" class="hero-gradient h-full rounded-full transition-all duration-300 shadow-sm" style="width: 0%"></div>
       </div>
 
+      <!-- Dynamic Question Cards Container -->
       <div id="questions-container" class="space-y-6"></div>
 
+      <!-- Complete & Submit Action -->
       <div class="bg-slate-900/90 p-6 rounded-2xl border border-rose-900/30 shadow-xl text-center">
         <button onclick="checkCompletionBeforeSubmit()" class="w-full sm:w-auto px-10 py-4 hero-gradient hover:opacity-95 text-white font-black text-sm uppercase tracking-wider rounded-xl shadow-xl hover:shadow-rose-900/50 transition transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 mx-auto">
           <span>🚀</span> Finalizar e Enviar Avaliação
@@ -191,7 +204,7 @@
       </div>
     </div>
 
-    <!-- VIEW 3: TELA DE SUCESSO -->
+    <!-- VIEW 3: TELA DE SUCESSO DO TESTE -->
     <div id="view-success" class="hidden-screen">
       <div class="bg-slate-900/90 p-8 rounded-2xl border border-rose-900/50 shadow-2xl text-center space-y-5 max-w-xl mx-auto">
         <div class="w-20 h-20 bg-rose-950 border-2 border-rose-600 text-rose-400 rounded-full flex items-center justify-center text-4xl mx-auto shadow-lg">✓</div>
@@ -214,7 +227,7 @@
       </div>
     </div>
 
-    <!-- VIEW 4: LOGIN ADMIN -->
+    <!-- VIEW 4: LOGIN DO PAINEL ADMIN -->
     <div id="view-admin-login" class="hidden-screen">
       <div class="max-w-md mx-auto bg-slate-900/95 text-white rounded-2xl p-6 sm:p-8 shadow-2xl border border-rose-900/60 space-y-6">
         <div class="text-center space-y-2">
@@ -246,9 +259,10 @@
       </div>
     </div>
 
-    <!-- VIEW 5: PAINEL DASHBOARD ADMIN -->
+    <!-- VIEW 5: PAINEL DASHBOARD COMPLETO DE ADMIN -->
     <div id="view-admin-dashboard" class="hidden-screen space-y-6">
       
+      <!-- Admin Header Bar -->
       <div class="hero-gradient text-white rounded-2xl p-6 shadow-2xl border border-rose-500/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <span class="text-[10px] uppercase font-black tracking-widest text-rose-200">Painel de Controle de Conteúdo & Integrações</span>
@@ -262,10 +276,7 @@
       <!-- Navigation Tabs inside Admin -->
       <div class="flex flex-wrap gap-2 border-b border-rose-900/40 pb-3">
         <button onclick="switchAdminTab('questions')" id="tab-btn-questions" class="px-4 py-2 rounded-xl text-xs font-bold transition hero-gradient text-white shadow">
-          ❓ Banco de Questões (<span id="count-questions-badge">0</span>)
-        </button>
-        <button onclick="switchAdminTab('versions')" id="tab-btn-versions" class="px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-900 text-slate-300 hover:text-white border border-rose-900/30">
-          🎯 Versões de Testes (<span id="count-versions-badge">0</span>)
+          ❓ Gerenciar Questões (<span id="count-questions-badge">0</span>)
         </button>
         <button onclick="switchAdminTab('topics')" id="tab-btn-topics" class="px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-900 text-slate-300 hover:text-white border border-rose-900/30">
           📁 Tópicos & Categorias (<span id="count-topics-badge">0</span>)
@@ -275,14 +286,13 @@
         </button>
       </div>
 
-      <!-- ADMIN TAB 1: GERENCIAR QUESTÕES & ALTERAÇÃO EM MASSA -->
+      <!-- ADMIN TAB 1: GERENCIAR QUESTÕES & PESOS -->
       <div id="admin-tab-questions" class="space-y-6">
-        
-        <!-- Formulário Adicionar/Editar Questão -->
+        <!-- Add / Edit Question Form Card -->
         <div class="bg-slate-900/90 p-6 rounded-2xl border border-rose-900/40 shadow-xl space-y-4">
           <div class="flex justify-between items-center border-b border-slate-800 pb-3">
             <h3 class="font-bold text-white text-base flex items-center gap-2" id="question-form-title">
-              <span>➕</span> Adicionar Nova Questão ao Banco
+              <span>➕</span> Adicionar Nova Questão
             </h3>
             <button onclick="resetQuestionForm()" id="btn-cancel-q-edit" class="hidden-screen text-xs bg-slate-800 text-slate-300 hover:text-white px-3 py-1.5 rounded-lg border border-slate-700">
               Cancelar Edição
@@ -296,21 +306,23 @@
               <div class="md:col-span-2">
                 <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Tópico / Categoria</label>
                 <select id="q-form-cat" class="w-full text-xs p-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white focus:outline-none focus:border-rose-500 font-medium" required>
+                  <!-- Populated via JS -->
                 </select>
               </div>
               <div>
-                <label class="block text-xs font-bold text-rose-300 uppercase mb-1">Peso / Pontuação (Permite Decimal ex: 1.5)</label>
-                <input type="number" id="q-form-weight" min="0.1" max="50" step="any" value="1" class="w-full text-xs p-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white focus:outline-none focus:border-rose-500 font-bold" required>
+                <label class="block text-xs font-bold text-rose-300 uppercase mb-1">Peso / Pontuação da Pergunta</label>
+                <input type="number" id="q-form-weight" min="0.1" max="50" step="0.1" value="1" class="w-full text-xs p-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white focus:outline-none focus:border-rose-500 font-bold" required>
               </div>
             </div>
 
             <div>
               <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Enunciado da Questão</label>
-              <textarea id="q-form-text" rows="2" placeholder="Digite a pergunta..." class="w-full text-xs p-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white focus:outline-none focus:border-rose-500 font-medium" required></textarea>
+              <textarea id="q-form-text" rows="2" placeholder="Digite a pergunta para a avaliação..." class="w-full text-xs p-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white focus:outline-none focus:border-rose-500 font-medium" required></textarea>
             </div>
 
+            <!-- Question Options -->
             <div class="space-y-2.5 pt-2">
-              <label class="block text-xs font-bold text-slate-300 uppercase">Opções de Resposta (Selecione a opção Correta):</label>
+              <label class="block text-xs font-bold text-slate-300 uppercase">Opções de Resposta (Selecione o botão da opção Correta):</label>
               
               <div class="grid grid-cols-1 gap-2">
                 <div class="flex items-center gap-2 bg-slate-950 p-2 rounded-xl border border-slate-800">
@@ -338,35 +350,26 @@
 
             <div class="flex gap-3 pt-2">
               <button type="submit" id="btn-save-q" class="px-6 py-3 hero-gradient text-white text-xs font-extrabold uppercase tracking-wider rounded-xl shadow transition">
-                💾 Salvar Questão no Banco
+                💾 Salvar Questão
               </button>
             </div>
           </form>
         </div>
 
-        <!-- AÇÕES EM MASSA (BULK EDIT) -->
-        <div class="bg-slate-900/90 p-4 rounded-2xl border border-rose-900/40 flex flex-wrap items-center justify-between gap-3">
-          <div class="flex items-center gap-3 flex-wrap">
-            <span class="text-xs font-bold text-rose-300">⚡ Alteração em Massa:</span>
-            <select id="bulk-topic-select" class="text-xs p-2 bg-slate-950 border border-rose-900/60 rounded-xl text-white font-medium">
-            </select>
-            <button onclick="applyBulkTopicChange()" class="px-4 py-2 bg-rose-700 hover:bg-rose-600 text-white text-xs font-bold rounded-xl transition">
-              Alterar Tópico das Selecionadas
+        <!-- Questions List Table -->
+        <div class="bg-slate-900/90 rounded-2xl border border-rose-900/40 p-5 shadow-xl space-y-4">
+          <div class="flex justify-between items-center">
+            <h3 class="font-bold text-white text-sm">Banco de Questões Ativo</h3>
+            <button onclick="restoreDefaultQuestions()" class="text-[11px] text-rose-400 hover:text-rose-300 underline font-medium">
+              🔄 Restaurar 50 Questões Padrão
             </button>
           </div>
-          <button onclick="restoreDefaultQuestions()" class="text-[11px] text-rose-400 hover:text-rose-300 underline font-medium">
-            🔄 Restaurar 50 Questões Padrão
-          </button>
-        </div>
 
-        <!-- Tabela do Banco de Questões -->
-        <div class="bg-slate-900/90 rounded-2xl border border-rose-900/40 p-5 shadow-xl space-y-4">
           <div class="overflow-x-auto">
             <table class="w-full text-left text-xs text-slate-300">
               <thead class="bg-slate-950 text-rose-300 uppercase tracking-wider border-b border-rose-900/40">
                 <tr>
-                  <th class="p-3 text-center"><input type="checkbox" id="select-all-q" onchange="toggleSelectAllQuestions(this)"></th>
-                  <th class="p-3">#</th>
+                  <th class="p-3"><input type="checkbox" onchange="selectAllQuestions(this.checked)" class="w-4 h-4"></th><th class="p-3">#</th>
                   <th class="p-3">Tópico</th>
                   <th class="p-3">Questão</th>
                   <th class="p-3">Peso</th>
@@ -374,52 +377,14 @@
                 </tr>
               </thead>
               <tbody id="questions-table-body" class="divide-y divide-slate-800/60">
+                <!-- Populated via JS -->
               </tbody>
             </table>
           </div>
         </div>
       </div>
 
-      <!-- ADMIN TAB 2: GERENCIAR E SALVAR VERSÕES DE TESTES -->
-      <div id="admin-tab-versions" class="hidden-screen space-y-6">
-        
-        <!-- Formulário para Criar/Salvar Nova Versão de Teste -->
-        <div class="bg-slate-900/90 p-6 rounded-2xl border border-rose-900/40 shadow-xl space-y-4">
-          <h3 class="font-bold text-white text-base flex items-center gap-2">
-            <span>🎯</span> Criar Nova Versão / Configuração de Teste
-          </h3>
-          <p class="text-xs text-slate-400">Configure como o teste será sorteado a partir do Banco de Questões (ex: callcenter1, callcenter2, Nivel_Avancado).</p>
-
-          <div class="space-y-4">
-            <div>
-              <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Nome/Identificador do Teste</label>
-              <input type="text" id="test-version-name" placeholder="Ex: callcenter1, callcenter2..." class="w-full text-xs p-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white focus:outline-none focus:border-rose-500 font-medium">
-            </div>
-
-            <!-- Regras de Seleção por Tópico -->
-            <div class="space-y-3">
-              <label class="block text-xs font-bold text-rose-300 uppercase">Regras de Questões por Tópico (Quantidade ou Porcentagem):</label>
-              <div id="topic-rules-container" class="space-y-2">
-                <!-- Preenchido via JS baseado nos tópicos -->
-              </div>
-            </div>
-
-            <button onclick="generateAndSaveTestVersion()" class="px-6 py-3 hero-gradient text-white text-xs font-extrabold uppercase tracking-wider rounded-xl shadow transition">
-              🎲 Gerar e Salvar Esta Versão de Teste
-            </button>
-          </div>
-        </div>
-
-        <!-- Lista de Versões Salvas -->
-        <div class="bg-slate-900/90 rounded-2xl border border-rose-900/40 p-5 shadow-xl space-y-4">
-          <h3 class="font-bold text-white text-sm">Versões de Testes Salvas</h3>
-          <div id="test-versions-list" class="space-y-3">
-            <!-- Preenchido via JS -->
-          </div>
-        </div>
-      </div>
-
-      <!-- ADMIN TAB 3: GERENCIAR TÓPICOS -->
+      <!-- ADMIN TAB 2: GERENCIAR TÓPICOS -->
       <div id="admin-tab-topics" class="hidden-screen space-y-6">
         <div class="bg-slate-900/90 p-6 rounded-2xl border border-rose-900/40 shadow-xl space-y-4">
           <h3 class="font-bold text-white text-base">📁 Cadastrar / Editar Tópicos</h3>
@@ -439,11 +404,12 @@
         <div class="bg-slate-900/90 rounded-2xl border border-rose-900/40 p-5 shadow-xl">
           <h3 class="font-bold text-white text-sm mb-4">Tópicos Cadastrados no Sistema</h3>
           <div id="topics-grid-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+            <!-- Populated via JS -->
           </div>
         </div>
       </div>
 
-      <!-- ADMIN TAB 4: DISCORD CONFIGS -->
+      <!-- ADMIN TAB 3: DISCORD WEBOOK CONFIGS -->
       <div id="admin-tab-discord" class="hidden-screen space-y-6">
         <div class="bg-slate-900/90 p-6 rounded-2xl border border-rose-900/40 shadow-xl space-y-4">
           <h3 class="font-bold text-white text-base flex items-center gap-2">
@@ -479,9 +445,11 @@
 
   </main>
 
-  <!-- CONTAINER OCULTO PARA PDF -->
+  <!-- CONTAINER OCULTO PARA A GERAÇÃO DO PDF -->
   <div class="hidden">
     <div id="pdf-template" style="width: 750px; padding: 35px; background: #ffffff; font-family: 'Inter', sans-serif; color: #0f172a;">
+      
+      <!-- PDF Header com o Estilo Oficial Conexão -->
       <div style="border-bottom: 3px solid #EE2B2E; padding-bottom: 15px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
         <div>
           <h1 style="font-size: 20px; font-weight: 900; color: #EE2B2E; margin: 0; letter-spacing: 1px;">CONEXÃO PROVEDOR DE INTERNET</h1>
@@ -492,6 +460,7 @@
         </div>
       </div>
 
+      <!-- Candidate & Score Info Box -->
       <div style="background: #fff1f2; border: 1px solid #fecdd3; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
         <table style="width: 100%; font-size: 11px; border-collapse: collapse;">
           <tr>
@@ -525,9 +494,12 @@
   </footer>
 
   <script>
-    const defaultTopics = ["Hardware", "Windows", "Word", "Excel", "Internet/Segurança"];
 
-    const defaultQuestions = [
+    // ============================================================
+    // SISTEMA DE AVALIAÇÕES - QUESTÕES, TESTES E VERSÕES
+    // ============================================================
+
+const defaultQuestions = [
       { id: 1, cat: "Hardware", q: "Qual componente é o 'cérebro' do computador, responsável por processar dados?", opts: ["Placa Mãe", "Processador (CPU)", "Memória RAM", "Disco Rígido (HD)"], c: 1, weight: 2 },
       { id: 2, cat: "Hardware", q: "A memória RAM é responsável por:", opts: ["Armazenar arquivos permanentemente", "Processar gráficos 3D", "Guardar dados temporários em uso", "Fornecer energia aos componentes"], c: 2, weight: 1 },
       { id: 3, cat: "Hardware", q: "Qual dos dispositivos abaixo é exclusivamente um periférico de entrada?", opts: ["Monitor", "Impressora", "Teclado", "Caixa de som"], c: 2, weight: 1 },
@@ -580,142 +552,379 @@
       { id: 50, cat: "Internet/Segurança", q: "Ao receber um e-mail de um remetente desconhecido com um anexo '.exe', você deve:", opts: ["Abrir o anexo imediatamente", "Não abrir o anexo e avisar a equipe de segurança/TI", "Encaminhar para todos os colegas", "Renomear o arquivo"], c: 1, weight: 2 }
     ];
 
-    // State Variables
+    const defaultTopics = ["Hardware", "Windows", "Word", "Excel", "Internet/Segurança"];
+
+    // Um teste é uma configuração de seleção de questões.
+    // Cada regra define quantas questões de um tópico entram no teste:
+    // mode = "count" para quantidade fixa ou "percentage" para porcentagem.
+    const defaultTests = [{
+      id: "test-default",
+      name: "Avaliação Geral",
+      level: "Completo",
+      description: "Todas as questões disponíveis, distribuídas por tópico.",
+      rules: defaultTopics.map(topic => ({ topic, mode: "percentage", value: 100 }))
+    }];
+
     let activeQuestions = [];
     let activeTopics = [];
-    let testVersions = {};
-    let currentTestVersion = "Padrão";
-    let activeTestQuestions = [];
+    let activeTests = [];
     let userAnswers = [];
-    
+    let currentTest = null;
+
     let discordSettings = {
       webhook: "https://discord.com/api/webhooks/1551208352653123666/fqobobH5FtuOcYJ8bsb51DPCDfsagy2S9M3h39EhFCn9nJmX7pGKOrJ3lvgzDJXsmLY7",
       userId: "1361695624252100850"
     };
 
+    const STORAGE = {
+      questions: 'conexao_quiz_questions',
+      topics: 'conexao_quiz_topics',
+      tests: 'conexao_quiz_tests',
+      discord: 'rh_quiz_discord'
+    };
+
     window.addEventListener('DOMContentLoaded', () => {
       loadStoredData();
+      installUIExtensions();
       renderQuestions();
       updateProgress();
       renderAdminDashboard();
+      renderTestSelector();
 
       const initialInput = document.getElementById('candidate-name-initial');
       const finalInput = document.getElementById('candidate-name');
       if (initialInput && finalInput) {
-        initialInput.addEventListener('input', (e) => {
-          finalInput.value = e.target.value;
-        });
+        initialInput.addEventListener('input', e => finalInput.value = e.target.value);
       }
+
+      // Começa com o primeiro teste salvo.
+      if (activeTests.length) selectTest(activeTests[0].id, true);
     });
 
+    function escapeHtml(value) {
+      return String(value ?? '')
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;').replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    function formatNumber(value) {
+      const n = Number(value || 0);
+      return Number.isInteger(n) ? String(n) : n.toFixed(2).replace(/0+$/, '').replace(/\.$/, '');
+    }
+
     function loadStoredData() {
-      // Load Topics
-      const savedTopics = localStorage.getItem('conexao_quiz_topics');
-      if (savedTopics) {
-        try { activeTopics = JSON.parse(savedTopics); } catch(e) { activeTopics = [...defaultTopics]; }
+      const savedTopics = localStorage.getItem(STORAGE.topics);
+      try {
+        activeTopics = savedTopics ? JSON.parse(savedTopics) : [...defaultTopics];
+      } catch { activeTopics = [...defaultTopics]; }
+      if (!Array.isArray(activeTopics) || !activeTopics.length) activeTopics = [...defaultTopics];
+
+      const savedQuestions = localStorage.getItem(STORAGE.questions);
+      try {
+        activeQuestions = savedQuestions ? JSON.parse(savedQuestions) : [...defaultQuestions];
+      } catch { activeQuestions = [...defaultQuestions]; }
+      if (!Array.isArray(activeQuestions)) activeQuestions = [...defaultQuestions];
+
+      const savedTests = localStorage.getItem(STORAGE.tests);
+      try {
+        activeTests = savedTests ? JSON.parse(savedTests) : [];
+      } catch { activeTests = []; }
+
+      if (!Array.isArray(activeTests) || !activeTests.length) {
+        activeTests = [makeDefaultTest()];
       } else {
-        activeTopics = [...defaultTopics];
+        activeTests = activeTests.map(normalizeTest);
       }
 
-      // Load Master Questions
-      const savedQuestions = localStorage.getItem('conexao_quiz_questions');
-      if (savedQuestions) {
-        try { activeQuestions = JSON.parse(savedQuestions); } catch(e) { activeQuestions = [...defaultQuestions]; }
-      } else {
-        activeQuestions = [...defaultQuestions];
-      }
-
-      // Load Test Versions
-      const savedVersions = localStorage.getItem('conexao_quiz_versions');
-      if (savedVersions) {
-        try { testVersions = JSON.parse(savedVersions); } catch(e) { testVersions = {}; }
-      }
-
-      const activeVerKey = localStorage.getItem('conexao_quiz_active_version') || 'Padrão';
-      currentTestVersion = activeVerKey;
-
-      if (testVersions[currentTestVersion]) {
-        activeTestQuestions = testVersions[currentTestVersion].questions;
-      } else {
-        activeTestQuestions = [...activeQuestions];
-      }
-
-      // Load Discord Settings
-      const savedDiscord = localStorage.getItem('rh_quiz_discord');
+      const savedDiscord = localStorage.getItem(STORAGE.discord);
       if (savedDiscord) {
-        try { discordSettings = JSON.parse(savedDiscord); } catch(e) {}
+        try { discordSettings = JSON.parse(savedDiscord); } catch {}
       }
-      document.getElementById('input-webhook').value = discordSettings.webhook;
-      document.getElementById('input-userid').value = discordSettings.userId;
 
-      userAnswers = new Array(activeTestQuestions.length).fill(null);
+      const webhookEl = document.getElementById('input-webhook');
+      const userIdEl = document.getElementById('input-userid');
+      if (webhookEl) webhookEl.value = discordSettings.webhook || '';
+      if (userIdEl) userIdEl.value = discordSettings.userId || '';
+
+      userAnswers = new Array(activeQuestions.length).fill(null);
+    }
+
+    function makeDefaultTest() {
+      return {
+        id: 'test-default',
+        name: 'Avaliação Geral',
+        level: 'Completo',
+        description: 'Todas as questões disponíveis, distribuídas por tópico.',
+        rules: activeTopics.map(topic => ({ topic, mode: 'percentage', value: 100 }))
+      };
+    }
+
+    function normalizeTest(test) {
+      return {
+        id: test.id || ('test-' + Date.now() + '-' + Math.random().toString(36).slice(2)),
+        name: test.name || 'Teste sem nome',
+        level: test.level || 'Personalizado',
+        description: test.description || '',
+        rules: Array.isArray(test.rules) ? test.rules.map(r => ({
+          topic: r.topic,
+          mode: r.mode === 'count' ? 'count' : 'percentage',
+          value: Math.max(0, Number(r.value) || 0)
+        })) : []
+      };
     }
 
     function saveDataToStorage() {
-      localStorage.setItem('conexao_quiz_topics', JSON.stringify(activeTopics));
-      localStorage.setItem('conexao_quiz_questions', JSON.stringify(activeQuestions));
-      localStorage.setItem('conexao_quiz_versions', JSON.stringify(testVersions));
-      localStorage.setItem('conexao_quiz_active_version', currentTestVersion);
+      localStorage.setItem(STORAGE.questions, JSON.stringify(activeQuestions));
+      localStorage.setItem(STORAGE.topics, JSON.stringify(activeTopics));
+      localStorage.setItem(STORAGE.tests, JSON.stringify(activeTests));
     }
 
     function restoreDefaultQuestions() {
-      if (confirm("Deseja restaurar o banco para as 50 questões originais? Qualquer alteração customizada será resetada.")) {
-        activeTopics = [...defaultTopics];
-        activeQuestions = [...defaultQuestions];
-        testVersions = {};
-        currentTestVersion = "Padrão";
-        activeTestQuestions = [...activeQuestions];
-        userAnswers = new Array(activeTestQuestions.length).fill(null);
-        saveDataToStorage();
-        renderQuestions();
-        updateProgress();
-        renderAdminDashboard();
+      if (!confirm("Deseja restaurar o banco para as 50 questões originais? Qualquer alteração customizada será resetada.")) return;
+      activeTopics = [...defaultTopics];
+      activeQuestions = [...defaultQuestions];
+      activeTests = [makeDefaultTest()];
+      currentTest = null;
+      userAnswers = new Array(activeQuestions.length).fill(null);
+      saveDataToStorage();
+      renderQuestions();
+      updateProgress();
+      renderAdminDashboard();
+      renderTestSelector();
+      selectTest(activeTests[0].id, true);
+    }
+
+    // ============================================================
+    // TESTES / VERSÕES
+    // ============================================================
+
+    function renderTestSelector() {
+      let box = document.getElementById('candidate-test-selector');
+      if (!box) {
+        const welcome = document.querySelector('#view-quiz > div:first-child');
+        if (!welcome) return;
+        box = document.createElement('div');
+        box.id = 'candidate-test-selector';
+        box.className = 'mt-4 pt-4 border-t border-slate-800';
+        welcome.querySelector('.relative.z-10')?.appendChild(box);
+      }
+
+      box.innerHTML = `
+        <div class="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-3 items-end">
+          <div>
+            <label class="block text-xs font-bold text-rose-200 uppercase tracking-wider mb-1.5">
+              Teste / Versão
+            </label>
+            <select id="candidate-test-select"
+              onchange="selectTest(this.value)"
+              class="w-full text-sm px-4 py-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white focus:outline-none focus:border-rose-500 font-medium">
+              ${activeTests.map(t => `<option value="${escapeHtml(t.id)}">${escapeHtml(t.name)} — ${escapeHtml(t.level)}</option>`).join('')}
+            </select>
+          </div>
+          <div class="bg-slate-950 border border-rose-900/40 rounded-xl px-4 py-3 text-xs text-slate-300">
+            <span class="text-rose-300 font-bold">Questões desta versão:</span>
+            <strong id="candidate-test-question-count" class="text-white">0</strong>
+          </div>
+        </div>
+        <p id="candidate-test-description" class="text-[11px] text-slate-400 mt-2"></p>
+      `;
+    }
+
+    function selectTest(testId, silent = false) {
+      const test = activeTests.find(t => t.id === testId) || activeTests[0];
+      if (!test) return;
+      currentTest = test;
+      const selected = generateQuestionsForTest(test);
+      activeQuestionsForQuiz = selected;
+      userAnswers = new Array(selected.length).fill(null);
+
+      const select = document.getElementById('candidate-test-select');
+      if (select) select.value = test.id;
+      const desc = document.getElementById('candidate-test-description');
+      if (desc) desc.textContent = test.description || `Nível: ${test.level}`;
+      const count = document.getElementById('candidate-test-question-count');
+      if (count) count.textContent = selected.length;
+
+      renderQuestions();
+      updateProgress();
+
+      if (!silent) {
+        document.getElementById('questions-container')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     }
 
-    // Render Candidate Test
+    let activeQuestionsForQuiz = null;
+    Object.defineProperty(window, 'activeQuestionsForQuiz', {
+      get() { return activeQuestionsForQuiz; },
+      set(v) { activeQuestionsForQuiz = v; }
+    });
+
+    function weightedSample(pool, amount) {
+      const source = [...pool];
+      const result = [];
+      amount = Math.min(Math.max(0, Math.floor(amount)), source.length);
+
+      while (result.length < amount && source.length) {
+        const totalWeight = source.reduce((sum, q) => sum + Math.max(0.0001, Number(q.weight) || 1), 0);
+        let random = Math.random() * totalWeight;
+        let selectedIndex = source.length - 1;
+
+        for (let i = 0; i < source.length; i++) {
+          random -= Math.max(0.0001, Number(source[i].weight) || 1);
+          if (random <= 0) {
+            selectedIndex = i;
+            break;
+          }
+        }
+        result.push(source.splice(selectedIndex, 1)[0]);
+      }
+      return result;
+    }
+
+    function generateQuestionsForTest(test) {
+      const result = [];
+      const usedIds = new Set();
+
+      for (const rule of test.rules || []) {
+        const topic = rule.topic;
+        const pool = activeQuestions.filter(q => q.cat === topic && !usedIds.has(q.id));
+        if (!pool.length) continue;
+
+        let amount = 0;
+        if (rule.mode === 'percentage') {
+          amount = Math.round(pool.length * Math.min(100, Math.max(0, Number(rule.value) || 0)) / 100);
+        } else {
+          amount = Math.round(Number(rule.value) || 0);
+        }
+
+        const chosen = weightedSample(pool, amount);
+        chosen.forEach(q => {
+          usedIds.add(q.id);
+          result.push(q);
+        });
+      }
+
+      // Embaralha a ordem final sem alterar o peso de seleção.
+      for (let i = result.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [result[i], result[j]] = [result[j], result[i]];
+      }
+      return result;
+    }
+
+    function installUIExtensions() {
+      // Decimal weights.
+      const weightInput = document.getElementById('q-form-weight');
+      if (weightInput) {
+        weightInput.min = '0.1';
+        weightInput.step = '0.1';
+        weightInput.value = '1';
+      }
+
+      // Acrescenta a aba de Testes ao painel existente.
+      const tabs = document.querySelector('#view-admin-dashboard .flex.flex-wrap');
+      if (tabs && !document.getElementById('tab-btn-tests')) {
+        const topicsBtn = document.getElementById('tab-btn-topics');
+        const btn = document.createElement('button');
+        btn.id = 'tab-btn-tests';
+        btn.onclick = () => switchAdminTab('tests');
+        btn.className = 'px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-900 text-slate-300 hover:text-white border border-rose-900/30';
+        btn.innerHTML = '🧪 Testes & Versões (<span id="count-tests-badge">0</span>)';
+        topicsBtn?.after(btn);
+      }
+
+      if (!document.getElementById('admin-tab-tests')) {
+        const discordTab = document.getElementById('admin-tab-discord');
+        if (!discordTab) return;
+        const tab = document.createElement('div');
+        tab.id = 'admin-tab-tests';
+        tab.className = 'hidden-screen space-y-6';
+        discordTab.before(tab);
+      }
+
+      // Barra de ações em massa da tabela de questões.
+      const tableCard = document.querySelector('#admin-tab-questions .overflow-x-auto')?.parentElement;
+      if (tableCard && !document.getElementById('bulk-question-actions')) {
+        const toolbar = document.createElement('div');
+        toolbar.id = 'bulk-question-actions';
+        toolbar.className = 'bg-slate-950/80 border border-rose-900/40 rounded-xl p-4 space-y-3';
+        toolbar.innerHTML = `
+          <div class="flex flex-col lg:flex-row lg:items-end gap-3">
+            <div class="flex-1">
+              <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Alterar tópico das questões selecionadas</label>
+              <select id="bulk-topic-select" class="w-full text-xs p-2.5 bg-slate-900 border border-rose-900/50 rounded-lg text-white">
+                ${activeTopics.map(t => `<option value="${escapeHtml(t)}">${escapeHtml(t)}</option>`).join('')}
+              </select>
+            </div>
+            <button onclick="selectAllQuestions(true)" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 rounded-lg text-xs font-bold text-white">☑ Selecionar todas</button>
+            <button onclick="selectAllQuestions(false)" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 rounded-lg text-xs font-bold text-slate-300">☐ Limpar seleção</button>
+            <button onclick="bulkChangeTopic()" class="px-5 py-2.5 hero-gradient rounded-lg text-xs font-black text-white">↔ Alterar tópico</button>
+          </div>
+          <p class="text-[10px] text-slate-500">Selecione várias questões e mova todas para outro tópico de uma só vez.</p>
+        `;
+        tableCard.querySelector('.overflow-x-auto').before(toolbar);
+      }
+    }
+
+    function switchAdminTab(tabName) {
+      ['questions', 'topics', 'tests', 'discord'].forEach(t => {
+        const tab = document.getElementById(`admin-tab-${t}`);
+        const btn = document.getElementById(`tab-btn-${t}`);
+        if (tab) tab.classList.add('hidden-screen');
+        if (btn) btn.className = "px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-900 text-slate-300 hover:text-white border border-rose-900/30";
+      });
+
+      const target = document.getElementById(`admin-tab-${tabName}`);
+      const activeBtn = document.getElementById(`tab-btn-${tabName}`);
+      if (target) target.classList.remove('hidden-screen');
+      if (activeBtn) activeBtn.className = "px-4 py-2 rounded-xl text-xs font-bold transition hero-gradient text-white shadow";
+
+      if (tabName === 'tests') renderTestsAdmin();
+    }
+
+    // ============================================================
+    // QUIZ
+    // ============================================================
+
     function renderQuestions() {
       const container = document.getElementById('questions-container');
+      if (!container) return;
       container.innerHTML = '';
 
-      document.getElementById('active-test-title').textContent = `Avaliação Técnica (${currentTestVersion})`;
-
-      if (activeTestQuestions.length === 0) {
+      const questions = activeQuestionsForQuiz || [];
+      if (!questions.length) {
         container.innerHTML = `
           <div class="bg-slate-900 border border-slate-800 p-8 rounded-2xl text-center text-slate-400">
-            <p>Nenhuma questão configurada para o teste atual. O administrador precisa selecionar ou gerar uma versão de teste.</p>
-          </div>
-        `;
+            <p>Nenhuma questão foi selecionada para esta versão do teste.</p>
+            <p class="text-xs mt-2">O administrador deve revisar as regras de seleção dos tópicos.</p>
+          </div>`;
         return;
       }
 
-      activeTestQuestions.forEach((q, idx) => {
+      questions.forEach((q, idx) => {
         const card = document.createElement('div');
         card.className = "bg-slate-900/90 p-5 sm:p-6 rounded-2xl border border-rose-900/40 shadow-xl space-y-4 transition hover:border-rose-800/60";
         card.innerHTML = `
           <div class="flex flex-wrap justify-between items-center gap-2 border-b border-slate-800 pb-3">
-            <div class="flex items-center gap-2">
-              <span class="text-xs font-black text-rose-300 bg-rose-950/80 px-3 py-1 rounded-lg border border-rose-800/60 uppercase tracking-wider">
-                Questão ${idx + 1} de ${activeTestQuestions.length} •${q.cat}
-              </span>
-            </div>
+            <span class="text-xs font-black text-rose-300 bg-rose-950/80 px-3 py-1 rounded-lg border border-rose-800/60 uppercase tracking-wider">
+              Questão ${idx + 1} de ${questions.length} • ${escapeHtml(q.cat)}
+            </span>
             <span class="text-xs font-bold text-rose-400 bg-slate-950 px-2.5 py-1 rounded-md border border-rose-900/40">
-              ⚖️ Peso: ${parseFloat(q.weight \vert{}\vert{} 1)}${q.weight > 1 ? 'pontos' : 'ponto'}
+              ⚖️ Peso: ${formatNumber(q.weight || 1)} ${Number(q.weight || 1) > 1 ? 'pontos' : 'ponto'}
             </span>
           </div>
-          <p class="font-bold text-white text-base leading-snug">${q.q}</p>
+          <p class="font-bold text-white text-base leading-snug">${escapeHtml(q.q)}</p>
           <div class="space-y-2.5 pt-1">
             ${q.opts.map((opt, oIdx) => {
               const isChecked = userAnswers[idx] === oIdx;
               return `
                 <label class="flex items-center gap-3 p-3.5 rounded-xl border text-xs sm:text-sm cursor-pointer transition ${isChecked ? 'bg-rose-950/70 border-rose-600 text-white font-bold' : 'bg-slate-950/80 border-slate-800/80 text-slate-300 hover:bg-slate-800/50 hover:border-slate-700'}">
                   <input type="radio" name="q_${idx}" value="${oIdx}" ${isChecked ? 'checked' : ''} onchange="selectAnswer(${idx}, ${oIdx})" class="w-4 h-4 text-rose-600 focus:ring-rose-500">
-                  <span>${opt}</span>
-                </label>
-              `;
+                  <span>${escapeHtml(opt)}</span>
+                </label>`;
             }).join('')}
-          </div>
-        `;
+          </div>`;
         container.appendChild(card);
       });
     }
@@ -726,25 +935,20 @@
     }
 
     function updateProgress() {
+      const questions = activeQuestionsForQuiz || [];
       const answered = userAnswers.filter(a => a !== null).length;
-      const totalQuestions = activeTestQuestions.length;
-      
       let currentEarnedWeight = 0;
       let totalMaxWeight = 0;
 
-      activeTestQuestions.forEach((q, idx) => {
-        const w = parseFloat(q.weight || 1);
+      questions.forEach((q, idx) => {
+        const w = Number(q.weight) || 1;
         totalMaxWeight += w;
-        if (userAnswers[idx] !== null) {
-          currentEarnedWeight += w;
-        }
+        if (userAnswers[idx] !== null) currentEarnedWeight += w;
       });
 
-      document.getElementById('progress-text').textContent = `${answered} /${totalQuestions}`;
-      document.getElementById('progress-weight-text').textContent = `Peso Marcado: ${currentEarnedWeight.toFixed(1)} /${totalMaxWeight.toFixed(1)} pts`;
-      
-      const pct = totalQuestions > 0 ? (answered / totalQuestions) * 100 : 0;
-      document.getElementById('progress-bar').style.width = `${pct}%`;
+      document.getElementById('progress-text').textContent = `${answered} / ${questions.length}`;
+      document.getElementById('progress-weight-text').textContent = `Peso Marcado: ${formatNumber(currentEarnedWeight)} / ${formatNumber(totalMaxWeight)} pts`;
+      document.getElementById('progress-bar').style.width = `${questions.length ? (answered / questions.length) * 100 : 0}%`;
     }
 
     function switchView(viewName) {
@@ -752,31 +956,32 @@
         const el = document.getElementById(`view-${v}`);
         if (el) el.classList.add('hidden-screen');
       });
-      document.getElementById(`view-${viewName}`).classList.remove('hidden-screen');
+      document.getElementById(`view-${viewName}`)?.classList.remove('hidden-screen');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function checkCompletionBeforeSubmit() {
       const initialName = document.getElementById('candidate-name-initial').value.trim();
       const finalName = document.getElementById('candidate-name');
+      if (initialName && !finalName.value) finalName.value = initialName;
 
-      if (initialName && !finalName.value) {
-        finalName.value = initialName;
-      }
-
+      const questions = activeQuestionsForQuiz || [];
       const answered = userAnswers.filter(a => a !== null).length;
-      const total = activeTestQuestions.length;
+      const total = questions.length;
       const pending = total - answered;
-
-      let totalMaxWeight = activeTestQuestions.reduce((acc, q) => acc + parseFloat(q.weight || 1), 0);
+      const totalMaxWeight = questions.reduce((acc, q) => acc + (Number(q.weight) || 1), 0);
 
       document.getElementById('summary-total-questions').textContent = total;
       document.getElementById('summary-answered').textContent = answered;
       document.getElementById('summary-pending').textContent = pending;
-      document.getElementById('summary-max-weight').textContent = `${totalMaxWeight.toFixed(1)} pts`;
+      document.getElementById('summary-max-weight').textContent = `${formatNumber(totalMaxWeight)} pts`;
 
       switchView('submit');
     }
+
+    // ============================================================
+    // ADMIN LOGIN / DASHBOARD
+    // ============================================================
 
     function handleAdminLogin(e) {
       e.preventDefault();
@@ -797,170 +1002,102 @@
       }
     }
 
-    function logoutAdmin() {
-      switchView('quiz');
-    }
-
-    function switchAdminTab(tabName) {
-      ['questions', 'versions', 'topics', 'discord'].forEach(t => {
-        document.getElementById(`admin-tab-${t}`).classList.add('hidden-screen');
-        const btn = document.getElementById(`tab-btn-${t}`);
-        if(btn) btn.className = "px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-900 text-slate-300 hover:text-white border border-rose-900/30";
-      });
-
-      document.getElementById(`admin-tab-${tabName}`).classList.remove('hidden-screen');
-      const activeBtn = document.getElementById(`tab-btn-${tabName}`);
-      if(activeBtn) activeBtn.className = "px-4 py-2 rounded-xl text-xs font-bold transition hero-gradient text-white shadow";
-    }
+    function logoutAdmin() { switchView('quiz'); }
 
     function renderAdminDashboard() {
+      installUIExtensions();
+
       document.getElementById('count-questions-badge').textContent = activeQuestions.length;
       document.getElementById('count-topics-badge').textContent = activeTopics.length;
-      document.getElementById('count-versions-badge').textContent = Object.keys(testVersions).length;
+      document.getElementById('count-tests-badge').textContent = activeTests.length;
 
-      // Selects
       const catSelect = document.getElementById('q-form-cat');
-      catSelect.innerHTML = activeTopics.map(t => `<option value="${t}">${t}</option>`).join('');
+      if (catSelect) {
+        const current = catSelect.value;
+        catSelect.innerHTML = activeTopics.map(t => `<option value="${escapeHtml(t)}">${escapeHtml(t)}</option>`).join('');
+        if (activeTopics.includes(current)) catSelect.value = current;
+      }
 
       const bulkSelect = document.getElementById('bulk-topic-select');
-      bulkSelect.innerHTML = activeTopics.map(t => `<option value="${t}">${t}</option>`).join('');
+      if (bulkSelect) {
+        const current = bulkSelect.value;
+        bulkSelect.innerHTML = activeTopics.map(t => `<option value="${escapeHtml(t)}">${escapeHtml(t)}</option>`).join('');
+        if (activeTopics.includes(current)) bulkSelect.value = current;
+      }
 
-      // Populate Questions Table
+      renderQuestionsTable();
+      renderTopicsGrid();
+      renderTestSelector();
+    }
+
+    function renderQuestionsTable() {
       const qTable = document.getElementById('questions-table-body');
+      if (!qTable) return;
       qTable.innerHTML = activeQuestions.map((q, idx) => `
         <tr class="hover:bg-slate-800/40 transition">
-          <td class="p-3 text-center"><input type="checkbox" class="q-select-chk" value="${idx}"></td>
+          <td class="p-3">
+            <input type="checkbox" class="question-select w-4 h-4 text-rose-600 rounded" data-index="${idx}">
+          </td>
           <td class="p-3 font-bold text-rose-400">${idx + 1}</td>
-          <td class="p-3"><span class="bg-rose-950/80 text-rose-300 border border-rose-800 px-2 py-0.5 rounded text-[10px] font-bold">${q.cat}</span></td>
-          <td class="p-3 font-medium max-w-xs truncate">${q.q}</td>
-          <td class="p-3 font-bold text-amber-400">${parseFloat(q.weight || 1)} pts</td>
+          <td class="p-3"><span class="bg-rose-950/80 text-rose-300 border border-rose-800 px-2 py-0.5 rounded text-[10px] font-bold">${escapeHtml(q.cat)}</span></td>
+          <td class="p-3 font-medium max-w-xs truncate">${escapeHtml(q.q)}</td>
+          <td class="p-3 font-bold text-amber-400">${formatNumber(q.weight || 1)} pts</td>
           <td class="p-3 text-right space-x-2">
             <button onclick="editQuestion(${idx})" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded font-bold text-[11px]">Editar</button>
             <button onclick="deleteQuestion(${idx})" class="px-2.5 py-1 bg-rose-950 hover:bg-rose-900 text-rose-300 border border-rose-800 rounded font-bold text-[11px]">Excluir</button>
           </td>
-        </tr>
-      `).join('');
+        </tr>`).join('');
+    }
 
-      // Populate Topic Rules for New Version Generation
-      const topicRulesContainer = document.getElementById('topic-rules-container');
-      topicRulesContainer.innerHTML = activeTopics.map(t => {
-        const availableCount = activeQuestions.filter(q => q.cat === t).length;
-        return `
-          <div class="flex flex-col sm:flex-row items-center justify-between gap-2 bg-slate-950 p-3 rounded-xl border border-rose-900/30">
-            <span class="text-xs font-bold text-white">${t} <span class="text-[10px] text-slate-400">(${availableCount} no banco)</span></span>
-            <div class="flex items-center gap-2">
-              <input type="number" id="topic-val-${t}" placeholder="Qtd ou %" min="0" step="any" class="w-24 text-xs p-2 bg-slate-900 border border-slate-800 rounded-lg text-white">
-              <select id="topic-type-${t}" class="text-xs p-2 bg-slate-900 border border-slate-800 rounded-lg text-white">
-                <option value="num">Questões</option>
-                <option value="pct">% do Tópico</option>
-              </select>
-            </div>
-          </div>
-        `;
-      }).join('');
-
-      // Populate Saved Test Versions List
-      const versionsList = document.getElementById('test-versions-list');
-      const vKeys = Object.keys(testVersions);
-      if (vKeys.length === 0) {
-        versionsList.innerHTML = `<p class="text-xs text-slate-400 italic">Nenhuma versão salva ainda. O teste padrão está utilizando todas as questões do banco.</p>`;
-      } else {
-        versionsList.innerHTML = vKeys.map(v => {
-          const isCurrent = v === currentTestVersion;
-          return `
-            <div class="bg-slate-950 p-4 rounded-xl border ${isCurrent ? 'border-rose-500 bg-rose-950/20' : 'border-rose-900/40'} flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-              <div>
-                <div class="flex items-center gap-2">
-                  <h4 class="font-bold text-white text-sm">${v}</h4>${isCurrent ? '<span class="text-[9px] bg-emerald-950 text-emerald-400 border border-emerald-800 px-2 py-0.5 rounded font-black">EM USO</span>' : ''}
-                </div>
-                <p class="text-xs text-slate-400 mt-0.5">${testVersions[v].questions.length} questões selecionadas</p>
-              </div>
-              <div class="flex items-center gap-2">
-                ${!isCurrent ? `<button onclick="activateTestVersion('${v}')" class="px-3 py-1.5 hero-gradient text-white text-xs font-bold rounded-lg transition">Ativar Teste</button>` : ''}
-                <button onclick="deleteTestVersion('${v}')" class="px-3 py-1.5 bg-rose-950 hover:bg-rose-900 text-rose-300 border border-rose-800 text-xs font-bold rounded-lg transition">Excluir</button>
-              </div>
-            </div>
-          `;
-        }).join('');
-      }
-
-      // Populate Topics Grid
+    function renderTopicsGrid() {
       const topicsGrid = document.getElementById('topics-grid-list');
+      if (!topicsGrid) return;
       topicsGrid.innerHTML = activeTopics.map(t => {
         const count = activeQuestions.filter(q => q.cat === t).length;
         return `
           <div class="bg-slate-950 p-3.5 rounded-xl border border-rose-900/40 flex justify-between items-center">
             <div>
-              <h4 class="font-bold text-white text-xs">${t}</h4>
+              <h4 class="font-bold text-white text-xs">${escapeHtml(t)}</h4>
               <p class="text-[10px] text-slate-400">${count} questões cadastradas</p>
             </div>
             <div class="flex items-center gap-1">
-              <button onclick="editTopic('${t}')" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 text-[10px] rounded font-semibold">Editar</button>
-              <button onclick="deleteTopic('${t}')" class="px-2 py-1 bg-rose-950 hover:bg-rose-900 text-rose-300 text-[10px] rounded font-semibold border border-rose-800">Excluir</button>
+              <button onclick="editTopic('${escapeJs(t)}')" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 text-[10px] rounded font-semibold">Editar</button>
+              <button onclick="deleteTopic('${escapeJs(t)}')" class="px-2 py-1 bg-rose-950 hover:bg-rose-900 text-rose-300 text-[10px] rounded font-semibold border border-rose-800">Excluir</button>
             </div>
-          </div>
-        `;
+          </div>`;
       }).join('');
     }
 
-    // ALTERAÇÃO EM MASSA (BULK EDIT)
-    function toggleSelectAllQuestions(master) {
-      document.querySelectorAll('.q-select-chk').forEach(chk => chk.checked = master.checked);
+    function escapeJs(value) {
+      return String(value ?? '').replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/\n/g, '\\n');
     }
 
-    function applyBulkTopicChange() {
-      const selectedChks = document.querySelectorAll('.q-select-chk:checked');
-      if (selectedChks.length === 0) {
-        alert("Selecione ao menos uma questão na tabela para alterar o tópico.");
-        return;
-      }
+    // ============================================================
+    // QUESTÕES + ALTERAÇÃO EM MASSA
+    // ============================================================
 
-      const targetTopic = document.getElementById('bulk-topic-select').value;
-      if (!targetTopic) return;
-
-      if (confirm(`Deseja alterar o tópico de ${selectedChks.length} questão(ões) para '${targetTopic}'?`)) {
-        selectedChks.forEach(chk => {
-          const idx = parseInt(chk.value);
-          activeQuestions[idx].cat = targetTopic;
-        });
-
-        saveDataToStorage();
-        renderQuestions();
-        renderAdminDashboard();
-      }
-    }
-
-    // QUESTION CRUD
     function handleSaveQuestion(e) {
       e.preventDefault();
       const idVal = document.getElementById('q-form-id').value;
       const cat = document.getElementById('q-form-cat').value;
-      const weight = parseFloat(document.getElementById('q-form-weight').value) || 1;
+      const weight = Math.max(0.1, parseFloat(document.getElementById('q-form-weight').value) || 1);
       const text = document.getElementById('q-form-text').value.trim();
-
-      const opts = [
-        document.getElementById('q-opt-0').value.trim(),
-        document.getElementById('q-opt-1').value.trim(),
-        document.getElementById('q-opt-2').value.trim(),
-        document.getElementById('q-opt-3').value.trim()
-      ];
-
+      const opts = [0,1,2,3].map(i => document.getElementById(`q-opt-${i}`).value.trim());
       const selectedRadio = document.querySelector('input[name="correct_opt_radio"]:checked');
       const correctIdx = selectedRadio ? parseInt(selectedRadio.value) : 0;
 
       if (idVal !== "") {
         const idx = parseInt(idVal);
-        activeQuestions[idx] = { id: activeQuestions[idx].id, cat, q: text, opts, c: correctIdx, weight };
+        activeQuestions[idx] = { ...activeQuestions[idx], cat, q: text, opts, c: correctIdx, weight };
       } else {
-        const newId = activeQuestions.length > 0 ? Math.max(...activeQuestions.map(q => q.id || 0)) + 1 : 1;
+        const newId = activeQuestions.length ? Math.max(...activeQuestions.map(q => q.id || 0)) + 1 : 1;
         activeQuestions.push({ id: newId, cat, q: text, opts, c: correctIdx, weight });
       }
 
       saveDataToStorage();
       resetQuestionForm();
-      renderQuestions();
-      updateProgress();
       renderAdminDashboard();
+      if (currentTest) selectTest(currentTest.id, true);
     }
 
     function editQuestion(idx) {
@@ -969,176 +1106,80 @@
       document.getElementById('q-form-cat').value = q.cat;
       document.getElementById('q-form-weight').value = q.weight || 1;
       document.getElementById('q-form-text').value = q.q;
-
-      document.getElementById('q-opt-0').value = q.opts[0] || '';
-      document.getElementById('q-opt-1').value = q.opts[1] || '';
-      document.getElementById('q-opt-2').value = q.opts[2] || '';
-      document.getElementById('q-opt-3').value = q.opts[3] || '';
-
+      [0,1,2,3].forEach(i => document.getElementById(`q-opt-${i}`).value = q.opts[i] || '');
       const radios = document.getElementsByName('correct_opt_radio');
+      [...radios].forEach(r => r.checked = false);
       if (radios[q.c]) radios[q.c].checked = true;
-
-      document.getElementById('question-form-title').innerHTML = `<span>✏️️</span> Editando Questão #${idx + 1}`;
+      document.getElementById('question-form-title').innerHTML = `<span>✏️</span> Editando Questão #${idx + 1}`;
       document.getElementById('btn-cancel-q-edit').classList.remove('hidden-screen');
       window.scrollTo({ top: 120, behavior: 'smooth' });
     }
 
     function deleteQuestion(idx) {
-      if (confirm("Tem certeza que deseja excluir esta questão?")) {
-        activeQuestions.splice(idx, 1);
-        saveDataToStorage();
-        renderQuestions();
-        updateProgress();
-        renderAdminDashboard();
-      }
+      if (!confirm("Tem certeza que deseja excluir esta questão?")) return;
+      activeQuestions.splice(idx, 1);
+      saveDataToStorage();
+      renderAdminDashboard();
+      if (currentTest) selectTest(currentTest.id, true);
     }
 
     function resetQuestionForm() {
       document.getElementById('q-form-id').value = "";
       document.getElementById('q-form-weight').value = 1;
       document.getElementById('q-form-text').value = "";
-      document.getElementById('q-opt-0').value = "";
-      document.getElementById('q-opt-1').value = "";
-      document.getElementById('q-opt-2').value = "";
-      document.getElementById('q-opt-3').value = "";
-      document.getElementById('question-form-title').innerHTML = `<span>➕</span> Adicionar Nova Questão ao Banco`;
+      [0,1,2,3].forEach(i => document.getElementById(`q-opt-${i}`).value = "");
+      document.querySelector('input[name="correct_opt_radio"][value="0"]').checked = true;
+      document.getElementById('question-form-title').innerHTML = `<span>➕</span> Adicionar Nova Questão`;
       document.getElementById('btn-cancel-q-edit').classList.add('hidden-screen');
     }
 
-    // VERSÕES DE TESTES & SELEÇÃO ALEATÓRIA PONDERADA POR PESO
-    function weightedRandomSample(items, count) {
-      let pool = [...items];
-      let selected = [];
-      const numToSelect = Math.min(count, pool.length);
-
-      for (let i = 0; i < numToSelect; i++) {
-        let totalWeight = pool.reduce((acc, item) => acc + (parseFloat(item.weight) || 1), 0);
-        let randomNum = Math.random() * totalWeight;
-        let weightSum = 0;
-
-        for (let j = 0; j < pool.length; j++) {
-          weightSum += (parseFloat(pool[j].weight) || 1);
-          if (randomNum <= weightSum) {
-            selected.push(pool[j]);
-            pool.splice(j, 1);
-            break;
-          }
-        }
-      }
-      return selected;
+    function selectAllQuestions(value) {
+      document.querySelectorAll('.question-select').forEach(cb => cb.checked = value);
     }
 
-    function generateAndSaveTestVersion() {
-      const name = document.getElementById('test-version-name').value.trim();
-      if (!name) {
-        alert("Por favor, informe o nome da versão do teste (ex: callcenter1).");
+    function bulkChangeTopic() {
+      const selected = [...document.querySelectorAll('.question-select:checked')]
+        .map(cb => parseInt(cb.dataset.index))
+        .filter(Number.isInteger);
+      const topic = document.getElementById('bulk-topic-select')?.value;
+      if (!selected.length) {
+        alert('Selecione pelo menos uma questão.');
         return;
       }
-
-      let selectedQuestionsForTest = [];
-
-      activeTopics.forEach(t => {
-        const valInput = document.getElementById(`topic-val-${t}`);
-        const typeSelect = document.getElementById(`topic-type-${t}`);
-        
-        const val = parseFloat(valInput.value);
-        if (!isNaN(val) && val > 0) {
-          const topicPool = activeQuestions.filter(q => q.cat === t);
-          let countToPick = 0;
-
-          if (typeSelect.value === 'pct') {
-            countToPick = Math.round((val / 100) * topicPool.length);
-          } else {
-            countToPick = Math.round(val);
-          }
-
-          if (countToPick > 0 && topicPool.length > 0) {
-            const picked = weightedRandomSample(topicPool, countToPick);
-            selectedQuestionsForTest.push(...picked);
-          }
-        }
-      });
-
-      if (selectedQuestionsForTest.length === 0) {
-        if (confirm("Nenhum filtro por tópico foi configurado. Deseja utilizar todas as questões do banco nesta versão?")) {
-          selectedQuestionsForTest = [...activeQuestions];
-        } else {
-          return;
-        }
-      }
-
-      testVersions[name] = {
-        name: name,
-        createdAt: new Date().toISOString(),
-        questions: selectedQuestionsForTest
-      };
-
-      currentTestVersion = name;
-      activeTestQuestions = selectedQuestionsForTest;
-      userAnswers = new Array(activeTestQuestions.length).fill(null);
-
+      if (!topic) return;
+      selected.forEach(idx => { if (activeQuestions[idx]) activeQuestions[idx].cat = topic; });
       saveDataToStorage();
-      renderQuestions();
-      updateProgress();
       renderAdminDashboard();
-
-      document.getElementById('test-version-name').value = "";
-      alert(`✅ Versão '${name}' gerada com${selectedQuestionsForTest.length} questões e ativada com sucesso!`);
+      alert(`✅ ${selected.length} questão(ões) movida(s) para "${topic}".`);
     }
 
-    function activateTestVersion(name) {
-      if (testVersions[name]) {
-        currentTestVersion = name;
-        activeTestQuestions = testVersions[name].questions;
-        userAnswers = new Array(activeTestQuestions.length).fill(null);
-        saveDataToStorage();
-        renderQuestions();
-        updateProgress();
-        renderAdminDashboard();
-      }
-    }
+    // ============================================================
+    // TÓPICOS
+    // ============================================================
 
-    function deleteTestVersion(name) {
-      if (confirm(`Tem certeza que deseja excluir a versão '${name}'?`)) {
-        delete testVersions[name];
-        if (currentTestVersion === name) {
-          currentTestVersion = "Padrão";
-          activeTestQuestions = [...activeQuestions];
-          userAnswers = new Array(activeTestQuestions.length).fill(null);
-        }
-        saveDataToStorage();
-        renderQuestions();
-        updateProgress();
-        renderAdminDashboard();
-      }
-    }
-
-    // TOPICS CRUD HANDLERS
     function handleSaveTopic(e) {
       e.preventDefault();
       const nameInput = document.getElementById('topic-input-name');
       const oldNameInput = document.getElementById('topic-edit-old-name');
       const newName = nameInput.value.trim();
       const oldName = oldNameInput.value.trim();
-
       if (!newName) return;
 
       if (oldName) {
         const idx = activeTopics.indexOf(oldName);
         if (idx !== -1) activeTopics[idx] = newName;
-        activeQuestions.forEach(q => {
-          if (q.cat === oldName) q.cat = newName;
-        });
-      } else {
-        if (!activeTopics.includes(newName)) {
-          activeTopics.push(newName);
-        }
+        activeQuestions.forEach(q => { if (q.cat === oldName) q.cat = newName; });
+        activeTests.forEach(test => test.rules?.forEach(rule => {
+          if (rule.topic === oldName) rule.topic = newName;
+        }));
+      } else if (!activeTopics.includes(newName)) {
+        activeTopics.push(newName);
       }
 
       saveDataToStorage();
       cancelTopicEdit();
-      renderQuestions();
       renderAdminDashboard();
+      if (currentTest) selectTest(currentTest.id, true);
     }
 
     function editTopic(topicName) {
@@ -1149,11 +1190,11 @@
     }
 
     function deleteTopic(topicName) {
-      if (confirm(`Tem certeza que deseja excluir o tópico '${topicName}'?`)) {
-        activeTopics = activeTopics.filter(t => t !== topicName);
-        saveDataToStorage();
-        renderAdminDashboard();
-      }
+      if (!confirm(`Excluir o tópico "${topicName}"? As questões serão mantidas, mas ficarão sem uma categoria válida até serem reatribuídas.`)) return;
+      activeTopics = activeTopics.filter(t => t !== topicName);
+      activeTests.forEach(test => test.rules = (test.rules || []).filter(r => r.topic !== topicName));
+      saveDataToStorage();
+      renderAdminDashboard();
     }
 
     function cancelTopicEdit() {
@@ -1163,7 +1204,203 @@
       document.getElementById('btn-cancel-topic').classList.add('hidden-screen');
     }
 
-    // DISCORD INTEGRATION CONFIGS
+    // ============================================================
+    // ADMIN - TESTES E VERSÕES
+    // ============================================================
+
+    function renderTestsAdmin(editId = null) {
+      const tab = document.getElementById('admin-tab-tests');
+      if (!tab) return;
+
+      const test = activeTests.find(t => t.id === editId) || null;
+      tab.innerHTML = `
+        <div class="bg-slate-900/90 p-6 rounded-2xl border border-rose-900/40 shadow-xl space-y-4">
+          <div class="flex flex-col sm:flex-row justify-between gap-3 items-start sm:items-center border-b border-slate-800 pb-3">
+            <div>
+              <h3 class="font-bold text-white text-base">${test ? '✏️ Editar Teste / Versão' : '🧪 Criar Novo Teste / Versão'}</h3>
+              <p class="text-[11px] text-slate-400 mt-1">Crie quantas versões quiser, como Callcenter 1, Callcenter 2, Técnico 1 etc.</p>
+            </div>
+            ${test ? `<button onclick="renderTestsAdmin()" class="px-3 py-2 bg-slate-800 text-slate-300 rounded-lg text-xs font-bold">Cancelar edição</button>` : ''}
+          </div>
+
+          <form onsubmit="saveTestFromForm(event, '${test ? escapeJs(test.id) : ''}')" class="space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div>
+                <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Nome da versão</label>
+                <input id="test-name" required value="${escapeHtml(test?.name || '')}" placeholder="Ex: Callcenter 1"
+                  class="w-full text-xs p-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white">
+              </div>
+              <div>
+                <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Nível</label>
+                <input id="test-level" required value="${escapeHtml(test?.level || '')}" placeholder="Ex: Básico / Intermediário"
+                  class="w-full text-xs p-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white">
+              </div>
+              <div>
+                <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Descrição</label>
+                <input id="test-description" value="${escapeHtml(test?.description || '')}" placeholder="Ex: versão mais fácil"
+                  class="w-full text-xs p-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white">
+              </div>
+            </div>
+
+            <div class="border border-rose-900/40 rounded-xl overflow-hidden">
+              <div class="bg-slate-950 px-4 py-3 flex justify-between items-center">
+                <div>
+                  <h4 class="text-xs font-black text-white">Seleção de questões por tópico</h4>
+                  <p class="text-[10px] text-slate-500">A seleção é aleatória e ponderada pelo peso de cada questão.</p>
+                </div>
+                <button type="button" onclick="addTestRule()" class="px-3 py-2 hero-gradient rounded-lg text-[10px] font-black">➕ Adicionar tópico</button>
+              </div>
+              <div id="test-rules-container" class="p-3 space-y-2"></div>
+            </div>
+
+            <button type="submit" class="px-6 py-3 hero-gradient text-white text-xs font-extrabold uppercase tracking-wider rounded-xl shadow">
+              💾 ${test ? 'Salvar alterações' : 'Criar teste / versão'}
+            </button>
+          </form>
+        </div>
+
+        <div class="bg-slate-900/90 rounded-2xl border border-rose-900/40 p-5 shadow-xl">
+          <h3 class="font-bold text-white text-sm mb-4">Testes / Versões salvos</h3>
+          <div class="space-y-3">
+            ${activeTests.map(t => `
+              <div class="bg-slate-950 p-4 rounded-xl border border-rose-900/40 flex flex-col lg:flex-row justify-between gap-3">
+                <div>
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <strong class="text-white text-sm">${escapeHtml(t.name)}</strong>
+                    <span class="text-[9px] px-2 py-1 rounded-full bg-rose-950 text-rose-300 border border-rose-800">${escapeHtml(t.level)}</span>
+                  </div>
+                  <p class="text-[10px] text-slate-400 mt-1">${escapeHtml(t.description || 'Sem descrição')}</p>
+                  <div class="text-[10px] text-slate-500 mt-2">
+                    ${(t.rules || []).map(r => `${escapeHtml(r.topic)}: ${r.mode === 'percentage' ? escapeHtml(formatNumber(r.value)) + '%' : escapeHtml(formatNumber(r.value)) + ' questão(ões)'}`).join(' • ') || 'Nenhuma regra'}
+                  </div>
+                </div>
+                <div class="flex gap-2 self-start">
+                  <button onclick="renderTestsAdmin('${escapeJs(t.id)}')" class="px-3 py-2 bg-slate-800 text-white rounded-lg text-[10px] font-bold">Editar</button>
+                  <button onclick="duplicateTest('${escapeJs(t.id)}')" class="px-3 py-2 bg-slate-800 text-emerald-300 rounded-lg text-[10px] font-bold">Duplicar</button>
+                  <button onclick="deleteTest('${escapeJs(t.id)}')" class="px-3 py-2 bg-rose-950 text-rose-300 border border-rose-800 rounded-lg text-[10px] font-bold">Excluir</button>
+                </div>
+              </div>`).join('')}
+          </div>
+        </div>
+      `;
+
+      renderTestRules(test?.rules || []);
+    }
+
+    function renderTestRules(rules = []) {
+      const container = document.getElementById('test-rules-container');
+      if (!container) return;
+      container.innerHTML = '';
+      (rules.length ? rules : [{ topic: activeTopics[0] || '', mode: 'count', value: 1 }]).forEach(rule => addTestRule(rule));
+    }
+
+    function addTestRule(rule = null) {
+      const container = document.getElementById('test-rules-container');
+      if (!container) return;
+      const row = document.createElement('div');
+      row.className = 'test-rule-row grid grid-cols-1 sm:grid-cols-[1fr_150px_120px_auto] gap-2 items-end bg-slate-900 p-3 rounded-lg border border-slate-800';
+      row.innerHTML = `
+        <div>
+          <label class="block text-[9px] font-bold text-slate-500 uppercase mb-1">Tópico</label>
+          <select class="test-rule-topic w-full text-xs p-2.5 bg-slate-950 border border-slate-800 rounded-lg text-white">
+            ${activeTopics.map(t => `<option value="${escapeHtml(t)}" ${rule?.topic === t ? 'selected' : ''}>${escapeHtml(t)}</option>`).join('')}
+          </select>
+        </div>
+        <div>
+          <label class="block text-[9px] font-bold text-slate-500 uppercase mb-1">Tipo</label>
+          <select class="test-rule-mode w-full text-xs p-2.5 bg-slate-950 border border-slate-800 rounded-lg text-white">
+            <option value="count" ${rule?.mode !== 'percentage' ? 'selected' : ''}>Número</option>
+            <option value="percentage" ${rule?.mode === 'percentage' ? 'selected' : ''}>Porcentagem</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-[9px] font-bold text-slate-500 uppercase mb-1">Valor</label>
+          <input type="number" min="0" step="1" class="test-rule-value w-full text-xs p-2.5 bg-slate-950 border border-slate-800 rounded-lg text-white" value="${rule ? escapeHtml(rule.value) : '1'}">
+        </div>
+        <button type="button" onclick="this.closest('.test-rule-row').remove()" class="px-3 py-2.5 bg-rose-950 text-rose-300 border border-rose-800 rounded-lg text-xs font-bold">✕</button>
+      `;
+      const mode = row.querySelector('.test-rule-mode');
+      const value = row.querySelector('.test-rule-value');
+      mode.addEventListener('change', () => {
+        value.step = mode.value === 'percentage' ? '1' : '1';
+        value.max = mode.value === 'percentage' ? '100' : '';
+      });
+      mode.dispatchEvent(new Event('change'));
+      container.appendChild(row);
+    }
+
+    function collectTestRules() {
+      return [...document.querySelectorAll('.test-rule-row')].map(row => ({
+        topic: row.querySelector('.test-rule-topic').value,
+        mode: row.querySelector('.test-rule-mode').value,
+        value: Math.max(0, Number(row.querySelector('.test-rule-value').value) || 0)
+      })).filter(r => r.topic);
+    }
+
+    function saveTestFromForm(e, editId) {
+      e.preventDefault();
+      const name = document.getElementById('test-name').value.trim();
+      const level = document.getElementById('test-level').value.trim();
+      const description = document.getElementById('test-description').value.trim();
+      const rules = collectTestRules();
+
+      if (!name || !level) return;
+      if (!rules.length) {
+        alert('Adicione pelo menos um tópico ao teste.');
+        return;
+      }
+
+      if (editId) {
+        const idx = activeTests.findIndex(t => t.id === editId);
+        if (idx !== -1) activeTests[idx] = { ...activeTests[idx], name, level, description, rules };
+      } else {
+        activeTests.push({
+          id: 'test-' + Date.now() + '-' + Math.random().toString(36).slice(2, 7),
+          name, level, description, rules
+        });
+      }
+
+      saveDataToStorage();
+      renderAdminDashboard();
+      renderTestsAdmin();
+      renderTestSelector();
+    }
+
+    function duplicateTest(testId) {
+      const original = activeTests.find(t => t.id === testId);
+      if (!original) return;
+      const copy = JSON.parse(JSON.stringify(original));
+      copy.id = 'test-' + Date.now() + '-' + Math.random().toString(36).slice(2, 7);
+      copy.name = original.name + ' - Cópia';
+      activeTests.push(copy);
+      saveDataToStorage();
+      renderAdminDashboard();
+      renderTestsAdmin();
+      renderTestSelector();
+    }
+
+    function deleteTest(testId) {
+      if (activeTests.length <= 1) {
+        alert('O sistema precisa manter pelo menos um teste.');
+        return;
+      }
+      const test = activeTests.find(t => t.id === testId);
+      if (!test || !confirm(`Excluir a versão "${test.name}"?`)) return;
+      activeTests = activeTests.filter(t => t.id !== testId);
+      saveDataToStorage();
+      if (currentTest?.id === testId) {
+        currentTest = activeTests[0];
+        selectTest(currentTest.id, true);
+      }
+      renderAdminDashboard();
+      renderTestsAdmin();
+      renderTestSelector();
+    }
+
+    // ============================================================
+    // DISCORD
+    // ============================================================
+
     function saveDiscordSettings() {
       const w = document.getElementById('input-webhook').value.trim();
       const u = document.getElementById('input-userid').value.trim();
@@ -1172,7 +1409,7 @@
         return;
       }
       discordSettings = { webhook: w, userId: u };
-      localStorage.setItem('rh_quiz_discord', JSON.stringify(discordSettings));
+      localStorage.setItem(STORAGE.discord, JSON.stringify(discordSettings));
       showConfigStatus("✅ Configurações do Discord salvas com sucesso!", false);
     }
 
@@ -1195,58 +1432,53 @@
             timestamp: new Date().toISOString()
           }]
         };
-
         const res = await fetch(discordSettings.webhook, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
-
-        if (res.ok || res.status === 204) {
-          showConfigStatus("✅ Mensagem de teste enviada com sucesso no Discord!", false);
-        } else {
-          showConfigStatus(`❌ Falha ao enviar para o Discord (HTTP ${res.status}).`, true);
-        }
+        if (res.ok || res.status === 204) showConfigStatus("✅ Mensagem de teste enviada com sucesso no Discord!", false);
+        else showConfigStatus(`❌ Falha ao enviar para o Discord (HTTP ${res.status}).`, true);
       } catch (err) {
         showConfigStatus(`❌ Erro de rede: ${err.message}`, true);
       }
     }
 
-    // FINAL SUBMISSION, WEIGHTED CALCULATION & PDF EXPORT
+    // ============================================================
+    // RESULTADO / PDF / DISCORD
+    // ============================================================
+
     async function processAndSendResults() {
       const nameInput = document.getElementById('candidate-name');
       const candidateName = nameInput.value.trim();
       const statusEl = document.getElementById('status-message');
       const btn = document.getElementById('btn-send-discord');
+      const questions = activeQuestionsForQuiz || [];
 
       if (!candidateName) {
-        statusEl.classList.remove('hidden-screen', 'bg-slate-800', 'text-amber-300');
-        statusEl.classList.add('bg-rose-950', 'text-rose-200', 'border', 'border-rose-800');
+        statusEl.classList.remove('hidden-screen');
+        statusEl.className = 'text-xs p-3.5 rounded-xl font-semibold border bg-rose-950 text-rose-200 border-rose-800';
         statusEl.textContent = "❌ Por favor, informe o seu nome completo antes de enviar.";
         return;
       }
 
       btn.disabled = true;
       btn.innerHTML = `<span>⏳</span> Gerando PDF e Enviando...`;
-
-      statusEl.classList.remove('hidden-screen', 'bg-rose-950', 'text-rose-200');
-      statusEl.classList.add('bg-slate-800', 'text-amber-300', 'border', 'border-slate-700');
+      statusEl.classList.remove('hidden-screen');
+      statusEl.className = 'text-xs p-3.5 rounded-xl font-semibold border bg-slate-800 text-amber-300 border-slate-700';
       statusEl.textContent = "⏳ Calculando pontuação ponderada e gerando relatório em PDF...";
 
       let earnedPoints = 0;
       let totalMaxPoints = 0;
       const catStats = {};
 
-      activeTestQuestions.forEach((q, idx) => {
+      questions.forEach((q, idx) => {
         const cat = q.cat || "Geral";
-        const w = parseFloat(q.weight || 1);
-
+        const w = Number(q.weight) || 1;
         if (!catStats[cat]) catStats[cat] = { totalPoints: 0, earnedPoints: 0, totalCount: 0, correctCount: 0 };
-        
         catStats[cat].totalPoints += w;
         catStats[cat].totalCount += 1;
         totalMaxPoints += w;
-
         if (userAnswers[idx] === q.c) {
           earnedPoints += w;
           catStats[cat].earnedPoints += w;
@@ -1254,49 +1486,50 @@
         }
       });
 
-      const percentage = totalMaxPoints > 0 ? Math.round((earnedPoints / totalMaxPoints) * 100) : 0;
-      
+      const percentage = totalMaxPoints > 0 ? Math.round((earnedPoints / totalMaxPoints) * 10000) / 100 : 0;
       let level = "Iniciante / Não Recomendado";
       if (percentage >= 80) level = "Avançado / Apto Corporativo";
       else if (percentage >= 50) level = "Intermediário / Em Avaliação";
 
       const dateStr = new Date().toLocaleDateString('pt-BR') + ' às ' + new Date().toLocaleTimeString('pt-BR');
-      
+      const testName = currentTest?.name || 'Avaliação';
+      const testLevel = currentTest?.level || '';
+
       document.getElementById('pdf-candidate-name').textContent = candidateName;
-      document.getElementById('pdf-date').textContent = dateStr;
-      document.getElementById('pdf-questions-count').textContent = activeTestQuestions.length;
-      document.getElementById('pdf-score-count').textContent = `${earnedPoints.toFixed(1)} /${totalMaxPoints.toFixed(1)} pts`;
-      document.getElementById('pdf-percentage').textContent = `${percentage}%`;
-      document.getElementById('pdf-level-badge').textContent = level;
+      document.getElementById('pdf-date').textContent = `${dateStr} • ${testName}`;
+      document.getElementById('pdf-questions-count').textContent = questions.length;
+      document.getElementById('pdf-score-count').textContent = `${formatNumber(earnedPoints)} / ${formatNumber(totalMaxPoints)} pts`;
+      document.getElementById('pdf-percentage').textContent = `${formatNumber(percentage)}%`;
+      document.getElementById('pdf-level-badge').textContent = `${level} • ${testLevel}`;
 
       const catBreakdownEl = document.getElementById('pdf-category-breakdown');
       catBreakdownEl.innerHTML = Object.keys(catStats).map(cat => {
         const st = catStats[cat];
-        const pct = st.totalPoints > 0 ? Math.round((st.earnedPoints / st.totalPoints) * 100) : 0;
+        const pct = st.totalPoints > 0 ? Math.round((st.earnedPoints / st.totalPoints) * 10000) / 100 : 0;
         return `
-          <div style="display: flex; justify-content: space-between; margin-bottom: 4px; background: #f8fafc; padding: 5px 8px; border-radius: 4px; border-left: 3px solid #EE2B2E;">
-            <span><strong>${cat}:</strong> ${st.earnedPoints.toFixed(1)}/${st.totalPoints.toFixed(1)} pts (${st.correctCount}/${st.totalCount} acertos)</span>
-            <span style="font-weight: bold; color: ${pct >= 70 ? '#059669' : '#e11d48'};">${pct}%</span>
-          </div>
-        `;
+          <div style="display:flex;justify-content:space-between;margin-bottom:4px;background:#f8fafc;padding:5px 8px;border-radius:4px;border-left:3px solid #EE2B2E;">
+            <span><strong>${escapeHtml(cat)}:</strong> ${formatNumber(st.earnedPoints)}/${formatNumber(st.totalPoints)} pts (${st.correctCount}/${st.totalCount} acertos)</span>
+            <span style="font-weight:bold;color:${pct >= 70 ? '#059669' : '#e11d48'};">${formatNumber(pct)}%</span>
+          </div>`;
       }).join('');
 
       const answersListEl = document.getElementById('pdf-answers-list');
-      answersListEl.innerHTML = activeTestQuestions.map((q, idx) => {
+      answersListEl.innerHTML = questions.map((q, idx) => {
         const uAns = userAnswers[idx];
         const isOk = uAns === q.c;
         const icon = uAns === null ? "⚪" : (isOk ? "✅" : "❌");
         return `
-          <div style="padding: 4px 6px; background: ${isOk ? '#f0fdf4' : '#fef2f2'}; border: 1px solid ${isOk ? '#bbf7d0' : '#fecdd3'}; border-radius: 4px;">
-            <strong>Q${idx + 1} (${parseFloat(q.weight \vert{}\vert{} 1)}pt):</strong>${icon} Resp: ${uAns !== null ? String.fromCharCode(65 + uAns) : 'S/R'} \vert{} Gab: ${String.fromCharCode(65 + q.c)}
-          </div>
-        `;
+          <div style="padding:4px 6px;background:${isOk ? '#f0fdf4' : '#fef2f2'};border:1px solid ${isOk ? '#bbf7d0' : '#fecdd3'};border-radius:4px;">
+            <strong>Q${idx + 1} (${formatNumber(q.weight || 1)}pt):</strong> ${icon} Resp: ${uAns !== null ? String.fromCharCode(65 + uAns) : 'S/R'} | Gab: ${String.fromCharCode(65 + q.c)}
+          </div>`;
       }).join('');
 
       const pdfElement = document.getElementById('pdf-template');
+      const safeCandidate = candidateName.replace(/\s+/g, '_');
+      const safeTest = testName.replace(/\s+/g, '_').replace(/[^\w-]/g, '');
       const opt = {
         margin: [10, 10, 10, 10],
-        filename: `Avaliacao_Conexao_${candidateName.replace(/\s+/g, '_')}.pdf`,
+        filename: `Avaliacao_Conexao_${safeTest}_${safeCandidate}.pdf`,
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: { scale: 2 },
         jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
@@ -1304,44 +1537,36 @@
 
       try {
         const pdfBlob = await html2pdf().set(opt).from(pdfElement).output('blob');
-
         const formData = new FormData();
         const mention = discordSettings.userId ? `<@${discordSettings.userId}>` : '';
         const payloadJson = {
-          content: `📢 **Nova Avaliação Técnica Concluída (${currentTestVersion}) - Conexão Provedor** ${mention}`,
-          embeds: [
-            {
-              title: `📋 Relatório do Candidato: ${candidateName}`,
-              description: `**Versão do Teste:** \`${currentTestVersion}\`\n**Pontuação Ponderada:** \`${earnedPoints.toFixed(1)} / ${totalMaxPoints.toFixed(1)} pts\` (${percentage}%)\n**Classificação RH:** \`${level}\`\n**Data:** \`${dateStr}\``,
-              color: percentage >= 80 ? 3066993 : (percentage >= 50 ? 16753920 : 15158332),
-              fields: Object.keys(catStats).map(cat => ({
-                name: cat,
-                value: `${catStats[cat].earnedPoints.toFixed(1)}/${catStats[cat].totalPoints.toFixed(1)} pts (${Math.round((catStats[cat].earnedPoints/catStats[cat].totalPoints)*100)}%)`,
-                inline: true
-              })),
-              footer: { text: "Conexão Provedor de Internet • Anexo PDF do Relatório RH" },
-              timestamp: new Date().toISOString()
-            }
-          ]
+          content: `📢 **Nova Avaliação Técnica Concluída - Conexão Provedor** ${mention}`,
+          embeds: [{
+            title: `📋 ${testName} — Candidato: ${candidateName}`,
+            description: `**Versão/Nível:** \`${testLevel}\`\n**Pontuação Ponderada:** \`${formatNumber(earnedPoints)} / ${formatNumber(totalMaxPoints)} pts\` (${formatNumber(percentage)}%)\n**Classificação RH:** \`${level}\`\n**Data:** \`${dateStr}\``,
+            color: percentage >= 80 ? 3066993 : (percentage >= 50 ? 16753920 : 15158332),
+            fields: Object.keys(catStats).map(cat => ({
+              name: cat,
+              value: `${formatNumber(catStats[cat].earnedPoints)}/${formatNumber(catStats[cat].totalPoints)} pts (${formatNumber((catStats[cat].earnedPoints/catStats[cat].totalPoints)*100)}%)`,
+              inline: true
+            })),
+            footer: { text: "Conexão Provedor de Internet • Anexo PDF do Relatório RH" },
+            timestamp: new Date().toISOString()
+          }]
         };
 
         formData.append('payload_json', JSON.stringify(payloadJson));
-        formData.append('files[0]', pdfBlob, `Avaliacao_Conexao_${candidateName.replace(/\s+/g, '_')}.pdf`);
+        formData.append('files[0]', pdfBlob, `Avaliacao_Conexao_${safeTest}_${safeCandidate}.pdf`);
 
-        const response = await fetch(discordSettings.webhook, {
-          method: 'POST',
-          body: formData
-        });
-
+        const response = await fetch(discordSettings.webhook, { method: 'POST', body: formData });
         if (response.ok || response.status === 204) {
           document.getElementById('success-candidate-name').textContent = candidateName;
-          document.getElementById('final-score-text').textContent = `${earnedPoints.toFixed(1)} / ${totalMaxPoints.toFixed(1)} pts (${percentage}%)`;
-          document.getElementById('final-level-text').textContent = `Classificação: ${level}`;
+          document.getElementById('final-score-text').textContent = `${formatNumber(earnedPoints)} / ${formatNumber(totalMaxPoints)} pts (${formatNumber(percentage)}%)`;
+          document.getElementById('final-level-text').textContent = `Teste: ${testName} • ${testLevel} • Classificação: ${level}`;
           switchView('success');
         } else {
           throw new Error(`Servidor Discord retornou código HTTP ${response.status}`);
         }
-
       } catch (err) {
         statusEl.classList.remove('bg-slate-800', 'text-amber-300');
         statusEl.classList.add('bg-rose-950', 'text-rose-200', 'border', 'border-rose-800');
@@ -1350,6 +1575,7 @@
         btn.innerHTML = `<span>📤</span> Tentar Reenviar`;
       }
     }
+
   </script>
 </body>
 </html>
