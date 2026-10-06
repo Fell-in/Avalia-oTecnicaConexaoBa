@@ -1575,6 +1575,136 @@ const defaultQuestions = [
         btn.innerHTML = `<span>📤</span> Tentar Reenviar`;
       }
     }
+    // ============================================================
+// NOVAS FUNCIONALIDADES: LOTE DE QUESTÕES, PORCENTAGEM E NOTA DE CORTE
+// ============================================================
+
+// Variavel global para controlar a Nota de Corte (Padrão 60%)
+let passingScoreCutoff = 60;
+
+// 1. Injetar campo de Nota de Corte no Painel Admin (Aba de Integração/Configurações)
+function injectCutoffSettingUI() {
+  const discordTab = document.getElementById('admin-tab-discord');
+  if (discordTab && !document.getElementById('cutoff-setting-card')) {
+    const card = document.createElement('div');
+    card.id = 'cutoff-setting-card';
+    card.className = 'bg-slate-900/90 p-6 rounded-2xl border border-rose-900/40 shadow-xl space-y-4 mt-6';
+    card.innerHTML = `
+      <h3 class="font-bold text-white text-base flex items-center gap-2">
+        <span>🎯</span> Configurar Nota de Corte para Aprovação (Admin)
+      </h3>
+      <div class="space-y-3">
+        <div>
+          <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Nota de Corte Mínima (%):</label>
+          <input type="number" id="input-cutoff-score" min="0" max="100" value="${passingScoreCutoff}" 
+                 class="w-full text-xs font-mono p-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white focus:outline-none focus:border-rose-500">
+        </div>
+        <button onclick="saveCutoffSetting()" class="px-6 py-3 hero-gradient text-white text-xs font-black uppercase tracking-wider rounded-xl shadow transition">
+          💾 Salvar Nota de Corte
+        </button>
+      </div>
+    `;
+    discordTab.appendChild(card);
+  }
+}
+
+function saveCutoffSetting() {
+  const inputVal = parseFloat(document.getElementById('input-cutoff-score').value);
+  if (!isNaN(inputVal) && inputVal >= 0 && inputVal <= 100) {
+    passingScoreCutoff = inputVal;
+    localStorage.setItem('conexao_quiz_cutoff', passingScoreCutoff);
+    alert(`✅ Nota de corte atualizada para ${passingScoreCutoff}% com sucesso!`);
+  } else {
+    alert('❌ Informe um valor válido entre 0 e 100.');
+  }
+}
+
+// 2. Sobrescrever/Expandir a renderização do formulário de testes na aba Admin
+const originalRenderTestsAdmin = window.renderTestsAdmin;
+window.renderTestsAdmin = function(editId = null) {
+  if (originalRenderTestsAdmin) originalRenderTestsAdmin(editId);
+  injectMaxQuestionsControls();
+};
+
+function injectMaxQuestionsControls() {
+  const container = document.getElementById('test-rules-container');
+  if (!container || document.getElementById('max-q-limit-box')) return;
+
+  const totalAvailable = activeQuestions.length;
+  const limitBox = document.createElement('div');
+  limitBox.id = 'max-q-limit-box';
+  limitBox.className = 'bg-slate-950/80 p-4 rounded-xl border border-rose-900/50 mb-4 space-y-3';
+  limitBox.innerHTML = `
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div>
+        <label class="block text-[10px] font-bold text-rose-300 uppercase mb-1">
+          1. Nº Máximo de Questões Selecionadas para o Teste:
+        </label>
+        <input type="number" id="input-max-test-questions" min="1" max="${totalAvailable}" value="${totalAvailable}" 
+               oninput="calculateSelectedPercentage()" 
+               class="w-full text-xs p-2.5 bg-slate-900 border border-rose-900/60 rounded-lg text-white font-bold">
+      </div>
+      <div class="flex flex-col justify-center bg-slate-900 p-3 rounded-lg border border-slate-800">
+        <span class="text-[10px] font-bold text-slate-400 uppercase">2. Porcentagem de Questões Gerais Selecionadas:</span>
+        <span id="selected-questions-percentage-text" class="text-base font-black text-emerald-400 mt-0.5">100%</span>
+        <span class="text-[9px] text-slate-500">(Com base no total de ${totalAvailable} questões do banco)</span>
+      </div>
+    </div>
+  `;
+  container.parentNode.insertBefore(limitBox, container);
+  calculateSelectedPercentage();
+}
+
+// Cálculo da porcentagem em tempo real das questões selecionadas em relação ao total
+function calculateSelectedPercentage() {
+  const maxInput = document.getElementById('input-max-test-questions');
+  const textEl = document.getElementById('selected-questions-percentage-text');
+  if (!maxInput || !textEl) return;
+
+  const total = activeQuestions.length;
+  let maxSelected = parseInt(maxInput.value) || 0;
+
+  if (maxSelected > total) maxSelected = total;
+  const pct = total > 0 ? ((maxSelected / total) * 100).toFixed(1) : 0;
+
+  textEl.textContent = `${pct}% (${maxSelected} de ${total} questões)`;
+}
+
+// 3. Atualizar fluxo de cálculo do Resultado para exibir Aprovação / Reprovação baseada na Nota de Corte
+const originalProcessAndSendResults = window.processAndSendResults;
+window.processAndSendResults = async function() {
+  // Carrega nota de corte salva
+  const savedCutoff = localStorage.getItem('conexao_quiz_cutoff');
+  if (savedCutoff !== null) passingScoreCutoff = parseFloat(savedCutoff);
+
+  // Executa o envio original
+  await originalProcessAndSendResults();
+
+  // Atualiza os textos da tela de Sucesso com o Status de Aprovado / Não Aprovado
+  const finalScoreEl = document.getElementById('final-score-text');
+  const levelTextEl = document.getElementById('final-level-text');
+
+  if (finalScoreEl && levelTextEl) {
+    const scoreText = finalScoreEl.textContent;
+    const match = scoreText.match(/\(([\d.]+)\%\)/);
+    if (match) {
+      const userPct = parseFloat(match[1]);
+      const isApproved = userPct >= passingScoreCutoff;
+      const statusTag = isApproved 
+        ? `<span class="text-emerald-400 font-black">[ APROVADO ]</span>` 
+        : `<span class="text-rose-500 font-black">[ NÃO APROVADO ]</span>`;
+
+      levelTextEl.innerHTML += `<br>Status Final: ${statusTag} (Corte: ${passingScoreCutoff}%)`;
+    }
+  }
+};
+
+// Inicializador de interface ao carregar
+window.addEventListener('load', () => {
+  const savedCutoff = localStorage.getItem('conexao_quiz_cutoff');
+  if (savedCutoff !== null) passingScoreCutoff = parseFloat(savedCutoff);
+  injectCutoffSettingUI();
+});
 
   </script>
 </body>
