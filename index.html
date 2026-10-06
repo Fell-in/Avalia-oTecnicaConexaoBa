@@ -38,7 +38,6 @@
       background-color: #0d0102; 
     }
 
-    /* Pixel Grid Background Overlay Inspired by Conexao Logo */
     .pixel-bg {
       background-color: #990000;
       background-image: 
@@ -62,7 +61,6 @@
 
     .hidden-screen { display: none !important; }
 
-    /* Custom scrollbar */
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: #1f0407; }
     ::-webkit-scrollbar-thumb { background: #EE2B2E; border-radius: 4px; }
@@ -74,24 +72,16 @@
   <header class="bg-slate-950/95 text-white shadow-2xl border-b border-rose-900/50 sticky top-0 z-50 backdrop-blur-md">
     <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center flex-wrap gap-3">
       
-      <!-- LOGO FIEL À IMAGEM -->
       <div class="flex items-center space-x-3 cursor-pointer group" onclick="switchView('quiz')">
-        <!-- Ícone do Símbolo dos Anéis (SVG Vetorial Fiel) -->
         <div class="relative w-11 h-11 sm:w-12 sm:h-12 flex-shrink-0 group-hover:scale-105 transition-transform">
           <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-lg" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Arco Externo Gradiente Cinza Escuro -->
             <path d="M 82 22 A 42 42 0 1 0 82 78" stroke="#333138" stroke-width="12" stroke-linecap="round"/>
             <path d="M 82 22 A 42 42 0 1 0 82 78" stroke="#524e5a" stroke-width="4" stroke-linecap="round" opacity="0.6"/>
-            
-            <!-- Arco Intermediário Vermelho -->
             <path d="M 72 32 A 28 28 0 1 0 72 68" stroke="#EE2B2E" stroke-width="7.5" stroke-linecap="round"/>
-            
-            <!-- Arco Interno Vermelho -->
             <path d="M 62 42 A 15 15 0 1 0 62 58" stroke="#EE2B2E" stroke-width="6" stroke-linecap="round"/>
           </svg>
         </div>
 
-        <!-- Tipografia Nome + Subtítulo -->
         <div class="flex flex-col justify-center">
           <div class="flex items-center">
             <span class="text-2xl sm:text-3xl font-black text-[#EE2B2E] tracking-wider leading-none" style="font-family: Arial, sans-serif;">
@@ -104,7 +94,6 @@
         </div>
       </div>
 
-      <!-- Header Admin Action Button -->
       <div class="flex items-center gap-2">
         <button id="nav-quiz-btn" onclick="switchView('quiz')" class="bg-white/10 hover:bg-white/20 text-white font-semibold text-xs px-3.5 py-2 rounded-lg backdrop-blur border border-white/20 transition flex items-center gap-1.5 shadow">
           <span>📝</span> Responder Teste
@@ -120,14 +109,13 @@
 
     <!-- VIEW 1: CANDIDATO - QUESTIONÁRIO DEDICADO -->
     <div id="view-quiz" class="space-y-6">
-      <!-- Candidate Welcome Card -->
       <div class="bg-slate-900/90 border border-rose-900/40 p-6 rounded-2xl shadow-2xl relative overflow-hidden">
         <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-rose-600/10 rounded-full blur-2xl pointer-events-none"></div>
         
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 relative z-10">
           <div>
             <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-rose-950/80 border border-rose-800 text-rose-300 text-xs font-semibold mb-2">
-              <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span> Sistema Corporativo de Seleção
+              <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span> Teste Ativo: <strong id="active-test-title-badge" class="ml-1 text-white">Padrão</strong>
             </div>
             <h2 class="text-2xl font-black text-white tracking-wide">Avaliação de Informática e Redes</h2>
             <p class="text-xs text-slate-300 mt-1">Responda às questões selecionadas. Preste atenção aos valores e pesos de cada pergunta.</p>
@@ -140,22 +128,18 @@
           </div>
         </div>
 
-        <!-- CAMPO DE NOME DO CANDIDATO -->
         <div class="pt-4 mt-4 border-t border-slate-800 relative z-10">
           <label class="block text-xs font-bold text-rose-200 uppercase tracking-wider mb-1.5">Nome Completo do Candidato <span class="text-rose-400">*</span></label>
           <input type="text" id="candidate-name-initial" placeholder="Digite seu nome completo para iniciar o teste..." class="w-full text-sm px-4 py-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-rose-500 font-medium transition shadow-inner">
         </div>
       </div>
 
-      <!-- Barra de Progresso Visual -->
       <div class="w-full bg-slate-900 rounded-full h-3 p-0.5 border border-rose-950 shadow-inner overflow-hidden">
         <div id="progress-bar" class="hero-gradient h-full rounded-full transition-all duration-300 shadow-sm" style="width: 0%"></div>
       </div>
 
-      <!-- Dynamic Question Cards Container -->
       <div id="questions-container" class="space-y-6"></div>
 
-      <!-- Complete & Submit Action -->
       <div class="bg-slate-900/90 p-6 rounded-2xl border border-rose-900/30 shadow-xl text-center">
         <button onclick="checkCompletionBeforeSubmit()" class="w-full sm:w-auto px-10 py-4 hero-gradient hover:opacity-95 text-white font-black text-sm uppercase tracking-wider rounded-xl shadow-xl hover:shadow-rose-900/50 transition transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 mx-auto">
           <span>🚀</span> Finalizar e Enviar Avaliação
@@ -262,7 +246,6 @@
     <!-- VIEW 5: PAINEL DASHBOARD COMPLETO DE ADMIN -->
     <div id="view-admin-dashboard" class="hidden-screen space-y-6">
       
-      <!-- Admin Header Bar -->
       <div class="hero-gradient text-white rounded-2xl p-6 shadow-2xl border border-rose-500/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <span class="text-[10px] uppercase font-black tracking-widest text-rose-200">Painel de Controle de Conteúdo & Integrações</span>
@@ -273,10 +256,13 @@
         </button>
       </div>
 
-      <!-- Navigation Tabs inside Admin -->
+      <!-- Admin Navigation Tabs -->
       <div class="flex flex-wrap gap-2 border-b border-rose-900/40 pb-3">
-        <button onclick="switchAdminTab('questions')" id="tab-btn-questions" class="px-4 py-2 rounded-xl text-xs font-bold transition hero-gradient text-white shadow">
-          ❓ Gerenciar Questões (<span id="count-questions-badge">0</span>)
+        <button onclick="switchAdminTab('tests')" id="tab-btn-tests" class="px-4 py-2 rounded-xl text-xs font-bold transition hero-gradient text-white shadow">
+          📋 Gerenciar Testes / Versões (<span id="count-tests-badge">0</span>)
+        </button>
+        <button onclick="switchAdminTab('questions')" id="tab-btn-questions" class="px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-900 text-slate-300 hover:text-white border border-rose-900/30">
+          ❓ Banco Global de Questões (<span id="count-questions-badge">0</span>)
         </button>
         <button onclick="switchAdminTab('topics')" id="tab-btn-topics" class="px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-900 text-slate-300 hover:text-white border border-rose-900/30">
           📁 Tópicos & Categorias (<span id="count-topics-badge">0</span>)
@@ -286,848 +272,66 @@
         </button>
       </div>
 
+      <!-- ADMIN TAB: GERENCIAR TESTES / VERSÕES -->
+      <div id="admin-tab-tests" class="space-y-6">
+        <div class="bg-slate-900/90 p-6 rounded-2xl border border-rose-900/40 shadow-xl space-y-4">
+          <h3 class="font-bold text-white text-base flex items-center gap-2">
+            <span>⚙️️</span> Criar / Configurar Versão de Teste (ex: Callcenter1, Callcenter2)
+          </h3>
+          <form onsubmit="handleCreateTestVersion(event)" class="flex flex-col sm:flex-row gap-3">
+            <input type="text" id="new-test-name" placeholder="Nome da Versão do Teste (ex: callcenter1, callcenter2, infra_nivel1...)" class="flex-grow text-xs p-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white focus:outline-none focus:border-rose-500 font-medium" required>
+            <button type="submit" class="px-6 py-3 hero-gradient text-white text-xs font-extrabold uppercase tracking-wider rounded-xl shadow transition">
+              ➕ Criar Versão
+            </button>
+          </form>
+        </div>
+
+        <div class="bg-slate-900/90 p-6 rounded-2xl border border-rose-900/40 shadow-xl space-y-4">
+          <h3 class="font-bold text-white text-sm">Versões de Testes Cadastradas</h3>
+          <div id="tests-list-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+        </div>
+
+        <!-- GERADOR ALEATÓRIO DE TESTE -->
+        <div class="bg-slate-900/90 p-6 rounded-2xl border border-rose-900/40 shadow-xl space-y-4">
+          <div class="border-b border-slate-800 pb-3">
+            <h3 class="font-bold text-white text-base flex items-center gap-2">
+              <span>🎲</span> Gerar Questões Aleatórias Ponderadas para um Teste
+            </h3>
+            <p class="text-xs text-slate-400 mt-1">Selecione uma versão e defina a quantidade/porcentagem de questões aleatórias de cada tópico baseadas no peso das questões.</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Selecione o Teste Destino:</label>
+              <select id="generator-target-test" class="w-full text-xs p-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white focus:outline-none focus:border-rose-500"></select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Tipo de Seleção:</label>
+              <select id="generator-mode" onchange="renderGeneratorTopicInputs()" class="w-full text-xs p-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white focus:outline-none focus:border-rose-500">
+                <option value="number">Por Número Exato de Questões</option>
+                <option value="percentage">Por Porcentagem (%) de Questões do Tópico</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="generator-topics-list" class="space-y-3 pt-2"></div>
+
+          <button onclick="generateRandomTestQuestions()" class="px-6 py-3.5 hero-gradient text-white text-xs font-black uppercase tracking-wider rounded-xl shadow-lg transition">
+            🎲 Gerar e Montar Teste Aleatório
+          </button>
+        </div>
+      </div>
+
       <!-- ADMIN TAB 1: GERENCIAR QUESTÕES & PESOS -->
-      <div id="admin-tab-questions" class="space-y-6">
-        <!-- Add / Edit Question Form Card -->
+      <div id="admin-tab-questions" class="hidden-screen space-y-6">
         <div class="bg-slate-900/90 p-6 rounded-2xl border border-rose-900/40 shadow-xl space-y-4">
           <div class="flex justify-between items-center border-b border-slate-800 pb-3">
             <h3 class="font-bold text-white text-base flex items-center gap-2" id="question-form-title">
-              <span>➕</span> Adicionar Nova Questão
+              <span>➕</span> Adicionar Nova Questão ao Banco Global
             </h3>
             <button onclick="resetQuestionForm()" id="btn-cancel-q-edit" class="hidden-screen text-xs bg-slate-800 text-slate-300 hover:text-white px-3 py-1.5 rounded-lg border border-slate-700">
               Cancelar Edição
             </button>
           </div>
 
-          <form onsubmit="handleSaveQuestion(event)" class="space-y-4">
-            <input type="hidden" id="q-form-id" value="">
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div class="md:col-span-2">
-                <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Tópico / Categoria</label>
-                <select id="q-form-cat" class="w-full text-xs p-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white focus:outline-none focus:border-rose-500 font-medium" required>
-                  <!-- Populated via JS -->
-                </select>
-              </div>
-              <div>
-                <label class="block text-xs font-bold text-rose-300 uppercase mb-1">Peso / Pontuação da Pergunta</label>
-                <input type="number" id="q-form-weight" min="1" max="50" value="1" class="w-full text-xs p-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white focus:outline-none focus:border-rose-500 font-bold" required>
-              </div>
-            </div>
-
-            <div>
-              <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Enunciado da Questão</label>
-              <textarea id="q-form-text" rows="2" placeholder="Digite a pergunta para a avaliação..." class="w-full text-xs p-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white focus:outline-none focus:border-rose-500 font-medium" required></textarea>
-            </div>
-
-            <!-- Question Options -->
-            <div class="space-y-2.5 pt-2">
-              <label class="block text-xs font-bold text-slate-300 uppercase">Opções de Resposta (Selecione o botão da opção Correta):</label>
-              
-              <div class="grid grid-cols-1 gap-2">
-                <div class="flex items-center gap-2 bg-slate-950 p-2 rounded-xl border border-slate-800">
-                  <input type="radio" name="correct_opt_radio" value="0" checked class="w-4 h-4 text-rose-600 focus:ring-rose-500">
-                  <span class="text-xs font-bold text-rose-400 w-6 text-center">A</span>
-                  <input type="text" id="q-opt-0" placeholder="Opção A" class="w-full text-xs p-2 bg-slate-900 border border-slate-800 rounded-lg text-white" required>
-                </div>
-                <div class="flex items-center gap-2 bg-slate-950 p-2 rounded-xl border border-slate-800">
-                  <input type="radio" name="correct_opt_radio" value="1" class="w-4 h-4 text-rose-600 focus:ring-rose-500">
-                  <span class="text-xs font-bold text-rose-400 w-6 text-center">B</span>
-                  <input type="text" id="q-opt-1" placeholder="Opção B" class="w-full text-xs p-2 bg-slate-900 border border-slate-800 rounded-lg text-white" required>
-                </div>
-                <div class="flex items-center gap-2 bg-slate-950 p-2 rounded-xl border border-slate-800">
-                  <input type="radio" name="correct_opt_radio" value="2" class="w-4 h-4 text-rose-600 focus:ring-rose-500">
-                  <span class="text-xs font-bold text-rose-400 w-6 text-center">C</span>
-                  <input type="text" id="q-opt-2" placeholder="Opção C" class="w-full text-xs p-2 bg-slate-900 border border-slate-800 rounded-lg text-white" required>
-                </div>
-                <div class="flex items-center gap-2 bg-slate-950 p-2 rounded-xl border border-slate-800">
-                  <input type="radio" name="correct_opt_radio" value="3" class="w-4 h-4 text-rose-600 focus:ring-rose-500">
-                  <span class="text-xs font-bold text-rose-400 w-6 text-center">D</span>
-                  <input type="text" id="q-opt-3" placeholder="Opção D" class="w-full text-xs p-2 bg-slate-900 border border-slate-800 rounded-lg text-white" required>
-                </div>
-              </div>
-            </div>
-
-            <div class="flex gap-3 pt-2">
-              <button type="submit" id="btn-save-q" class="px-6 py-3 hero-gradient text-white text-xs font-extrabold uppercase tracking-wider rounded-xl shadow transition">
-                💾 Salvar Questão
-              </button>
-            </div>
-          </form>
-        </div>
-
-        <!-- Questions List Table -->
-        <div class="bg-slate-900/90 rounded-2xl border border-rose-900/40 p-5 shadow-xl space-y-4">
-          <div class="flex justify-between items-center">
-            <h3 class="font-bold text-white text-sm">Banco de Questões Ativo</h3>
-            <button onclick="restoreDefaultQuestions()" class="text-[11px] text-rose-400 hover:text-rose-300 underline font-medium">
-              🔄 Restaurar 50 Questões Padrão
-            </button>
-          </div>
-
-          <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs text-slate-300">
-              <thead class="bg-slate-950 text-rose-300 uppercase tracking-wider border-b border-rose-900/40">
-                <tr>
-                  <th class="p-3">#</th>
-                  <th class="p-3">Tópico</th>
-                  <th class="p-3">Questão</th>
-                  <th class="p-3">Peso</th>
-                  <th class="p-3 text-right">Ações</th>
-                </tr>
-              </thead>
-              <tbody id="questions-table-body" class="divide-y divide-slate-800/60">
-                <!-- Populated via JS -->
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <!-- ADMIN TAB 2: GERENCIAR TÓPICOS -->
-      <div id="admin-tab-topics" class="hidden-screen space-y-6">
-        <div class="bg-slate-900/90 p-6 rounded-2xl border border-rose-900/40 shadow-xl space-y-4">
-          <h3 class="font-bold text-white text-base">📁 Cadastrar / Editar Tópicos</h3>
-          
-          <form onsubmit="handleSaveTopic(event)" class="flex flex-col sm:flex-row gap-3">
-            <input type="hidden" id="topic-edit-old-name" value="">
-            <input type="text" id="topic-input-name" placeholder="Nome do Tópico (ex: Cabeamento Estruturado, FTTH...)" class="flex-grow text-xs p-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white focus:outline-none focus:border-rose-500 font-medium" required>
-            <button type="submit" id="btn-save-topic" class="px-6 py-3 hero-gradient text-white text-xs font-extrabold uppercase tracking-wider rounded-xl shadow transition">
-              ➕ Salvar Tópico
-            </button>
-            <button type="button" onclick="cancelTopicEdit()" id="btn-cancel-topic" class="hidden-screen px-4 py-3 bg-slate-800 text-slate-300 text-xs font-bold rounded-xl">
-              Cancelar
-            </button>
-          </form>
-        </div>
-
-        <div class="bg-slate-900/90 rounded-2xl border border-rose-900/40 p-5 shadow-xl">
-          <h3 class="font-bold text-white text-sm mb-4">Tópicos Cadastrados no Sistema</h3>
-          <div id="topics-grid-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-            <!-- Populated via JS -->
-          </div>
-        </div>
-      </div>
-
-      <!-- ADMIN TAB 3: DISCORD WEBOOK CONFIGS -->
-      <div id="admin-tab-discord" class="hidden-screen space-y-6">
-        <div class="bg-slate-900/90 p-6 rounded-2xl border border-rose-900/40 shadow-xl space-y-4">
-          <h3 class="font-bold text-white text-base flex items-center gap-2">
-            <span>⚙️</span> Alterar Integração com Discord Webhook
-          </h3>
-
-          <div class="space-y-4">
-            <div>
-              <label class="block text-xs font-bold text-slate-300 uppercase mb-1">URL do Webhook do Discord:</label>
-              <input type="text" id="input-webhook" class="w-full text-xs font-mono p-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white focus:outline-none focus:border-rose-500">
-            </div>
-
-            <div>
-              <label class="block text-xs font-bold text-slate-300 uppercase mb-1">ID do Usuário / Recrutador (Mencionados no Discord):</label>
-              <input type="text" id="input-userid" class="w-full text-xs font-mono p-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white focus:outline-none focus:border-rose-500">
-            </div>
-
-            <div class="flex flex-wrap gap-3 pt-2">
-              <button onclick="saveDiscordSettings()" class="px-6 py-3 hero-gradient text-white text-xs font-black uppercase tracking-wider rounded-xl shadow transition">
-                💾 Salvar Configurações
-              </button>
-              <button onclick="testDiscordWebhook()" class="px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold rounded-xl transition">
-                🧪 Disparar Teste
-              </button>
-            </div>
-
-            <div id="admin-config-status" class="hidden-screen text-xs font-semibold p-3.5 rounded-xl border"></div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-  </main>
-
-  <!-- CONTAINER OCULTO PARA A GERAÇÃO DO PDF -->
-  <div class="hidden">
-    <div id="pdf-template" style="width: 750px; padding: 35px; background: #ffffff; font-family: 'Inter', sans-serif; color: #0f172a;">
-      
-      <!-- PDF Header com o Estilo Oficial Conexão -->
-      <div style="border-bottom: 3px solid #EE2B2E; padding-bottom: 15px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
-        <div>
-          <h1 style="font-size: 20px; font-weight: 900; color: #EE2B2E; margin: 0; letter-spacing: 1px;">CONEXÃO PROVEDOR DE INTERNET</h1>
-          <p style="font-size: 11px; font-weight: 700; color: #475569; margin: 3px 0 0 0;">RELATÓRIO DE AVALIAÇÃO TÉCNICA E REDES</p>
-        </div>
-        <div style="text-align: right;">
-          <span style="font-size: 10px; background: #EE2B2E; color: #fff; padding: 5px 10px; border-radius: 4px; font-weight: 800;">AVALIAÇÃO RH</span>
-        </div>
-      </div>
-
-      <!-- Candidate & Score Info Box -->
-      <div style="background: #fff1f2; border: 1px solid #fecdd3; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-        <table style="width: 100%; font-size: 11px; border-collapse: collapse;">
-          <tr>
-            <td style="padding: 4px 0;"><strong>Candidato:</strong> <span id="pdf-candidate-name">-</span></td>
-            <td style="padding: 4px 0;"><strong>Data do Teste:</strong> <span id="pdf-date">-</span></td>
-          </tr>
-          <tr>
-            <td style="padding: 4px 0;"><strong>Total Questões:</strong> <span id="pdf-questions-count">-</span></td>
-            <td style="padding: 4px 0;"><strong>Pontuação Conquistada:</strong> <span id="pdf-score-count" style="font-weight: bold; color: #EE2B2E;">-</span></td>
-          </tr>
-          <tr>
-            <td style="padding: 4px 0;"><strong>Aproveitamento Ponderado:</strong> <span id="pdf-percentage" style="font-weight: bold;">-</span></td>
-            <td style="padding: 4px 0;"><strong>Classificação:</strong> <span id="pdf-level-badge" style="font-weight: bold; color: #be123c;">-</span></td>
-          </tr>
-        </table>
-      </div>
-
-      <h3 style="font-size: 12px; font-weight: 800; color: #0f172a; margin-bottom: 10px; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; text-transform: uppercase;">Desempenho por Tópico Técnico</h3>
-      <div id="pdf-category-breakdown" style="font-size: 10px; margin-bottom: 20px;"></div>
-
-      <h3 style="font-size: 12px; font-weight: 800; color: #0f172a; margin-bottom: 10px; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; text-transform: uppercase;">Detalhamento de Respostas e Gabarito</h3>
-      <div id="pdf-answers-list" style="font-size: 8px; display: grid; grid-template-columns: 1fr 1fr; gap: 5px;"></div>
-    </div>
-  </div>
-
-  <footer class="bg-slate-950 text-slate-400 text-xs py-5 text-center border-t border-rose-950/60 mt-auto">
-    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-2">
-      <p class="font-medium text-slate-400">© Conexão Provedor de Internet • Todos os direitos reservados</p>
-      <p class="text-[11px] text-slate-400">Sistema de Gestão de Testes RH & Conhecimento Técnico</p>
-    </div>
-  </footer>
-
-  <script>
-    // 50 Default Questions Database with configurable Weights & Topics
-    const defaultTopics = ["Hardware", "Windows", "Word", "Excel", "Internet/Segurança"];
-
-    const defaultQuestions = [
-      { id: 1, cat: "Hardware", q: "Qual componente é o 'cérebro' do computador, responsável por processar dados?", opts: ["Placa Mãe", "Processador (CPU)", "Memória RAM", "Disco Rígido (HD)"], c: 1, weight: 2 },
-      { id: 2, cat: "Hardware", q: "A memória RAM é responsável por:", opts: ["Armazenar arquivos permanentemente", "Processar gráficos 3D", "Guardar dados temporários em uso", "Fornecer energia aos componentes"], c: 2, weight: 1 },
-      { id: 3, cat: "Hardware", q: "Qual dos dispositivos abaixo é exclusivamente um periférico de entrada?", opts: ["Monitor", "Impressora", "Teclado", "Caixa de som"], c: 2, weight: 1 },
-      { id: 4, cat: "Hardware", q: "Qual unidade armazena dados permanentemente mesmo após desligar o PC?", opts: ["Memória RAM", "SSD / HD", "Cache", "Registrador"], c: 1, weight: 2 },
-      { id: 5, cat: "Hardware", q: "O que significa a sigla USB?", opts: ["Universal Serial Bus", "Ultra Speed Boot", "United System Board", "Universal Storage Backup"], c: 0, weight: 1 },
-      { id: 6, cat: "Hardware", q: "Antes de retirar um pendrive da porta USB, qual procedimento evita perda de dados?", opts: ["Desligar o monitor", "Ejetar Mídia com Segurança no sistema", "Apagar os arquivos", "Puxar rapidamente"], c: 1, weight: 1 },
-      { id: 7, cat: "Hardware", q: "Qual é o principal dispositivo de saída de vídeo de um computador?", opts: ["Scanner", "Monitor", "Webcam", "Microfone"], c: 1, weight: 1 },
-      { id: 8, cat: "Hardware", q: "O que é um No-Break (UPS)?", opts: ["Um tipo de vírus", "Filtro de linha básico", "Dispositivo com bateria que mantém o PC ligado na falta de energia", "Placa de rede sem fio"], c: 2, weight: 2 },
-      { id: 9, cat: "Hardware", q: "Qual das opções equivale a aproximadamente 1 Gigabyte (GB)?", opts: ["1024 Bytes", "1024 Megabytes (MB)", "1024 Kilobytes (KB)", "1024 Terabytes (TB)"], c: 1, weight: 1 },
-      { id: 10, cat: "Hardware", q: "O que é a Placa-Mãe (Motherboard)?", opts: ["A tela do computador", "A placa central que conecta todos os componentes", "O software principal do sistema", "O cabo de energia"], c: 1, weight: 2 },
-      { id: 11, cat: "Windows", q: "No Windows, qual atalho seleciona TODOS os arquivos ou textos de uma pasta/documento?", opts: ["Ctrl + A", "Ctrl + S", "Ctrl + T", "Ctrl + Z"], c: 0, weight: 1 },
-      { id: 12, cat: "Windows", q: "Qual é a função da Lixeira no Windows?", opts: ["Armazenar vírus isolados", "Guardar arquivos excluídos temporariamente", "Aumentar a memória do PC", "Limpar a memória RAM"], c: 1, weight: 1 },
-      { id: 13, cat: "Windows", q: "Qual atalho de teclado é usado para recortar um item selecionado?", opts: ["Ctrl + C", "Ctrl + V", "Ctrl + X", "Ctrl + Z"], c: 2, weight: 1 },
-      { id: 14, cat: "Windows", q: "Como alternar rapidamente entre janelas abertas no Windows?", opts: ["Alt + Tab", "Ctrl + Esc", "Shift + Enter", "Windows + P"], c: 0, weight: 1 },
-      { id: 15, cat: "Windows", q: "Qual atalho minimiza todas as janelas e mostra a Área de Trabalho?", opts: ["Windows + D", "Alt + F4", "Ctrl + Alt + Del", "Shift + Tab"], c: 0, weight: 1 },
-      { id: 16, cat: "Windows", q: "O Gerenciador de Tarefas do Windows é útil para:", opts: ["Criar arquivos de texto", "Encerrar programas travados e monitorar o uso de memória/CPU", "Formatar o disco rígido", "Navegar na internet"], c: 1, weight: 2 },
-      { id: 17, cat: "Windows", q: "Qual a extensão padrão de arquivos executáveis no Windows?", opts: [".txt", ".docx", ".exe", ".pdf"], c: 2, weight: 1 },
-      { id: 18, cat: "Windows", q: "Qual atalho desfaz a última ação no Windows/Office?", opts: ["Ctrl + Y", "Ctrl + Z", "Ctrl + U", "Ctrl + W"], c: 1, weight: 1 },
-      { id: 19, cat: "Windows", q: "Qual atalho fecha a janela do programa ativo no Windows?", opts: ["Alt + F4", "Ctrl + F4", "Windows + L", "Esc"], c: 0, weight: 1 },
-      { id: 20, cat: "Windows", q: "Qual atalho bloqueia rapidamente a tela do computador no Windows?", opts: ["Windows + L", "Ctrl + L", "Alt + L", "Shift + L"], c: 0, weight: 1 },
-      { id: 21, cat: "Word", q: "No Microsoft Word, para que serve a opção 'Salvar Como'?", opts: ["Imprimir o arquivo", "Salvar uma cópia do arquivo com novo nome ou localização", "Fechar o Word", "Enviar por e-mail"], c: 1, weight: 1 },
-      { id: 22, cat: "Word", q: "Qual atalho no Word aplica o estilo Negrito ao texto selecionado em português?", opts: ["Ctrl + N", "Ctrl + B", "Ctrl + I", "Ctrl + S"], c: 0, weight: 1 },
-      { id: 23, cat: "Word", q: "Para que serve a ferramenta 'Pincel de Formatação'?", opts: ["Desenhar formas geométricas", "Copiar a formatação de um texto e aplicar em outro", "Mudar a cor da página", "Inserir tabelas"], c: 1, weight: 2 },
-      { id: 24, cat: "Word", q: "Qual orientação de página deixa a folha 'deitada' no Word?", opts: ["Retrato", "Paisagem", "Vertical", "Espelhada"], c: 1, weight: 1 },
-      { id: 25, cat: "Word", q: "Para alinhar o texto igualmente entre as margens esquerda e direita, usa-se o alinhamento:", opts: ["Esquerda", "Centralizado", "Justificado", "Direita"], c: 2, weight: 1 },
-      { id: 26, cat: "Word", q: "Qual atalho abre a janela de Impressão no Word?", opts: ["Ctrl + P", "Ctrl + I", "Ctrl + F", "Ctrl + Shift + P"], c: 0, weight: 1 },
-      { id: 27, cat: "Word", q: "Qual recurso do Word verifica erros gramaticais e ortográficos?", opts: ["Teclas F7", "Teclas F1", "Ctrl + F", "Mala Direta"], c: 0, weight: 1 },
-      { id: 28, cat: "Word", q: "O cabeçalho em um documento do Word é exibido:", opts: ["Apenas no final do arquivo", "No topo de todas as páginas (ou páginas selecionadas)", "Somente na capa", "Como marca d'água"], c: 1, weight: 1 },
-      { id: 29, cat: "Word", q: "A extensão padrão de um documento salvo no Word moderno é:", opts: [".txt", ".xlsx", ".docx", ".pdf"], c: 2, weight: 1 },
-      { id: 30, cat: "Word", q: "O que faz a combinação Ctrl + Localizar (Ctrl + B / Ctrl + F no Word)?", opts: ["Abre busca de palavras no documento", "Abre novas tabelas", "Formata o texto em itálico", "Salva o arquivo"], c: 0, weight: 1 },
-      { id: 31, cat: "Excel", q: "No Microsoft Excel, toda fórmula deve OBRIGATORIAMENTE começar com:", opts: ["Sinal de mais (+)", "Sinal de igual (=)", "Arroba (@)", "Ponto e vírgula (;)"], c: 1, weight: 2 },
-      { id: 32, cat: "Excel", q: "Qual fórmula calcula a média dos valores do intervalo A1 até A10?", opts: ["=MEDIANA(A1:A10)", "=MEDIA(A1:A10)", "=SOMA(A1:A10)/2", "=CALCULAR(A1:A10)"], c: 1, weight: 2 },
-      { id: 33, cat: "Excel", q: "Como é identificada a interseção entre uma coluna e uma linha no Excel?", opts: ["Bloco", "Célula", "Tabela", "Matriz"], c: 1, weight: 1 },
-      { id: 34, cat: "Excel", q: "O que acontece se a célula exibir '##### ' no Excel?", opts: ["A fórmula tem erro de sintaxe", "A coluna está muito estreita para exibir o número", "O arquivo foi corrompido", "O valor é negativo"], c: 1, weight: 1 },
-      { id: 35, cat: "Excel", q: "O sinal de dois pontos ( : ) em uma fórmula do Excel representa:", opts: ["Operação de divisão", "Intervalo contínuo (ex: de A1 até A10)", "E/Ou condicional", "Multiplicação"], c: 1, weight: 2 },
-      { id: 36, cat: "Excel", q: "Qual função do Excel soma todos os valores em um intervalo de células?", opts: ["=TOTAL()", "=SOMA()", "=SOMARVALORES()", "=ADICIONAR()"], c: 1, weight: 1 },
-      { id: 37, cat: "Excel", q: "Para fixar o valor de uma célula em uma fórmula ao arrastá-la, usa-se o símbolo:", opts: ["Sifrão ($)", "Porcentagem (%)", "Asterisco (*)", "Sustenido (#)"], c: 0, weight: 3 },
-      { id: 38, cat: "Excel", q: "Qual a extensão padrão de arquivo salvo no Microsoft Excel?", opts: [".docx", ".pptx", ".xlsx", ".csv"], c: 2, weight: 1 },
-      { id: 39, cat: "Excel", q: "O operador usado para multiplicação no Excel é:", opts: ["x", "X", "*", "•"], c: 2, weight: 1 },
-      { id: 40, cat: "Excel", q: "A função '=PROCV' no Excel serve para:", opts: ["Procurar um valor em uma coluna e retornar um dado correspondente", "Somar valores condicionais", "Criar gráficos de pizza", "Imprimir a planilha"], c: 0, weight: 3 },
-      { id: 41, cat: "Internet/Segurança", q: "No envio de e-mail, o campo 'Cco' (Com Cópia Oculta) serve para:", opts: ["Anexar arquivos pesados", "Enviar cópia sem que os outros destinatários vejam o endereço", "Marcar o e-mail como urgente", "Programar o envio para mais tarde"], c: 1, weight: 2 },
-      { id: 42, cat: "Internet/Segurança", q: "O que é Phishing?", opts: ["Um antivírus gratuito", "Um golpe para enganar o usuário e roubar dados pessoais/senhas", "Um tipo de impressora", "Um programa de edição de imagens"], c: 1, weight: 2 },
-      { id: 43, cat: "Internet/Segurança", q: "O que indica o ícone de cadeado na barra de endereço do navegador?", opts: ["O site requer pagamento", "A conexão é criptografada e segura (HTTPS)", "O site está bloqueado", "Você perdeu a conexão"], c: 1, weight: 1 },
-      { id: 44, cat: "Internet/Segurança", q: "Qual das opções é um exemplo de boa prática para criação de senhas?", opts: ["Usar '123456' ou a data de aniversário", "Combinar letras maiúsculas, minúsculas, números e símbolos", "Anotar a senha em um post-it no monitor", "Usar a mesma senha para todas as contas"], c: 1, weight: 1 },
-      { id: 45, cat: "Internet/Segurança", q: "O que é o 'Spam' na sua caixa de e-mail?", opts: ["Mensagens importantes do chefe", "E-mails indesejados enviados em massa", "Vírus de computador", "Arquivos anexados no e-mail"], c: 1, weight: 1 },
-      { id: 46, cat: "Internet/Segurança", q: "Qual programa é utilizado para acessar páginas na web?", opts: ["Navegador (Browser), como Google Chrome ou Edge", "Excel", "Windows Media Player", "Bloco de Notas"], c: 0, weight: 1 },
-      { id: 47, cat: "Internet/Segurança", q: "O que é um 'Malware'?", opts: ["Um tipo de monitor", "Um software malicioso desenvolvido para causar danos ou roubar dados", "Um cabo de internet", "Uma atualização de sistema"], c: 1, weight: 2 },
-      { id: 48, cat: "Internet/Segurança", q: "O que significa 'Download'?", opts: ["Enviar um arquivo do seu computador para a internet", "Baixar/transferir um arquivo da internet para seu computador", "Apagar um arquivo", "Imprimir um documento da web"], c: 1, weight: 1 },
-      { id: 49, cat: "Internet/Segurança", q: "A autenticação em dois fatores (2FA) serve para:", opts: ["Aumentar a velocidade da internet", "Adicionar uma camada extra de segurança ao fazer login", "Apagar arquivos duplicados", "Salvar o histórico de navegação"], c: 1, weight: 2 },
-      { id: 50, cat: "Internet/Segurança", q: "Ao receber um e-mail de um remetente desconhecido com um anexo '.exe', você deve:", opts: ["Abrir o anexo imediatamente", "Não abrir o anexo e avisar a equipe de segurança/TI", "Encaminhar para todos os colegas", "Renomear o arquivo"], c: 1, weight: 2 }
-    ];
-
-    // State Variables
-    let activeQuestions = [];
-    let activeTopics = [];
-    let userAnswers = [];
-    
-    let discordSettings = {
-      webhook: "https://discord.com/api/webhooks/1551208352653123666/fqobobH5FtuOcYJ8bsb51DPCDfsagy2S9M3h39EhFCn9nJmX7pGKOrJ3lvgzDJXsmLY7",
-      userId: "1361695624252100850"
-    };
-
-    // App Initialization
-    window.addEventListener('DOMContentLoaded', () => {
-      loadStoredData();
-      renderQuestions();
-      updateProgress();
-      renderAdminDashboard();
-
-      // Sync initial candidate name with final submit input
-      const initialInput = document.getElementById('candidate-name-initial');
-      const finalInput = document.getElementById('candidate-name');
-      if (initialInput && finalInput) {
-        initialInput.addEventListener('input', (e) => {
-          finalInput.value = e.target.value;
-        });
-      }
-    });
-
-    // Local Storage Data Handlers
-    function loadStoredData() {
-      // Load Topics
-      const savedTopics = localStorage.getItem('conexao_quiz_topics');
-      if (savedTopics) {
-        try { activeTopics = JSON.parse(savedTopics); } catch(e) { activeTopics = [...defaultTopics]; }
-      } else {
-        activeTopics = [...defaultTopics];
-      }
-
-      // Load Questions
-      const savedQuestions = localStorage.getItem('conexao_quiz_questions');
-      if (savedQuestions) {
-        try { activeQuestions = JSON.parse(savedQuestions); } catch(e) { activeQuestions = [...defaultQuestions]; }
-      } else {
-        activeQuestions = [...defaultQuestions];
-      }
-
-      // Load Discord Settings
-      const savedDiscord = localStorage.getItem('rh_quiz_discord');
-      if (savedDiscord) {
-        try { discordSettings = JSON.parse(savedDiscord); } catch(e) {}
-      }
-      document.getElementById('input-webhook').value = discordSettings.webhook;
-      document.getElementById('input-userid').value = discordSettings.userId;
-
-      userAnswers = new Array(activeQuestions.length).fill(null);
-    }
-
-    function saveDataToStorage() {
-      localStorage.setItem('conexao_quiz_topics', JSON.stringify(activeTopics));
-      localStorage.setItem('conexao_quiz_questions', JSON.stringify(activeQuestions));
-    }
-
-    function restoreDefaultQuestions() {
-      if (confirm("Deseja restaurar o banco para as 50 questões originais? Qualquer alteração customizada será resetada.")) {
-        activeTopics = [...defaultTopics];
-        activeQuestions = [...defaultQuestions];
-        userAnswers = new Array(activeQuestions.length).fill(null);
-        saveDataToStorage();
-        renderQuestions();
-        updateProgress();
-        renderAdminDashboard();
-      }
-    }
-
-    // Render Quiz Questions for Candidate
-    function renderQuestions() {
-      const container = document.getElementById('questions-container');
-      container.innerHTML = '';
-
-      if (activeQuestions.length === 0) {
-        container.innerHTML = `
-          <div class="bg-slate-900 border border-slate-800 p-8 rounded-2xl text-center text-slate-400">
-            <p>Nenhuma questão disponível no momento. O administrador precisa cadastrar questões no Painel.</p>
-          </div>
-        `;
-        return;
-      }
-
-      activeQuestions.forEach((q, idx) => {
-        const card = document.createElement('div');
-        card.className = "bg-slate-900/90 p-5 sm:p-6 rounded-2xl border border-rose-900/40 shadow-xl space-y-4 transition hover:border-rose-800/60";
-        card.innerHTML = `
-          <div class="flex flex-wrap justify-between items-center gap-2 border-b border-slate-800 pb-3">
-            <div class="flex items-center gap-2">
-              <span class="text-xs font-black text-rose-300 bg-rose-950/80 px-3 py-1 rounded-lg border border-rose-800/60 uppercase tracking-wider">
-                Questão ${idx + 1} de ${activeQuestions.length} • ${q.cat}
-              </span>
-            </div>
-            <span class="text-xs font-bold text-rose-400 bg-slate-950 px-2.5 py-1 rounded-md border border-rose-900/40">
-              ⚖️ Peso: ${q.weight || 1} ${q.weight > 1 ? 'pontos' : 'ponto'}
-            </span>
-          </div>
-          <p class="font-bold text-white text-base leading-snug">${q.q}</p>
-          <div class="space-y-2.5 pt-1">
-            ${q.opts.map((opt, oIdx) => {
-              const isChecked = userAnswers[idx] === oIdx;
-              return `
-                <label class="flex items-center gap-3 p-3.5 rounded-xl border text-xs sm:text-sm cursor-pointer transition ${isChecked ? 'bg-rose-950/70 border-rose-600 text-white font-bold' : 'bg-slate-950/80 border-slate-800/80 text-slate-300 hover:bg-slate-800/50 hover:border-slate-700'}">
-                  <input type="radio" name="q_${idx}" value="${oIdx}" ${isChecked ? 'checked' : ''} onchange="selectAnswer(${idx}, ${oIdx})" class="w-4 h-4 text-rose-600 focus:ring-rose-500">
-                  <span>${opt}</span>
-                </label>
-              `;
-            }).join('')}
-          </div>
-        `;
-        container.appendChild(card);
-      });
-    }
-
-    function selectAnswer(qIdx, optIdx) {
-      userAnswers[qIdx] = optIdx;
-      updateProgress();
-    }
-
-    function updateProgress() {
-      const answered = userAnswers.filter(a => a !== null).length;
-      const totalQuestions = activeQuestions.length;
-      
-      let currentEarnedWeight = 0;
-      let totalMaxWeight = 0;
-
-      activeQuestions.forEach((q, idx) => {
-        const w = q.weight || 1;
-        totalMaxWeight += w;
-        if (userAnswers[idx] !== null) {
-          currentEarnedWeight += w;
-        }
-      });
-
-      document.getElementById('progress-text').textContent = `${answered} / ${totalQuestions}`;
-      document.getElementById('progress-weight-text').textContent = `Peso Marcado: ${currentEarnedWeight} / ${totalMaxWeight} pts`;
-      
-      const pct = totalQuestions > 0 ? (answered / totalQuestions) * 100 : 0;
-      document.getElementById('progress-bar').style.width = `${pct}%`;
-    }
-
-    // View Navigation Router
-    function switchView(viewName) {
-      ['quiz', 'submit', 'success', 'admin-login', 'admin-dashboard'].forEach(v => {
-        const el = document.getElementById(`view-${v}`);
-        if (el) el.classList.add('hidden-screen');
-      });
-      document.getElementById(`view-${viewName}`).classList.remove('hidden-screen');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function checkCompletionBeforeSubmit() {
-      const initialName = document.getElementById('candidate-name-initial').value.trim();
-      const finalName = document.getElementById('candidate-name');
-
-      if (initialName && !finalName.value) {
-        finalName.value = initialName;
-      }
-
-      const answered = userAnswers.filter(a => a !== null).length;
-      const total = activeQuestions.length;
-      const pending = total - answered;
-
-      let totalMaxWeight = activeQuestions.reduce((acc, q) => acc + (q.weight || 1), 0);
-
-      document.getElementById('summary-total-questions').textContent = total;
-      document.getElementById('summary-answered').textContent = answered;
-      document.getElementById('summary-pending').textContent = pending;
-      document.getElementById('summary-max-weight').textContent = `${totalMaxWeight} pts`;
-
-      switchView('submit');
-    }
-
-    function handleAdminLogin(e) {
-  e.preventDefault();
-  const u = document.getElementById('admin-user').value.trim();
-  const p = document.getElementById('admin-pass').value.trim();
-  const errEl = document.getElementById('admin-login-error');
-
-  const isValidLipe = (u === 'Lipe' && p === 'q1234567');
-  const isValidMatheus = (u === 'matheus' && p === 'Conexao123@');
-
-  if (isValidLipe || isValidMatheus) {
-    errEl.classList.add('hidden-screen');
-    switchView('admin-dashboard');
-    renderAdminDashboard();
-  } else {
-    errEl.classList.remove('hidden-screen');
-    errEl.textContent = "❌ Usuário ou senha incorretos!";
-  }
-}
-
-    function logoutAdmin() {
-      switchView('quiz');
-    }
-
-    // ADMIN DASHBOARD TAB NAVIGATION
-    function switchAdminTab(tabName) {
-      ['questions', 'topics', 'discord'].forEach(t => {
-        document.getElementById(`admin-tab-${t}`).classList.add('hidden-screen');
-        const btn = document.getElementById(`tab-btn-${t}`);
-        btn.className = "px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-900 text-slate-300 hover:text-white border border-rose-900/30";
-      });
-
-      document.getElementById(`admin-tab-${tabName}`).classList.remove('hidden-screen');
-      const activeBtn = document.getElementById(`tab-btn-${tabName}`);
-      activeBtn.className = "px-4 py-2 rounded-xl text-xs font-bold transition hero-gradient text-white shadow";
-    }
-
-    function renderAdminDashboard() {
-      // Badges
-      document.getElementById('count-questions-badge').textContent = activeQuestions.length;
-      document.getElementById('count-topics-badge').textContent = activeTopics.length;
-
-      // Populate Category Selector in Question Form
-      const catSelect = document.getElementById('q-form-cat');
-      catSelect.innerHTML = activeTopics.map(t => `<option value="${t}">${t}</option>`).join('');
-
-      // Populate Questions Table
-      const qTable = document.getElementById('questions-table-body');
-      qTable.innerHTML = activeQuestions.map((q, idx) => `
-        <tr class="hover:bg-slate-800/40 transition">
-          <td class="p-3 font-bold text-rose-400">${idx + 1}</td>
-          <td class="p-3"><span class="bg-rose-950/80 text-rose-300 border border-rose-800 px-2 py-0.5 rounded text-[10px] font-bold">${q.cat}</span></td>
-          <td class="p-3 font-medium max-w-xs truncate">${q.q}</td>
-          <td class="p-3 font-bold text-amber-400">${q.weight || 1} pts</td>
-          <td class="p-3 text-right space-x-2">
-            <button onclick="editQuestion(${idx})" class="px-2.5 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded font-bold text-[11px]">Editar</button>
-            <button onclick="deleteQuestion(${idx})" class="px-2.5 py-1 bg-rose-950 hover:bg-rose-900 text-rose-300 border border-rose-800 rounded font-bold text-[11px]">Excluir</button>
-          </td>
-        </tr>
-      `).join('');
-
-      // Populate Topics Grid
-      const topicsGrid = document.getElementById('topics-grid-list');
-      topicsGrid.innerHTML = activeTopics.map(t => {
-        const count = activeQuestions.filter(q => q.cat === t).length;
-        return `
-          <div class="bg-slate-950 p-3.5 rounded-xl border border-rose-900/40 flex justify-between items-center">
-            <div>
-              <h4 class="font-bold text-white text-xs">${t}</h4>
-              <p class="text-[10px] text-slate-400">${count} questões cadastradas</p>
-            </div>
-            <div class="flex items-center gap-1">
-              <button onclick="editTopic('${t}')" class="px-2 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 text-[10px] rounded font-semibold">Editar</button>
-              <button onclick="deleteTopic('${t}')" class="px-2 py-1 bg-rose-950 hover:bg-rose-900 text-rose-300 text-[10px] rounded font-semibold border border-rose-800">Excluir</button>
-            </div>
-          </div>
-        `;
-      }).join('');
-    }
-
-    // QUESTION CRUD HANDLERS
-    function handleSaveQuestion(e) {
-      e.preventDefault();
-      const idVal = document.getElementById('q-form-id').value;
-      const cat = document.getElementById('q-form-cat').value;
-      const weight = parseInt(document.getElementById('q-form-weight').value) || 1;
-      const text = document.getElementById('q-form-text').value.trim();
-
-      const opts = [
-        document.getElementById('q-opt-0').value.trim(),
-        document.getElementById('q-opt-1').value.trim(),
-        document.getElementById('q-opt-2').value.trim(),
-        document.getElementById('q-opt-3').value.trim()
-      ];
-
-      const selectedRadio = document.querySelector('input[name="correct_opt_radio"]:checked');
-      const correctIdx = selectedRadio ? parseInt(selectedRadio.value) : 0;
-
-      if (idVal !== "") {
-        // Update Existing
-        const idx = parseInt(idVal);
-        activeQuestions[idx] = { id: activeQuestions[idx].id, cat, q: text, opts, c: correctIdx, weight };
-      } else {
-        // Create New
-        const newId = activeQuestions.length > 0 ? Math.max(...activeQuestions.map(q => q.id || 0)) + 1 : 1;
-        activeQuestions.push({ id: newId, cat, q: text, opts, c: correctIdx, weight });
-        userAnswers.push(null);
-      }
-
-      saveDataToStorage();
-      resetQuestionForm();
-      renderQuestions();
-      updateProgress();
-      renderAdminDashboard();
-    }
-
-    function editQuestion(idx) {
-      const q = activeQuestions[idx];
-      document.getElementById('q-form-id').value = idx;
-      document.getElementById('q-form-cat').value = q.cat;
-      document.getElementById('q-form-weight').value = q.weight || 1;
-      document.getElementById('q-form-text').value = q.q;
-
-      document.getElementById('q-opt-0').value = q.opts[0] || '';
-      document.getElementById('q-opt-1').value = q.opts[1] || '';
-      document.getElementById('q-opt-2').value = q.opts[2] || '';
-      document.getElementById('q-opt-3').value = q.opts[3] || '';
-
-      const radios = document.getElementsByName('correct_opt_radio');
-      if (radios[q.c]) radios[q.c].checked = true;
-
-      document.getElementById('question-form-title').innerHTML = `<span>✏️</span> Editando Questão #${idx + 1}`;
-      document.getElementById('btn-cancel-q-edit').classList.remove('hidden-screen');
-      window.scrollTo({ top: 120, behavior: 'smooth' });
-    }
-
-    function deleteQuestion(idx) {
-      if (confirm("Tem certeza que deseja excluir esta questão?")) {
-        activeQuestions.splice(idx, 1);
-        userAnswers.splice(idx, 1);
-        saveDataToStorage();
-        renderQuestions();
-        updateProgress();
-        renderAdminDashboard();
-      }
-    }
-
-    function resetQuestionForm() {
-      document.getElementById('q-form-id').value = "";
-      document.getElementById('q-form-weight').value = 1;
-      document.getElementById('q-form-text').value = "";
-      document.getElementById('q-opt-0').value = "";
-      document.getElementById('q-opt-1').value = "";
-      document.getElementById('q-opt-2').value = "";
-      document.getElementById('q-opt-3').value = "";
-      document.getElementById('question-form-title').innerHTML = `<span>➕</span> Adicionar Nova Questão`;
-      document.getElementById('btn-cancel-q-edit').classList.add('hidden-screen');
-    }
-
-    // TOPICS CRUD HANDLERS
-    function handleSaveTopic(e) {
-      e.preventDefault();
-      const nameInput = document.getElementById('topic-input-name');
-      const oldNameInput = document.getElementById('topic-edit-old-name');
-      const newName = nameInput.value.trim();
-      const oldName = oldNameInput.value.trim();
-
-      if (!newName) return;
-
-      if (oldName) {
-        // Edit Topic
-        const idx = activeTopics.indexOf(oldName);
-        if (idx !== -1) activeTopics[idx] = newName;
-        // Update references in activeQuestions
-        activeQuestions.forEach(q => {
-          if (q.cat === oldName) q.cat = newName;
-        });
-      } else {
-        // Add Topic
-        if (!activeTopics.includes(newName)) {
-          activeTopics.push(newName);
-        }
-      }
-
-      saveDataToStorage();
-      cancelTopicEdit();
-      renderQuestions();
-      renderAdminDashboard();
-    }
-
-    function editTopic(topicName) {
-      document.getElementById('topic-input-name').value = topicName;
-      document.getElementById('topic-edit-old-name').value = topicName;
-      document.getElementById('btn-save-topic').textContent = "💾 Atualizar Tópico";
-      document.getElementById('btn-cancel-topic').classList.remove('hidden-screen');
-    }
-
-    function deleteTopic(topicName) {
-      if (confirm(`Tem certeza que deseja excluir o tópico '${topicName}'? Questões associadas serão mantidas mas precisam ser reatribuídas.`)) {
-        activeTopics = activeTopics.filter(t => t !== topicName);
-        saveDataToStorage();
-        renderAdminDashboard();
-      }
-    }
-
-    function cancelTopicEdit() {
-      document.getElementById('topic-input-name').value = "";
-      document.getElementById('topic-edit-old-name').value = "";
-      document.getElementById('btn-save-topic').textContent = "➕ Salvar Tópico";
-      document.getElementById('btn-cancel-topic').classList.add('hidden-screen');
-    }
-
-    // DISCORD INTEGRATION CONFIGS
-    function saveDiscordSettings() {
-      const w = document.getElementById('input-webhook').value.trim();
-      const u = document.getElementById('input-userid').value.trim();
-      if (!w) {
-        showConfigStatus("❌ Insira uma URL de Webhook válida.", true);
-        return;
-      }
-      discordSettings = { webhook: w, userId: u };
-      localStorage.setItem('rh_quiz_discord', JSON.stringify(discordSettings));
-      showConfigStatus("✅ Configurações do Discord salvas com sucesso!", false);
-    }
-
-    function showConfigStatus(msg, isErr) {
-      const el = document.getElementById('admin-config-status');
-      el.classList.remove('hidden-screen', 'bg-emerald-950', 'text-emerald-300', 'border-emerald-800', 'bg-rose-950', 'text-rose-300', 'border-rose-800');
-      el.classList.add(isErr ? 'bg-rose-950' : 'bg-emerald-950', isErr ? 'text-rose-300' : 'text-emerald-300', isErr ? 'border-rose-800' : 'border-emerald-800');
-      el.textContent = msg;
-    }
-
-    async function testDiscordWebhook() {
-      showConfigStatus("⏳ Disparando mensagem de teste para o Discord...", false);
-      try {
-        const payload = {
-          content: `🔔 **Teste de Integração Solicitado pelo Admin** ${discordSettings.userId ? `<@${discordSettings.userId}>` : ''}`,
-          embeds: [{
-            title: "✅ Integração Conexão Provedor de Internet Ativa",
-            description: "O sistema de avaliação técnica está pronto para transmitir relatórios e PDFs.",
-            color: 15608622,
-            timestamp: new Date().toISOString()
-          }]
-        };
-
-        const res = await fetch(discordSettings.webhook, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-
-        if (res.ok || res.status === 204) {
-          showConfigStatus("✅ Mensagem de teste enviada com sucesso no Discord!", false);
-        } else {
-          showConfigStatus(`❌ Falha ao enviar para o Discord (HTTP ${res.status}).`, true);
-        }
-      } catch (err) {
-        showConfigStatus(`❌ Erro de rede: ${err.message}`, true);
-      }
-    }
-
-    // FINAL SUBMISSION, WEIGHTED CALCULATION & PDF EXPORT
-    async function processAndSendResults() {
-      const nameInput = document.getElementById('candidate-name');
-      const candidateName = nameInput.value.trim();
-      const statusEl = document.getElementById('status-message');
-      const btn = document.getElementById('btn-send-discord');
-
-      if (!candidateName) {
-        statusEl.classList.remove('hidden-screen', 'bg-slate-800', 'text-amber-300');
-        statusEl.classList.add('bg-rose-950', 'text-rose-200', 'border', 'border-rose-800');
-        statusEl.textContent = "❌ Por favor, informe o seu nome completo antes de enviar.";
-        return;
-      }
-
-      btn.disabled = true;
-      btn.innerHTML = `<span>⏳</span> Gerando PDF e Enviando...`;
-
-      statusEl.classList.remove('hidden-screen', 'bg-rose-950', 'text-rose-200');
-      statusEl.classList.add('bg-slate-800', 'text-amber-300', 'border', 'border-slate-700');
-      statusEl.textContent = "⏳ Calculando pontuação ponderada e gerando relatório em PDF...";
-
-      let earnedPoints = 0;
-      let totalMaxPoints = 0;
-      const catStats = {};
-
-      // Calculate weighted points per category
-      activeQuestions.forEach((q, idx) => {
-        const cat = q.cat || "Geral";
-        const w = q.weight || 1;
-
-        if (!catStats[cat]) catStats[cat] = { totalPoints: 0, earnedPoints: 0, totalCount: 0, correctCount: 0 };
-        
-        catStats[cat].totalPoints += w;
-        catStats[cat].totalCount += 1;
-        totalMaxPoints += w;
-
-        if (userAnswers[idx] === q.c) {
-          earnedPoints += w;
-          catStats[cat].earnedPoints += w;
-          catStats[cat].correctCount += 1;
-        }
-      });
-
-      const percentage = totalMaxPoints > 0 ? Math.round((earnedPoints / totalMaxPoints) * 100) : 0;
-      
-      let level = "Iniciante / Não Recomendado";
-      if (percentage >= 80) level = "Avançado / Apto Corporativo";
-      else if (percentage >= 50) level = "Intermediário / Em Avaliação";
-
-      const dateStr = new Date().toLocaleDateString('pt-BR') + ' às ' + new Date().toLocaleTimeString('pt-BR');
-      
-      // Update PDF Template Elements
-      document.getElementById('pdf-candidate-name').textContent = candidateName;
-      document.getElementById('pdf-date').textContent = dateStr;
-      document.getElementById('pdf-questions-count').textContent = activeQuestions.length;
-      document.getElementById('pdf-score-count').textContent = `${earnedPoints} / ${totalMaxPoints} pts`;
-      document.getElementById('pdf-percentage').textContent = `${percentage}%`;
-      document.getElementById('pdf-level-badge').textContent = level;
-
-      const catBreakdownEl = document.getElementById('pdf-category-breakdown');
-      catBreakdownEl.innerHTML = Object.keys(catStats).map(cat => {
-        const st = catStats[cat];
-        const pct = st.totalPoints > 0 ? Math.round((st.earnedPoints / st.totalPoints) * 100) : 0;
-        return `
-          <div style="display: flex; justify-content: space-between; margin-bottom: 4px; background: #f8fafc; padding: 5px 8px; border-radius: 4px; border-left: 3px solid #EE2B2E;">
-            <span><strong>${cat}:</strong> ${st.earnedPoints}/${st.totalPoints} pts (${st.correctCount}/${st.totalCount} acertos)</span>
-            <span style="font-weight: bold; color: ${pct >= 70 ? '#059669' : '#e11d48'};">${pct}%</span>
-          </div>
-        `;
-      }).join('');
-
-      const answersListEl = document.getElementById('pdf-answers-list');
-      answersListEl.innerHTML = activeQuestions.map((q, idx) => {
-        const uAns = userAnswers[idx];
-        const isOk = uAns === q.c;
-        const icon = uAns === null ? "⚪" : (isOk ? "✅" : "❌");
-        return `
-          <div style="padding: 4px 6px; background: ${isOk ? '#f0fdf4' : '#fef2f2'}; border: 1px solid ${isOk ? '#bbf7d0' : '#fecdd3'}; border-radius: 4px;">
-            <strong>Q${idx + 1} (${q.weight || 1}pt):</strong> ${icon} Resp: ${uAns !== null ? String.fromCharCode(65 + uAns) : 'S/R'} | Gab: ${String.fromCharCode(65 + q.c)}
-          </div>
-        `;
-      }).join('');
-
-      // Generate PDF Output
-      const pdfElement = document.getElementById('pdf-template');
-      const opt = {
-        margin: [10, 10, 10, 10],
-        filename: `Avaliacao_Conexao_${candidateName.replace(/\s+/g, '_')}.pdf`,
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-      };
-
-      try {
-        const pdfBlob = await html2pdf().set(opt).from(pdfElement).output('blob');
-
-        const formData = new FormData();
-        const mention = discordSettings.userId ? `<@${discordSettings.userId}>` : '';
-        const payloadJson = {
-          content: `📢 **Nova Avaliação Técnica Concluída - Conexão Provedor** ${mention}`,
-          embeds: [
-            {
-              title: `📋 Relatório do Candidato: ${candidateName}`,
-              description: `**Pontuação Ponderada:** \`${earnedPoints} / ${totalMaxPoints} pts\` (${percentage}%)\n**Classificação RH:** \`${level}\`\n**Data:** \`${dateStr}\``,
-              color: percentage >= 80 ? 3066993 : (percentage >= 50 ? 16753920 : 15158332),
-              fields: Object.keys(catStats).map(cat => ({
-                name: cat,
-                value: `${catStats[cat].earnedPoints}/${catStats[cat].totalPoints} pts (${Math.round((catStats[cat].earnedPoints/catStats[cat].totalPoints)*100)}%)`,
-                inline: true
-              })),
-              footer: { text: "Conexão Provedor de Internet • Anexo PDF do Relatório RH" },
-              timestamp: new Date().toISOString()
-            }
-          ]
-        };
-
-        formData.append('payload_json', JSON.stringify(payloadJson));
-        formData.append('files[0]', pdfBlob, `Avaliacao_Conexao_${candidateName.replace(/\s+/g, '_')}.pdf`);
-
-        const response = await fetch(discordSettings.webhook, {
-          method: 'POST',
-          body: formData
-        });
-
-        if (response.ok || response.status === 204) {
-          document.getElementById('success-candidate-name').textContent = candidateName;
-          document.getElementById('final-score-text').textContent = `${earnedPoints} / ${totalMaxPoints} pts (${percentage}%)`;
-          document.getElementById('final-level-text').textContent = `Classificação: ${level}`;
-          switchView('success');
-        } else {
-          throw new Error(`Servidor Discord retornou código HTTP ${response.status}`);
-        }
-
-      } catch (err) {
-        statusEl.classList.remove('bg-slate-800', 'text-amber-300');
-        statusEl.classList.add('bg-rose-950', 'text-rose-200', 'border', 'border-rose-800');
-        statusEl.textContent = `❌ Erro no envio: ${err.message}. Verifique a URL do Webhook na Área Admin.`;
-        btn.disabled = false;
-        btn.innerHTML = `<span>📤</span> Tentar Reenviar`;
-      }
-    }
-  </script>
-</body>
-</html>
+          <form onsubmit="handleSaveQuestion
