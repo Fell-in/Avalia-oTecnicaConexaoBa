@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR" class="h-full">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,19 +33,19 @@
   </script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-    
-    body { 
-      font-family: 'Inter', sans-serif; 
-      background-color: #0d0102; 
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0d0102;
     }
 
     /* Pixel Grid Background Overlay Inspired by Conexao Logo */
     .pixel-bg {
       background-color: #990000;
-      background-image: 
-        linear-gradient(35deg, #700000 25%, transparent 25%), 
-        linear-gradient(135deg, #700000 25%, transparent 25%), 
-        linear-gradient(205deg, #b30000 25%, transparent 25%), 
+      background-image:
+        linear-gradient(35deg, #700000 25%, transparent 25%),
+        linear-gradient(135deg, #700000 25%, transparent 25%),
+        linear-gradient(205deg, #b30000 25%, transparent 25%),
         linear-gradient(315deg, #b30000 25%, transparent 25%);
       background-position: 12px 0, 12px 0, 0 0, 0 0;
       background-size: 24px 24px;
@@ -60,45 +61,65 @@
       backdrop-filter: blur(12px);
     }
 
-    .hidden-screen { display: none !important; }
+    .hidden-screen {
+      display: none !important;
+    }
 
     /* Custom scrollbar */
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: #1f0407; }
-    ::-webkit-scrollbar-thumb { background: #EE2B2E; border-radius: 4px; }
-    ::-webkit-scrollbar-thumb:hover { background: #ff4d50; }
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #1f0407;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #EE2B2E;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #ff4d50;
+    }
   </style>
 </head>
-<body class="bg-brand-deepbg text-slate-100 min-h-screen flex flex-col justify-between selection:bg-rose-600 selection:text-white">
+
+<body
+  class="bg-brand-deepbg text-slate-100 min-h-screen flex flex-col justify-between selection:bg-rose-600 selection:text-white">
 
   <header class="bg-slate-950/95 text-white shadow-2xl border-b border-rose-900/50 sticky top-0 z-50 backdrop-blur-md">
     <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center flex-wrap gap-3">
-      
+
       <!-- LOGO FIEL À IMAGEM -->
       <div class="flex items-center space-x-3 cursor-pointer group" onclick="switchView('quiz')">
         <!-- Ícone do Símbolo dos Anéis (SVG Vetorial Fiel) -->
         <div class="relative w-11 h-11 sm:w-12 sm:h-12 flex-shrink-0 group-hover:scale-105 transition-transform">
-          <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-lg" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <svg viewBox="0 0 100 100" class="w-full h-full drop-shadow-lg" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
             <!-- Arco Externo Gradiente Cinza Escuro -->
-            <path d="M 82 22 A 42 42 0 1 0 82 78" stroke="#333138" stroke-width="12" stroke-linecap="round"/>
-            <path d="M 82 22 A 42 42 0 1 0 82 78" stroke="#524e5a" stroke-width="4" stroke-linecap="round" opacity="0.6"/>
-            
+            <path d="M 82 22 A 42 42 0 1 0 82 78" stroke="#333138" stroke-width="12" stroke-linecap="round" />
+            <path d="M 82 22 A 42 42 0 1 0 82 78" stroke="#524e5a" stroke-width="4" stroke-linecap="round"
+              opacity="0.6" />
+
             <!-- Arco Intermediário Vermelho -->
-            <path d="M 72 32 A 28 28 0 1 0 72 68" stroke="#EE2B2E" stroke-width="7.5" stroke-linecap="round"/>
-            
+            <path d="M 72 32 A 28 28 0 1 0 72 68" stroke="#EE2B2E" stroke-width="7.5" stroke-linecap="round" />
+
             <!-- Arco Interno Vermelho -->
-            <path d="M 62 42 A 15 15 0 1 0 62 58" stroke="#EE2B2E" stroke-width="6" stroke-linecap="round"/>
+            <path d="M 62 42 A 15 15 0 1 0 62 58" stroke="#EE2B2E" stroke-width="6" stroke-linecap="round" />
           </svg>
         </div>
 
         <!-- Tipografia Nome + Subtítulo -->
         <div class="flex flex-col justify-center">
           <div class="flex items-center">
-            <span class="text-2xl sm:text-3xl font-black text-[#EE2B2E] tracking-wider leading-none" style="font-family: Arial, sans-serif;">
+            <span class="text-2xl sm:text-3xl font-black text-[#EE2B2E] tracking-wider leading-none"
+              style="font-family: Arial, sans-serif;">
               CONEXÃO
             </span>
           </div>
-          <span class="text-[9px] sm:text-[10px] font-extrabold tracking-[0.25em] text-slate-200 uppercase mt-0.5 leading-tight">
+          <span
+            class="text-[9px] sm:text-[10px] font-extrabold tracking-[0.25em] text-slate-200 uppercase mt-0.5 leading-tight">
             PROVEDOR DE INTERNET
           </span>
         </div>
@@ -106,10 +127,12 @@
 
       <!-- Header Admin Action Button -->
       <div class="flex items-center gap-2">
-        <button id="nav-quiz-btn" onclick="switchView('quiz')" class="bg-white/10 hover:bg-white/20 text-white font-semibold text-xs px-3.5 py-2 rounded-lg backdrop-blur border border-white/20 transition flex items-center gap-1.5 shadow">
+        <button id="nav-quiz-btn" onclick="switchView('quiz')"
+          class="bg-white/10 hover:bg-white/20 text-white font-semibold text-xs px-3.5 py-2 rounded-lg backdrop-blur border border-white/20 transition flex items-center gap-1.5 shadow">
           <span>📝</span> Responder Teste
         </button>
-        <button id="nav-admin-btn" onclick="switchView('admin-login')" class="bg-brand-red hover:bg-rose-700 text-white font-bold text-xs px-4 py-2 rounded-lg transition flex items-center gap-1.5 shadow-md border border-rose-500/30">
+        <button id="nav-admin-btn" onclick="switchView('admin-login')"
+          class="bg-brand-red hover:bg-rose-700 text-white font-bold text-xs px-4 py-2 rounded-lg transition flex items-center gap-1.5 shadow-md border border-rose-500/30">
           <span>⚙️</span> Painel Admin
         </button>
       </div>
@@ -122,18 +145,22 @@
     <div id="view-quiz" class="space-y-6">
       <!-- Candidate Welcome Card -->
       <div class="bg-slate-900/90 border border-rose-900/40 p-6 rounded-2xl shadow-2xl relative overflow-hidden">
-        <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-rose-600/10 rounded-full blur-2xl pointer-events-none"></div>
-        
+        <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-rose-600/10 rounded-full blur-2xl pointer-events-none">
+        </div>
+
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 relative z-10">
           <div>
-            <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-rose-950/80 border border-rose-800 text-rose-300 text-xs font-semibold mb-2">
+            <div
+              class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-rose-950/80 border border-rose-800 text-rose-300 text-xs font-semibold mb-2">
               <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span> Sistema Corporativo de Seleção
             </div>
             <h2 class="text-2xl font-black text-white tracking-wide">Avaliação de Informática e Redes</h2>
-            <p class="text-xs text-slate-300 mt-1">Responda às questões selecionadas. Preste atenção aos valores e pesos de cada pergunta.</p>
+            <p class="text-xs text-slate-300 mt-1">Responda às questões selecionadas. Preste atenção aos valores e pesos
+              de cada pergunta.</p>
           </div>
-          
-          <div class="bg-gradient-to-br from-rose-950 to-slate-900 border border-rose-800/60 p-3.5 rounded-xl text-right min-w-[170px] shadow-lg">
+
+          <div
+            class="bg-gradient-to-br from-rose-950 to-slate-900 border border-rose-800/60 p-3.5 rounded-xl text-right min-w-[170px] shadow-lg">
             <div class="text-xs text-rose-300 font-semibold uppercase tracking-wider">Progresso do Teste</div>
             <div class="text-xl font-black text-white mt-0.5" id="progress-text">0 / 0</div>
             <div class="text-[10px] text-slate-400 font-medium" id="progress-weight-text">Peso Total: 0 pts</div>
@@ -142,14 +169,17 @@
 
         <!-- CAMPO DE NOME DO CANDIDATO -->
         <div class="pt-4 mt-4 border-t border-slate-800 relative z-10">
-          <label class="block text-xs font-bold text-rose-200 uppercase tracking-wider mb-1.5">Nome Completo do Candidato <span class="text-rose-400">*</span></label>
-          <input type="text" id="candidate-name-initial" placeholder="Digite seu nome completo para iniciar o teste..." class="w-full text-sm px-4 py-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-rose-500 font-medium transition shadow-inner">
+          <label class="block text-xs font-bold text-rose-200 uppercase tracking-wider mb-1.5">Nome Completo do
+            Candidato <span class="text-rose-400">*</span></label>
+          <input type="text" id="candidate-name-initial" placeholder="Digite seu nome completo para iniciar o teste..."
+            class="w-full text-sm px-4 py-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-rose-500 font-medium transition shadow-inner">
         </div>
       </div>
 
       <!-- Barra de Progresso Visual -->
       <div class="w-full bg-slate-900 rounded-full h-3 p-0.5 border border-rose-950 shadow-inner overflow-hidden">
-        <div id="progress-bar" class="hero-gradient h-full rounded-full transition-all duration-300 shadow-sm" style="width: 0%"></div>
+        <div id="progress-bar" class="hero-gradient h-full rounded-full transition-all duration-300 shadow-sm"
+          style="width: 0%"></div>
       </div>
 
       <!-- Dynamic Question Cards Container -->
@@ -157,7 +187,8 @@
 
       <!-- Complete & Submit Action -->
       <div class="bg-slate-900/90 p-6 rounded-2xl border border-rose-900/30 shadow-xl text-center">
-        <button onclick="checkCompletionBeforeSubmit()" class="w-full sm:w-auto px-10 py-4 hero-gradient hover:opacity-95 text-white font-black text-sm uppercase tracking-wider rounded-xl shadow-xl hover:shadow-rose-900/50 transition transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 mx-auto">
+        <button onclick="checkCompletionBeforeSubmit()"
+          class="w-full sm:w-auto px-10 py-4 hero-gradient hover:opacity-95 text-white font-black text-sm uppercase tracking-wider rounded-xl shadow-xl hover:shadow-rose-900/50 transition transform hover:-translate-y-0.5 active:translate-y-0 flex items-center justify-center gap-2 mx-auto">
           <span>🚀</span> Finalizar e Enviar Avaliação
         </button>
       </div>
@@ -169,13 +200,16 @@
         <div class="border-b border-rose-900/40 pb-4">
           <span class="text-xs font-black text-rose-400 uppercase tracking-widest">Confirmação de Envio</span>
           <h2 class="text-2xl font-black text-white mt-1">Revisão Final da Submissão</h2>
-          <p class="text-xs text-slate-300 mt-1">Verifique seu nome completo antes de gerar o relatório oficial e enviar à equipe RH da Conexão.</p>
+          <p class="text-xs text-slate-300 mt-1">Verifique seu nome completo antes de gerar o relatório oficial e enviar
+            à equipe RH da Conexão.</p>
         </div>
 
         <div class="space-y-4">
           <div>
-            <label class="block text-xs font-bold text-rose-200 uppercase tracking-wider mb-1">Nome Completo do Candidato <span class="text-rose-400">*</span></label>
-            <input type="text" id="candidate-name" placeholder="Ex: Lucas Gabriel da Silva" class="w-full text-sm px-4 py-3 bg-slate-950 border border-rose-800 rounded-xl text-white focus:outline-none focus:border-rose-500 shadow-inner">
+            <label class="block text-xs font-bold text-rose-200 uppercase tracking-wider mb-1">Nome Completo do
+              Candidato <span class="text-rose-400">*</span></label>
+            <input type="text" id="candidate-name" placeholder="Ex: Lucas Gabriel da Silva"
+              class="w-full text-sm px-4 py-3 bg-slate-950 border border-rose-800 rounded-xl text-white focus:outline-none focus:border-rose-500 shadow-inner">
           </div>
 
           <div class="p-4 bg-slate-950/80 rounded-xl border border-rose-900/40 text-xs text-slate-300 space-y-2">
@@ -194,10 +228,12 @@
         <div id="status-message" class="hidden-screen text-xs p-3.5 rounded-xl font-semibold border"></div>
 
         <div class="flex flex-col sm:flex-row justify-between items-center gap-4 pt-4 border-t border-rose-900/40">
-          <button onclick="switchView('quiz')" class="px-5 py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold rounded-xl transition w-full sm:w-auto">
+          <button onclick="switchView('quiz')"
+            class="px-5 py-3 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold rounded-xl transition w-full sm:w-auto">
             ← Voltar e Corrigir Resp.
           </button>
-          <button id="btn-send-discord" onclick="processAndSendResults()" class="px-8 py-3.5 hero-gradient hover:brightness-110 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-lg transition flex items-center justify-center gap-2 w-full sm:w-auto">
+          <button id="btn-send-discord" onclick="processAndSendResults()"
+            class="px-8 py-3.5 hero-gradient hover:brightness-110 text-white font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-lg transition flex items-center justify-center gap-2 w-full sm:w-auto">
             <span>📤</span> Confirmar & Enviar para RH
           </button>
         </div>
@@ -206,22 +242,28 @@
 
     <!-- VIEW 3: TELA DE SUCESSO DO TESTE -->
     <div id="view-success" class="hidden-screen">
-      <div class="bg-slate-900/90 p-8 rounded-2xl border border-rose-900/50 shadow-2xl text-center space-y-5 max-w-xl mx-auto">
-        <div class="w-20 h-20 bg-rose-950 border-2 border-rose-600 text-rose-400 rounded-full flex items-center justify-center text-4xl mx-auto shadow-lg">✓</div>
+      <div
+        class="bg-slate-900/90 p-8 rounded-2xl border border-rose-900/50 shadow-2xl text-center space-y-5 max-w-xl mx-auto">
+        <div
+          class="w-20 h-20 bg-rose-950 border-2 border-rose-600 text-rose-400 rounded-full flex items-center justify-center text-4xl mx-auto shadow-lg">
+          ✓</div>
         <div>
           <h2 class="text-2xl font-black text-white">Avaliação Concluída com Sucesso!</h2>
           <p class="text-xs text-slate-300 mt-1">
-            Obrigado, <strong id="success-candidate-name" class="text-rose-400"></strong>! Seu teste foi corrigido pelo sistema.
+            Obrigado, <strong id="success-candidate-name" class="text-rose-400"></strong>! Seu teste foi corrigido pelo
+            sistema.
           </p>
         </div>
 
         <div id="score-badge" class="p-5 bg-slate-950 border border-rose-900/60 rounded-xl space-y-2 my-4 shadow-inner">
           <span class="text-[10px] text-rose-300 font-bold uppercase tracking-widest">Sua Pontuação Ponderada</span>
           <div id="final-score-text" class="text-3xl font-black text-white">0 / 0 pts (0%)</div>
-          <div id="final-level-text" class="text-xs font-bold text-rose-400 uppercase tracking-wider">Classificação</div>
+          <div id="final-level-text" class="text-xs font-bold text-rose-400 uppercase tracking-wider">Classificação
+          </div>
         </div>
 
-        <button onclick="location.reload()" class="px-8 py-3 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold rounded-xl transition">
+        <button onclick="location.reload()"
+          class="px-8 py-3 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold rounded-xl transition">
           🔄 Iniciar Novo Teste
         </button>
       </div>
@@ -229,9 +271,12 @@
 
     <!-- VIEW 4: LOGIN DO PAINEL ADMIN -->
     <div id="view-admin-login" class="hidden-screen">
-      <div class="max-w-md mx-auto bg-slate-900/95 text-white rounded-2xl p-6 sm:p-8 shadow-2xl border border-rose-900/60 space-y-6">
+      <div
+        class="max-w-md mx-auto bg-slate-900/95 text-white rounded-2xl p-6 sm:p-8 shadow-2xl border border-rose-900/60 space-y-6">
         <div class="text-center space-y-2">
-          <div class="w-14 h-14 hero-gradient text-white rounded-2xl flex items-center justify-center text-2xl mx-auto shadow-xl border border-rose-400/30">🔒</div>
+          <div
+            class="w-14 h-14 hero-gradient text-white rounded-2xl flex items-center justify-center text-2xl mx-auto shadow-xl border border-rose-400/30">
+            🔒</div>
           <h2 class="text-xl font-black uppercase tracking-wide">Painel Administrativo</h2>
           <p class="text-xs text-slate-400">Conexão Provedor de Internet • Gerenciamento RH</p>
         </div>
@@ -239,19 +284,25 @@
         <form onsubmit="handleAdminLogin(event)" class="space-y-4">
           <div>
             <label class="block text-xs font-bold uppercase text-slate-300 mb-1">Usuário Admin</label>
-            <input type="text" id="admin-user" placeholder="Digite o usuário" class="w-full text-sm px-4 py-2.5 bg-slate-950 border border-rose-900/50 rounded-xl text-white focus:outline-none focus:border-rose-500">
+            <input type="text" id="admin-user" placeholder="Digite o usuário"
+              class="w-full text-sm px-4 py-2.5 bg-slate-950 border border-rose-900/50 rounded-xl text-white focus:outline-none focus:border-rose-500">
           </div>
           <div>
             <label class="block text-xs font-bold uppercase text-slate-300 mb-1">Senha de Acesso</label>
-            <input type="password" id="admin-pass" placeholder="Digite a senha" class="w-full text-sm px-4 py-2.5 bg-slate-950 border border-rose-900/50 rounded-xl text-white focus:outline-none focus:border-rose-500">
+            <input type="password" id="admin-pass" placeholder="Digite a senha"
+              class="w-full text-sm px-4 py-2.5 bg-slate-950 border border-rose-900/50 rounded-xl text-white focus:outline-none focus:border-rose-500">
           </div>
-          <div id="admin-login-error" class="hidden-screen text-rose-300 text-xs font-bold p-3 bg-rose-950/80 border border-rose-800 rounded-xl text-center"></div>
+          <div id="admin-login-error"
+            class="hidden-screen text-rose-300 text-xs font-bold p-3 bg-rose-950/80 border border-rose-800 rounded-xl text-center">
+          </div>
 
           <div class="pt-2 flex flex-col gap-2">
-            <button type="submit" class="w-full py-3 hero-gradient text-white font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-lg transition">
+            <button type="submit"
+              class="w-full py-3 hero-gradient text-white font-extrabold text-xs uppercase tracking-wider rounded-xl shadow-lg transition">
               Acessar Painel
             </button>
-            <button type="button" onclick="switchView('quiz')" class="w-full py-2 text-slate-400 hover:text-slate-200 text-xs transition">
+            <button type="button" onclick="switchView('quiz')"
+              class="w-full py-2 text-slate-400 hover:text-slate-200 text-xs transition">
               ← Cancelar e Voltar ao Teste
             </button>
           </div>
@@ -261,28 +312,34 @@
 
     <!-- VIEW 5: PAINEL DASHBOARD COMPLETO DE ADMIN -->
     <div id="view-admin-dashboard" class="hidden-screen space-y-6">
-      
+
       <!-- Admin Header Bar -->
-      <div class="hero-gradient text-white rounded-2xl p-6 shadow-2xl border border-rose-500/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+      <div
+        class="hero-gradient text-white rounded-2xl p-6 shadow-2xl border border-rose-500/30 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <span class="text-[10px] uppercase font-black tracking-widest text-rose-200">Painel de Controle de Conteúdo & Integrações</span>
+          <span class="text-[10px] uppercase font-black tracking-widest text-rose-200">Painel de Controle de Conteúdo &
+            Integrações</span>
           <h2 class="text-2xl font-black tracking-wide">Gestão RH & Configurações</h2>
         </div>
-        <button onclick="logoutAdmin()" class="bg-slate-950 hover:bg-slate-900 text-rose-300 text-xs font-bold px-4 py-2.5 rounded-xl border border-rose-800 transition shadow">
+        <button onclick="logoutAdmin()"
+          class="bg-slate-950 hover:bg-slate-900 text-rose-300 text-xs font-bold px-4 py-2.5 rounded-xl border border-rose-800 transition shadow">
           🚪 Sair do Painel
         </button>
       </div>
 
       <!-- Navigation Tabs inside Admin -->
       <div class="flex flex-wrap gap-2 border-b border-rose-900/40 pb-3">
-        <button onclick="switchAdminTab('questions')" id="tab-btn-questions" class="px-4 py-2 rounded-xl text-xs font-bold transition hero-gradient text-white shadow">
+        <button onclick="switchAdminTab('questions')" id="tab-btn-questions"
+          class="px-4 py-2 rounded-xl text-xs font-bold transition hero-gradient text-white shadow">
           ❓ Gerenciar Questões (<span id="count-questions-badge">0</span>)
         </button>
-        <button onclick="switchAdminTab('topics')" id="tab-btn-topics" class="px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-900 text-slate-300 hover:text-white border border-rose-900/30">
+        <button onclick="switchAdminTab('topics')" id="tab-btn-topics"
+          class="px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-900 text-slate-300 hover:text-white border border-rose-900/30">
           📁 Tópicos & Categorias (<span id="count-topics-badge">0</span>)
         </button>
-        <button onclick="switchAdminTab('discord')" id="tab-btn-discord" class="px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-900 text-slate-300 hover:text-white border border-rose-900/30">
-          ⚙️ Integração Discord / Webhook
+        <button onclick="switchAdminTab('discord')" id="tab-btn-discord"
+          class="px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-900 text-slate-300 hover:text-white border border-rose-900/30">
+          ⚙️ Integração Discord & Nota de Corte
         </button>
       </div>
 
@@ -294,62 +351,79 @@
             <h3 class="font-bold text-white text-base flex items-center gap-2" id="question-form-title">
               <span>➕</span> Adicionar Nova Questão
             </h3>
-            <button onclick="resetQuestionForm()" id="btn-cancel-q-edit" class="hidden-screen text-xs bg-slate-800 text-slate-300 hover:text-white px-3 py-1.5 rounded-lg border border-slate-700">
+            <button onclick="resetQuestionForm()" id="btn-cancel-q-edit"
+              class="hidden-screen text-xs bg-slate-800 text-slate-300 hover:text-white px-3 py-1.5 rounded-lg border border-slate-700">
               Cancelar Edição
             </button>
           </div>
 
           <form onsubmit="handleSaveQuestion(event)" class="space-y-4">
             <input type="hidden" id="q-form-id" value="">
-            
+
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div class="md:col-span-2">
                 <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Tópico / Categoria</label>
-                <select id="q-form-cat" class="w-full text-xs p-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white focus:outline-none focus:border-rose-500 font-medium" required>
+                <select id="q-form-cat"
+                  class="w-full text-xs p-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white focus:outline-none focus:border-rose-500 font-medium"
+                  required>
                   <!-- Populated via JS -->
                 </select>
               </div>
               <div>
                 <label class="block text-xs font-bold text-rose-300 uppercase mb-1">Peso / Pontuação da Pergunta</label>
-                <input type="number" id="q-form-weight" min="0.1" max="50" step="0.1" value="1" class="w-full text-xs p-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white focus:outline-none focus:border-rose-500 font-bold" required>
+                <input type="number" id="q-form-weight" min="0.1" max="50" step="0.1" value="1"
+                  class="w-full text-xs p-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white focus:outline-none focus:border-rose-500 font-bold"
+                  required>
               </div>
             </div>
 
             <div>
               <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Enunciado da Questão</label>
-              <textarea id="q-form-text" rows="2" placeholder="Digite a pergunta para a avaliação..." class="w-full text-xs p-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white focus:outline-none focus:border-rose-500 font-medium" required></textarea>
+              <textarea id="q-form-text" rows="2" placeholder="Digite a pergunta para a avaliação..."
+                class="w-full text-xs p-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white focus:outline-none focus:border-rose-500 font-medium"
+                required></textarea>
             </div>
 
             <!-- Question Options -->
             <div class="space-y-2.5 pt-2">
-              <label class="block text-xs font-bold text-slate-300 uppercase">Opções de Resposta (Selecione o botão da opção Correta):</label>
-              
+              <label class="block text-xs font-bold text-slate-300 uppercase">Opções de Resposta (Selecione o botão da
+                opção Correta):</label>
+
               <div class="grid grid-cols-1 gap-2">
                 <div class="flex items-center gap-2 bg-slate-950 p-2 rounded-xl border border-slate-800">
-                  <input type="radio" name="correct_opt_radio" value="0" checked class="w-4 h-4 text-rose-600 focus:ring-rose-500">
+                  <input type="radio" name="correct_opt_radio" value="0" checked
+                    class="w-4 h-4 text-rose-600 focus:ring-rose-500">
                   <span class="text-xs font-bold text-rose-400 w-6 text-center">A</span>
-                  <input type="text" id="q-opt-0" placeholder="Opção A" class="w-full text-xs p-2 bg-slate-900 border border-slate-800 rounded-lg text-white" required>
+                  <input type="text" id="q-opt-0" placeholder="Opção A"
+                    class="w-full text-xs p-2 bg-slate-900 border border-slate-800 rounded-lg text-white" required>
                 </div>
                 <div class="flex items-center gap-2 bg-slate-950 p-2 rounded-xl border border-slate-800">
-                  <input type="radio" name="correct_opt_radio" value="1" class="w-4 h-4 text-rose-600 focus:ring-rose-500">
+                  <input type="radio" name="correct_opt_radio" value="1"
+                    class="w-4 h-4 text-rose-600 focus:ring-rose-500">
                   <span class="text-xs font-bold text-rose-400 w-6 text-center">B</span>
-                  <input type="text" id="q-opt-1" placeholder="Opção B" class="w-full text-xs p-2 bg-slate-900 border border-slate-800 rounded-lg text-white" required>
+                  <input type="text" id="q-opt-1" placeholder="Opção B"
+                    class="w-full text-xs p-2 bg-slate-900 border border-slate-800 rounded-lg text-white" required>
                 </div>
                 <div class="flex items-center gap-2 bg-slate-950 p-2 rounded-xl border border-slate-800">
-                  <input type="radio" name="correct_opt_radio" value="2" class="w-4 h-4 text-rose-600 focus:ring-rose-500">
+                  <input type="radio" name="correct_opt_radio" value="2"
+                    class="w-4 h-4 text-rose-600 focus:ring-rose-500">
                   <span class="text-xs font-bold text-rose-400 w-6 text-center">C</span>
-                  <input type="text" id="q-opt-2" placeholder="Opção C" class="w-full text-xs p-2 bg-slate-900 border border-slate-800 rounded-lg text-white" required>
+                  <input type="text" id="q-opt-2" placeholder="Opção C"
+                    class="w-full text-xs p-2 bg-slate-900 border border-slate-800 rounded-lg text-white" required>
                 </div>
                 <div class="flex items-center gap-2 bg-slate-950 p-2 rounded-xl border border-slate-800">
-                  <input type="radio" name="correct_opt_radio" value="3" class="w-4 h-4 text-rose-600 focus:ring-rose-500">
+                  <input type="radio" name="correct_opt_radio" value="3"
+                    class="w-4 h-4 text-rose-600 focus:ring-rose-500">
                   <span class="text-xs font-bold text-rose-400 w-6 text-center">D</span>
-                  <input type="text" id="q-opt-3" placeholder="Opção D" class="w-full text-xs p-2 bg-slate-900 border border-slate-800 rounded-lg text-white" required>
+                  <input type="text" id="q-opt-3" placeholder="Opção D"
+                    class="w-full text-xs p-2 bg-slate-900 border border-slate-800 rounded-lg text-white" required>
                 </div>
               </div>
             </div>
 
             <div class="flex gap-3 pt-2">
-              <button type="submit" id="btn-save-q" class="px-6 py-3 hero-gradient text-white text-xs font-extrabold uppercase tracking-wider rounded-xl shadow transition">
+              <button type="submit" id="btn-save-q"
+                class="px-6 py-3 hero-gradient text-white text-xs font-extrabold uppercase tracking-wider rounded-xl shadow transition">
                 💾 Salvar Questão
               </button>
             </div>
@@ -360,7 +434,8 @@
         <div class="bg-slate-900/90 rounded-2xl border border-rose-900/40 p-5 shadow-xl space-y-4">
           <div class="flex justify-between items-center">
             <h3 class="font-bold text-white text-sm">Banco de Questões Ativo</h3>
-            <button onclick="restoreDefaultQuestions()" class="text-[11px] text-rose-400 hover:text-rose-300 underline font-medium">
+            <button onclick="restoreDefaultQuestions()"
+              class="text-[11px] text-rose-400 hover:text-rose-300 underline font-medium">
               🔄 Restaurar 50 Questões Padrão
             </button>
           </div>
@@ -369,7 +444,9 @@
             <table class="w-full text-left text-xs text-slate-300">
               <thead class="bg-slate-950 text-rose-300 uppercase tracking-wider border-b border-rose-900/40">
                 <tr>
-                  <th class="p-3"><input type="checkbox" onchange="selectAllQuestions(this.checked)" class="w-4 h-4"></th><th class="p-3">#</th>
+                  <th class="p-3"><input type="checkbox" onchange="selectAllQuestions(this.checked)" class="w-4 h-4">
+                  </th>
+                  <th class="p-3">#</th>
                   <th class="p-3">Tópico</th>
                   <th class="p-3">Questão</th>
                   <th class="p-3">Peso</th>
@@ -388,14 +465,18 @@
       <div id="admin-tab-topics" class="hidden-screen space-y-6">
         <div class="bg-slate-900/90 p-6 rounded-2xl border border-rose-900/40 shadow-xl space-y-4">
           <h3 class="font-bold text-white text-base">📁 Cadastrar / Editar Tópicos</h3>
-          
+
           <form onsubmit="handleSaveTopic(event)" class="flex flex-col sm:flex-row gap-3">
             <input type="hidden" id="topic-edit-old-name" value="">
-            <input type="text" id="topic-input-name" placeholder="Nome do Tópico (ex: Cabeamento Estruturado, FTTH...)" class="flex-grow text-xs p-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white focus:outline-none focus:border-rose-500 font-medium" required>
-            <button type="submit" id="btn-save-topic" class="px-6 py-3 hero-gradient text-white text-xs font-extrabold uppercase tracking-wider rounded-xl shadow transition">
+            <input type="text" id="topic-input-name" placeholder="Nome do Tópico (ex: Cabeamento Estruturado, FTTH...)"
+              class="flex-grow text-xs p-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white focus:outline-none focus:border-rose-500 font-medium"
+              required>
+            <button type="submit" id="btn-save-topic"
+              class="px-6 py-3 hero-gradient text-white text-xs font-extrabold uppercase tracking-wider rounded-xl shadow transition">
               ➕ Salvar Tópico
             </button>
-            <button type="button" onclick="cancelTopicEdit()" id="btn-cancel-topic" class="hidden-screen px-4 py-3 bg-slate-800 text-slate-300 text-xs font-bold rounded-xl">
+            <button type="button" onclick="cancelTopicEdit()" id="btn-cancel-topic"
+              class="hidden-screen px-4 py-3 bg-slate-800 text-slate-300 text-xs font-bold rounded-xl">
               Cancelar
             </button>
           </form>
@@ -419,19 +500,24 @@
           <div class="space-y-4">
             <div>
               <label class="block text-xs font-bold text-slate-300 uppercase mb-1">URL do Webhook do Discord:</label>
-              <input type="text" id="input-webhook" class="w-full text-xs font-mono p-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white focus:outline-none focus:border-rose-500">
+              <input type="text" id="input-webhook"
+                class="w-full text-xs font-mono p-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white focus:outline-none focus:border-rose-500">
             </div>
 
             <div>
-              <label class="block text-xs font-bold text-slate-300 uppercase mb-1">ID do Usuário / Recrutador (Mencionados no Discord):</label>
-              <input type="text" id="input-userid" class="w-full text-xs font-mono p-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white focus:outline-none focus:border-rose-500">
+              <label class="block text-xs font-bold text-slate-300 uppercase mb-1">ID do Usuário / Recrutador
+                (Mencionados no Discord):</label>
+              <input type="text" id="input-userid"
+                class="w-full text-xs font-mono p-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white focus:outline-none focus:border-rose-500">
             </div>
 
             <div class="flex flex-wrap gap-3 pt-2">
-              <button onclick="saveDiscordSettings()" class="px-6 py-3 hero-gradient text-white text-xs font-black uppercase tracking-wider rounded-xl shadow transition">
+              <button onclick="saveDiscordSettings()"
+                class="px-6 py-3 hero-gradient text-white text-xs font-black uppercase tracking-wider rounded-xl shadow transition">
                 💾 Salvar Configurações
               </button>
-              <button onclick="testDiscordWebhook()" class="px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold rounded-xl transition">
+              <button onclick="testDiscordWebhook()"
+                class="px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold rounded-xl transition">
                 🧪 Disparar Teste
               </button>
             </div>
@@ -447,21 +533,28 @@
 
   <!-- CONTAINER OCULTO PARA A GERAÇÃO DO PDF -->
   <div class="hidden">
-    <div id="pdf-template" style="width: 750px; padding: 35px; background: #ffffff; font-family: 'Inter', sans-serif; color: #0f172a;">
-      
+    <div id="pdf-template"
+      style="width: 750px; padding: 35px; background: #ffffff; font-family: 'Inter', sans-serif; color: #0f172a;">
+
       <!-- PDF Header com o Estilo Oficial Conexão -->
-      <div style="border-bottom: 3px solid #EE2B2E; padding-bottom: 15px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+      <div
+        style="border-bottom: 3px solid #EE2B2E; padding-bottom: 15px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
         <div>
-          <h1 style="font-size: 20px; font-weight: 900; color: #EE2B2E; margin: 0; letter-spacing: 1px;">CONEXÃO PROVEDOR DE INTERNET</h1>
-          <p style="font-size: 11px; font-weight: 700; color: #475569; margin: 3px 0 0 0;">RELATÓRIO DE AVALIAÇÃO TÉCNICA E REDES</p>
+          <h1 style="font-size: 20px; font-weight: 900; color: #EE2B2E; margin: 0; letter-spacing: 1px;">CONEXÃO
+            PROVEDOR DE INTERNET</h1>
+          <p style="font-size: 11px; font-weight: 700; color: #475569; margin: 3px 0 0 0;">RELATÓRIO DE AVALIAÇÃO
+            TÉCNICA E REDES</p>
         </div>
         <div style="text-align: right;">
-          <span style="font-size: 10px; background: #EE2B2E; color: #fff; padding: 5px 10px; border-radius: 4px; font-weight: 800;">AVALIAÇÃO RH</span>
+          <span
+            style="font-size: 10px; background: #EE2B2E; color: #fff; padding: 5px 10px; border-radius: 4px; font-weight: 800;">AVALIAÇÃO
+            RH</span>
         </div>
       </div>
 
       <!-- Candidate & Score Info Box -->
-      <div style="background: #fff1f2; border: 1px solid #fecdd3; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+      <div
+        style="background: #fff1f2; border: 1px solid #fecdd3; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
         <table style="width: 100%; font-size: 11px; border-collapse: collapse;">
           <tr>
             <td style="padding: 4px 0;"><strong>Candidato:</strong> <span id="pdf-candidate-name">-</span></td>
@@ -469,19 +562,26 @@
           </tr>
           <tr>
             <td style="padding: 4px 0;"><strong>Total Questões:</strong> <span id="pdf-questions-count">-</span></td>
-            <td style="padding: 4px 0;"><strong>Pontuação Conquistada:</strong> <span id="pdf-score-count" style="font-weight: bold; color: #EE2B2E;">-</span></td>
+            <td style="padding: 4px 0;"><strong>Pontuação Conquistada:</strong> <span id="pdf-score-count"
+                style="font-weight: bold; color: #EE2B2E;">-</span></td>
           </tr>
           <tr>
-            <td style="padding: 4px 0;"><strong>Aproveitamento Ponderado:</strong> <span id="pdf-percentage" style="font-weight: bold;">-</span></td>
-            <td style="padding: 4px 0;"><strong>Classificação:</strong> <span id="pdf-level-badge" style="font-weight: bold; color: #be123c;">-</span></td>
+            <td style="padding: 4px 0;"><strong>Aproveitamento Ponderado:</strong> <span id="pdf-percentage"
+                style="font-weight: bold;">-</span></td>
+            <td style="padding: 4px 0;"><strong>Classificação:</strong> <span id="pdf-level-badge"
+                style="font-weight: bold; color: #be123c;">-</span></td>
           </tr>
         </table>
       </div>
 
-      <h3 style="font-size: 12px; font-weight: 800; color: #0f172a; margin-bottom: 10px; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; text-transform: uppercase;">Desempenho por Tópico Técnico</h3>
+      <h3
+        style="font-size: 12px; font-weight: 800; color: #0f172a; margin-bottom: 10px; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; text-transform: uppercase;">
+        Desempenho por Tópico Técnico</h3>
       <div id="pdf-category-breakdown" style="font-size: 10px; margin-bottom: 20px;"></div>
 
-      <h3 style="font-size: 12px; font-weight: 800; color: #0f172a; margin-bottom: 10px; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; text-transform: uppercase;">Detalhamento de Respostas e Gabarito</h3>
+      <h3
+        style="font-size: 12px; font-weight: 800; color: #0f172a; margin-bottom: 10px; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; text-transform: uppercase;">
+        Detalhamento de Respostas e Gabarito</h3>
       <div id="pdf-answers-list" style="font-size: 8px; display: grid; grid-template-columns: 1fr 1fr; gap: 5px;"></div>
     </div>
   </div>
@@ -499,7 +599,7 @@
     // SISTEMA DE AVALIAÇÕES - QUESTÕES, TESTES E VERSÕES
     // ============================================================
 
-const defaultQuestions = [
+    const defaultQuestions = [
       { id: 1, cat: "Hardware", q: "Qual componente é o 'cérebro' do computador, responsável por processar dados?", opts: ["Placa Mãe", "Processador (CPU)", "Memória RAM", "Disco Rígido (HD)"], c: 1, weight: 2 },
       { id: 2, cat: "Hardware", q: "A memória RAM é responsável por:", opts: ["Armazenar arquivos permanentemente", "Processar gráficos 3D", "Guardar dados temporários em uso", "Fornecer energia aos componentes"], c: 2, weight: 1 },
       { id: 3, cat: "Hardware", q: "Qual dos dispositivos abaixo é exclusivamente um periférico de entrada?", opts: ["Monitor", "Impressora", "Teclado", "Caixa de som"], c: 2, weight: 1 },
@@ -562,8 +662,16 @@ const defaultQuestions = [
       name: "Avaliação Geral",
       level: "Completo",
       description: "Todas as questões disponíveis, distribuídas por tópico.",
-      rules: defaultTopics.map(topic => ({ topic, mode: "percentage", value: 100 }))
+      maxQuestions: 50,
+      rules: defaultTopics.map(topic => ({ topic, mode: "percentage", type: "Porcentagem", value: 20 }))
     }];
+
+    // ============================================================
+    // SISTEMA DE DISTRIBUIÇÃO POR PORCENTAGEM POR TÓPICO E NOTA DE CORTE
+    // ============================================================
+
+    // Variável Global para a Nota de Corte
+    let globalCutoffScore = parseFloat(localStorage.getItem('conexao_quiz_cutoff')) || 60;
 
     let activeQuestions = [];
     let activeTopics = [];
@@ -580,7 +688,8 @@ const defaultQuestions = [
       questions: 'conexao_quiz_questions',
       topics: 'conexao_quiz_topics',
       tests: 'conexao_quiz_tests',
-      discord: 'rh_quiz_discord'
+      discord: 'rh_quiz_discord',
+      cutoff: 'conexao_quiz_cutoff'
     };
 
     window.addEventListener('DOMContentLoaded', () => {
@@ -589,6 +698,7 @@ const defaultQuestions = [
       renderQuestions();
       updateProgress();
       renderAdminDashboard();
+      renderCutoffAdminPanel();
       renderTestSelector();
 
       const initialInput = document.getElementById('candidate-name-initial');
@@ -596,6 +706,18 @@ const defaultQuestions = [
       if (initialInput && finalInput) {
         initialInput.addEventListener('input', e => finalInput.value = e.target.value);
       }
+
+      // Monitora alterações nos campos de regras por tópico em tempo real
+      document.addEventListener('input', (e) => {
+        if (e.target.matches('#input-max-test-questions, #test-rules-container input, #test-rules-container select')) {
+          updateTopicDistributionSummary();
+        }
+      });
+      document.addEventListener('change', (e) => {
+        if (e.target.matches('#input-max-test-questions, #test-rules-container input, #test-rules-container select')) {
+          updateTopicDistributionSummary();
+        }
+      });
 
       // Começa com o primeiro teste salvo.
       if (activeTests.length) selectTest(activeTests[0].id, true);
@@ -614,6 +736,11 @@ const defaultQuestions = [
     }
 
     function loadStoredData() {
+      const savedCutoff = localStorage.getItem(STORAGE.cutoff) || localStorage.getItem('conexao_quiz_cutoff');
+      if (savedCutoff !== null && !isNaN(parseFloat(savedCutoff))) {
+        globalCutoffScore = parseFloat(savedCutoff);
+      }
+
       const savedTopics = localStorage.getItem(STORAGE.topics);
       try {
         activeTopics = savedTopics ? JSON.parse(savedTopics) : [...defaultTopics];
@@ -639,7 +766,7 @@ const defaultQuestions = [
 
       const savedDiscord = localStorage.getItem(STORAGE.discord);
       if (savedDiscord) {
-        try { discordSettings = JSON.parse(savedDiscord); } catch {}
+        try { discordSettings = JSON.parse(savedDiscord); } catch { }
       }
 
       const webhookEl = document.getElementById('input-webhook');
@@ -651,12 +778,20 @@ const defaultQuestions = [
     }
 
     function makeDefaultTest() {
+      const topicCount = activeTopics.length || 1;
+      const pctPerTopic = Math.round(100 / topicCount);
       return {
         id: 'test-default',
         name: 'Avaliação Geral',
         level: 'Completo',
         description: 'Todas as questões disponíveis, distribuídas por tópico.',
-        rules: activeTopics.map(topic => ({ topic, mode: 'percentage', value: 100 }))
+        maxQuestions: 50,
+        rules: activeTopics.map(topic => ({
+          topic,
+          mode: 'percentage',
+          type: 'Porcentagem',
+          value: pctPerTopic
+        }))
       };
     }
 
@@ -666,11 +801,16 @@ const defaultQuestions = [
         name: test.name || 'Teste sem nome',
         level: test.level || 'Personalizado',
         description: test.description || '',
-        rules: Array.isArray(test.rules) ? test.rules.map(r => ({
-          topic: r.topic,
-          mode: r.mode === 'count' ? 'count' : 'percentage',
-          value: Math.max(0, Number(r.value) || 0)
-        })) : []
+        maxQuestions: Math.max(1, parseInt(test.maxQuestions) || 50),
+        rules: Array.isArray(test.rules) ? test.rules.map(r => {
+          const isPct = (r.mode === 'percentage' || r.type === 'Porcentagem' || r.type === 'porcentagem' || r.type === 'percentage');
+          return {
+            topic: r.topic,
+            mode: isPct ? 'percentage' : 'count',
+            type: isPct ? 'Porcentagem' : 'Quantidade',
+            value: Math.max(0, Number(r.value) || 0)
+          };
+        }) : []
       };
     }
 
@@ -782,35 +922,59 @@ const defaultQuestions = [
       return result;
     }
 
-    function generateQuestionsForTest(test) {
-      const result = [];
+    // Seleciona as questões de cada tópico aplicando as porcentagens configuradas ou quantidades fixas
+    function buildQuestionSetByTopicPercentage(allQuestions, topicRules, totalMaxQuestions) {
+      let selectedPool = [];
       const usedIds = new Set();
+      const maxTotalInput = document.getElementById('input-max-test-questions');
+      const totalMax = parseInt(totalMaxQuestions || (maxTotalInput ? maxTotalInput.value : 50) || 50) || 50;
 
-      for (const rule of test.rules || []) {
-        const topic = rule.topic;
-        const pool = activeQuestions.filter(q => q.cat === topic && !usedIds.has(q.id));
-        if (!pool.length) continue;
+      (topicRules || []).forEach(rule => {
+        // Filtra questões do banco pertencentes a este tópico (suporta q.cat, q.topic ou q.topico)
+        const questionsInTopic = (allQuestions || []).filter(q =>
+          !usedIds.has(q.id) && ((q.cat && q.cat === rule.topic) || (q.topic && q.topic === rule.topic) || (q.topico && q.topico === rule.topic))
+        );
 
-        let amount = 0;
-        if (rule.mode === 'percentage') {
-          amount = Math.round(pool.length * Math.min(100, Math.max(0, Number(rule.value) || 0)) / 100);
+        let targetCount = 0;
+        const isPercentage = (rule.type === 'Porcentagem' || rule.type === 'porcentagem' || rule.mode === 'percentage' || rule.type === 'percentage');
+        if (isPercentage) {
+          // Calcula número de questões baseado na % definida para o tópico em relação ao total do teste
+          targetCount = Math.round(((parseFloat(rule.value) || 0) / 100) * totalMax);
         } else {
-          amount = Math.round(Number(rule.value) || 0);
+          targetCount = parseInt(rule.value) || 0;
         }
 
-        const chosen = weightedSample(pool, amount);
-        chosen.forEach(q => {
+        if (targetCount <= 0 || !questionsInTopic.length) return;
+
+        // Embaralha e seleciona a quantidade desejada do tópico (respeitando ponderação de pesos)
+        let picked = [];
+        if (typeof weightedSample === 'function') {
+          picked = weightedSample(questionsInTopic, targetCount);
+        } else {
+          const shuffled = [...questionsInTopic].sort(() => 0.5 - Math.random());
+          picked = shuffled.slice(0, targetCount);
+        }
+
+        picked.forEach(q => {
           usedIds.add(q.id);
-          result.push(q);
+          selectedPool.push(q);
         });
+      });
+
+      // Embaralha a ordem final do teste
+      for (let i = selectedPool.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [selectedPool[i], selectedPool[j]] = [selectedPool[j], selectedPool[i]];
       }
 
-      // Embaralha a ordem final sem alterar o peso de seleção.
-      for (let i = result.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [result[i], result[j]] = [result[j], result[i]];
-      }
-      return result;
+      // Se o total selecionado ultrapassar o limite máximo do teste, limita ao totalMax
+      return selectedPool.slice(0, totalMax);
+    }
+
+    function generateQuestionsForTest(test) {
+      if (!test) return [];
+      const totalMax = parseInt(test.maxQuestions || 50) || 50;
+      return buildQuestionSetByTopicPercentage(activeQuestions, test.rules || [], totalMax);
     }
 
     function installUIExtensions() {
@@ -881,6 +1045,7 @@ const defaultQuestions = [
       if (activeBtn) activeBtn.className = "px-4 py-2 rounded-xl text-xs font-bold transition hero-gradient text-white shadow";
 
       if (tabName === 'tests') renderTestsAdmin();
+      if (tabName === 'discord') renderCutoffAdminPanel();
     }
 
     // ============================================================
@@ -917,13 +1082,13 @@ const defaultQuestions = [
           <p class="font-bold text-white text-base leading-snug">${escapeHtml(q.q)}</p>
           <div class="space-y-2.5 pt-1">
             ${q.opts.map((opt, oIdx) => {
-              const isChecked = userAnswers[idx] === oIdx;
-              return `
+          const isChecked = userAnswers[idx] === oIdx;
+          return `
                 <label class="flex items-center gap-3 p-3.5 rounded-xl border text-xs sm:text-sm cursor-pointer transition ${isChecked ? 'bg-rose-950/70 border-rose-600 text-white font-bold' : 'bg-slate-950/80 border-slate-800/80 text-slate-300 hover:bg-slate-800/50 hover:border-slate-700'}">
                   <input type="radio" name="q_${idx}" value="${oIdx}" ${isChecked ? 'checked' : ''} onchange="selectAnswer(${idx}, ${oIdx})" class="w-4 h-4 text-rose-600 focus:ring-rose-500">
                   <span>${escapeHtml(opt)}</span>
                 </label>`;
-            }).join('')}
+        }).join('')}
           </div>`;
         container.appendChild(card);
       });
@@ -1082,7 +1247,7 @@ const defaultQuestions = [
       const cat = document.getElementById('q-form-cat').value;
       const weight = Math.max(0.1, parseFloat(document.getElementById('q-form-weight').value) || 1);
       const text = document.getElementById('q-form-text').value.trim();
-      const opts = [0,1,2,3].map(i => document.getElementById(`q-opt-${i}`).value.trim());
+      const opts = [0, 1, 2, 3].map(i => document.getElementById(`q-opt-${i}`).value.trim());
       const selectedRadio = document.querySelector('input[name="correct_opt_radio"]:checked');
       const correctIdx = selectedRadio ? parseInt(selectedRadio.value) : 0;
 
@@ -1106,7 +1271,7 @@ const defaultQuestions = [
       document.getElementById('q-form-cat').value = q.cat;
       document.getElementById('q-form-weight').value = q.weight || 1;
       document.getElementById('q-form-text').value = q.q;
-      [0,1,2,3].forEach(i => document.getElementById(`q-opt-${i}`).value = q.opts[i] || '');
+      [0, 1, 2, 3].forEach(i => document.getElementById(`q-opt-${i}`).value = q.opts[i] || '');
       const radios = document.getElementsByName('correct_opt_radio');
       [...radios].forEach(r => r.checked = false);
       if (radios[q.c]) radios[q.c].checked = true;
@@ -1127,7 +1292,7 @@ const defaultQuestions = [
       document.getElementById('q-form-id').value = "";
       document.getElementById('q-form-weight').value = 1;
       document.getElementById('q-form-text').value = "";
-      [0,1,2,3].forEach(i => document.getElementById(`q-opt-${i}`).value = "");
+      [0, 1, 2, 3].forEach(i => document.getElementById(`q-opt-${i}`).value = "");
       document.querySelector('input[name="correct_opt_radio"][value="0"]').checked = true;
       document.getElementById('question-form-title').innerHTML = `<span>➕</span> Adicionar Nova Questão`;
       document.getElementById('btn-cancel-q-edit').classList.add('hidden-screen');
@@ -1218,13 +1383,13 @@ const defaultQuestions = [
           <div class="flex flex-col sm:flex-row justify-between gap-3 items-start sm:items-center border-b border-slate-800 pb-3">
             <div>
               <h3 class="font-bold text-white text-base">${test ? '✏️ Editar Teste / Versão' : '🧪 Criar Novo Teste / Versão'}</h3>
-              <p class="text-[11px] text-slate-400 mt-1">Crie quantas versões quiser, como Callcenter 1, Callcenter 2, Técnico 1 etc.</p>
+              <p class="text-[11px] text-slate-400 mt-1">Crie quantas versões quiser, definindo porcentagens ou quantidades de questões por tópico.</p>
             </div>
             ${test ? `<button onclick="renderTestsAdmin()" class="px-3 py-2 bg-slate-800 text-slate-300 rounded-lg text-xs font-bold">Cancelar edição</button>` : ''}
           </div>
 
           <form onsubmit="saveTestFromForm(event, '${test ? escapeJs(test.id) : ''}')" class="space-y-4">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
               <div>
                 <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Nome da versão</label>
                 <input id="test-name" required value="${escapeHtml(test?.name || '')}" placeholder="Ex: Callcenter 1"
@@ -1240,15 +1405,27 @@ const defaultQuestions = [
                 <input id="test-description" value="${escapeHtml(test?.description || '')}" placeholder="Ex: versão mais fácil"
                   class="w-full text-xs p-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white">
               </div>
+              <div>
+                <label class="block text-[10px] font-bold text-rose-300 uppercase mb-1">Total de Questões no Teste</label>
+                <input type="number" id="input-max-test-questions" min="1" max="500" value="${test?.maxQuestions || 50}" placeholder="Ex: 50"
+                  class="w-full text-xs p-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white font-bold focus:outline-none focus:border-rose-500">
+              </div>
             </div>
 
             <div class="border border-rose-900/40 rounded-xl overflow-hidden">
-              <div class="bg-slate-950 px-4 py-3 flex justify-between items-center">
+              <div class="bg-slate-950 px-4 py-3 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
                 <div>
-                  <h4 class="text-xs font-black text-white">Seleção de questões por tópico</h4>
-                  <p class="text-[10px] text-slate-500">A seleção é aleatória e ponderada pelo peso de cada questão.</p>
+                  <h4 class="text-xs font-black text-white flex items-center gap-2">
+                    <span>📊</span> Seleção e Distribuição de Questões por Tópico
+                  </h4>
+                  <p class="text-[10px] text-slate-500">A distribuição pode ser em % do total ou em quantidade fixa por tópico.</p>
                 </div>
-                <button type="button" onclick="addTestRule()" class="px-3 py-2 hero-gradient rounded-lg text-[10px] font-black">➕ Adicionar tópico</button>
+                <div class="flex items-center gap-3">
+                  <span id="selected-questions-percentage-text" class="text-xs font-bold text-rose-400 bg-rose-950/70 border border-rose-800/60 px-3 py-1.5 rounded-lg">
+                    0% (0 de ${test?.maxQuestions || 50} questões definidas)
+                  </span>
+                  <button type="button" onclick="addTestRule()" class="px-3 py-2 hero-gradient rounded-lg text-[10px] font-black text-white">➕ Adicionar tópico</button>
+                </div>
               </div>
               <div id="test-rules-container" class="p-3 space-y-2"></div>
             </div>
@@ -1268,10 +1445,11 @@ const defaultQuestions = [
                   <div class="flex items-center gap-2 flex-wrap">
                     <strong class="text-white text-sm">${escapeHtml(t.name)}</strong>
                     <span class="text-[9px] px-2 py-1 rounded-full bg-rose-950 text-rose-300 border border-rose-800">${escapeHtml(t.level)}</span>
+                    <span class="text-[9px] px-2 py-0.5 rounded bg-slate-900 text-slate-300 border border-slate-800 font-bold">Total: ${t.maxQuestions || 50} questões</span>
                   </div>
                   <p class="text-[10px] text-slate-400 mt-1">${escapeHtml(t.description || 'Sem descrição')}</p>
                   <div class="text-[10px] text-slate-500 mt-2">
-                    ${(t.rules || []).map(r => `${escapeHtml(r.topic)}: ${r.mode === 'percentage' ? escapeHtml(formatNumber(r.value)) + '%' : escapeHtml(formatNumber(r.value)) + ' questão(ões)'}`).join(' • ') || 'Nenhuma regra'}
+                    ${(t.rules || []).map(r => `${escapeHtml(r.topic)}: ${(r.mode === 'percentage' || r.type === 'Porcentagem') ? escapeHtml(formatNumber(r.value)) + '%' : escapeHtml(formatNumber(r.value)) + ' questão(ões)'}`).join(' • ') || 'Nenhuma regra'}
                   </div>
                 </div>
                 <div class="flex gap-2 self-start">
@@ -1287,18 +1465,63 @@ const defaultQuestions = [
       renderTestRules(test?.rules || []);
     }
 
+    // Atualiza em tempo real o resumo de porcentagens/quantidades de cada tópico no formulário
+    function updateTopicDistributionSummary() {
+      const maxTotalInput = document.getElementById('input-max-test-questions');
+      const totalMax = parseInt(maxTotalInput ? maxTotalInput.value : 50) || 50;
+
+      const topicRows = document.querySelectorAll('#test-rules-container > div, .test-rule-row, .topic-rule-row');
+      let totalCalculatedQ = 0;
+      let totalPercentConfigured = 0;
+
+      topicRows.forEach(row => {
+        const typeSelect = row.querySelector('select[name="topic-type"], .topic-type-select, .test-rule-mode');
+        const valInput = row.querySelector('input[type="number"], .test-rule-value');
+
+        if (typeSelect && valInput) {
+          const type = typeSelect.value; // 'Porcentagem', 'percentage', 'count', 'Quantidade'
+          const val = parseFloat(valInput.value) || 0;
+
+          if (type === 'Porcentagem' || type === 'porcentagem' || type === 'percent' || type === 'percentage') {
+            totalPercentConfigured += val;
+            const countFromPercent = Math.round((val / 100) * totalMax);
+            totalCalculatedQ += countFromPercent;
+          } else {
+            totalCalculatedQ += val;
+          }
+        }
+      });
+
+      // Atualiza os indicadores do topo
+      const pctText = document.getElementById('selected-questions-percentage-text');
+      if (pctText) {
+        const overallPct = totalMax > 0 ? ((totalCalculatedQ / totalMax) * 100).toFixed(1) : 0;
+        pctText.textContent = `${overallPct}% (${totalCalculatedQ} de ${totalMax} questões definidas)`;
+
+        if (totalCalculatedQ === totalMax) {
+          pctText.className = "text-xs font-bold text-emerald-400 bg-emerald-950/70 border border-emerald-800/60 px-3 py-1.5 rounded-lg";
+        } else if (totalCalculatedQ > totalMax) {
+          pctText.className = "text-xs font-bold text-rose-400 bg-rose-950/70 border border-rose-800/60 px-3 py-1.5 rounded-lg";
+        } else {
+          pctText.className = "text-xs font-bold text-amber-400 bg-amber-950/70 border border-amber-800/60 px-3 py-1.5 rounded-lg";
+        }
+      }
+    }
+
     function renderTestRules(rules = []) {
       const container = document.getElementById('test-rules-container');
       if (!container) return;
       container.innerHTML = '';
-      (rules.length ? rules : [{ topic: activeTopics[0] || '', mode: 'count', value: 1 }]).forEach(rule => addTestRule(rule));
+      (rules.length ? rules : [{ topic: activeTopics[0] || '', mode: 'percentage', type: 'Porcentagem', value: 20 }]).forEach(rule => addTestRule(rule));
+      updateTopicDistributionSummary();
     }
 
     function addTestRule(rule = null) {
       const container = document.getElementById('test-rules-container');
       if (!container) return;
       const row = document.createElement('div');
-      row.className = 'test-rule-row grid grid-cols-1 sm:grid-cols-[1fr_150px_120px_auto] gap-2 items-end bg-slate-900 p-3 rounded-lg border border-slate-800';
+      row.className = 'test-rule-row topic-rule-row grid grid-cols-1 sm:grid-cols-[1fr_150px_120px_auto] gap-2 items-end bg-slate-900 p-3 rounded-lg border border-slate-800';
+      const isPercent = (rule?.mode === 'percentage' || rule?.type === 'Porcentagem' || rule?.type === 'percentage');
       row.innerHTML = `
         <div>
           <label class="block text-[9px] font-bold text-slate-500 uppercase mb-1">Tópico</label>
@@ -1308,33 +1531,47 @@ const defaultQuestions = [
         </div>
         <div>
           <label class="block text-[9px] font-bold text-slate-500 uppercase mb-1">Tipo</label>
-          <select class="test-rule-mode w-full text-xs p-2.5 bg-slate-950 border border-slate-800 rounded-lg text-white">
-            <option value="count" ${rule?.mode !== 'percentage' ? 'selected' : ''}>Número</option>
-            <option value="percentage" ${rule?.mode === 'percentage' ? 'selected' : ''}>Porcentagem</option>
+          <select name="topic-type" class="topic-type-select test-rule-mode w-full text-xs p-2.5 bg-slate-950 border border-slate-800 rounded-lg text-white">
+            <option value="percentage" ${isPercent ? 'selected' : ''}>Porcentagem (%)</option>
+            <option value="count" ${!isPercent ? 'selected' : ''}>Quantidade</option>
           </select>
         </div>
         <div>
           <label class="block text-[9px] font-bold text-slate-500 uppercase mb-1">Valor</label>
-          <input type="number" min="0" step="1" class="test-rule-value w-full text-xs p-2.5 bg-slate-950 border border-slate-800 rounded-lg text-white" value="${rule ? escapeHtml(rule.value) : '1'}">
+          <input type="number" min="0" step="1" class="test-rule-value w-full text-xs p-2.5 bg-slate-950 border border-slate-800 rounded-lg text-white" value="${rule ? escapeHtml(rule.value) : '20'}">
         </div>
-        <button type="button" onclick="this.closest('.test-rule-row').remove()" class="px-3 py-2.5 bg-rose-950 text-rose-300 border border-rose-800 rounded-lg text-xs font-bold">✕</button>
+        <button type="button" onclick="this.closest('.test-rule-row').remove(); updateTopicDistributionSummary();" class="px-3 py-2.5 bg-rose-950 hover:bg-rose-900 text-rose-300 border border-rose-800 rounded-lg text-xs font-bold transition">✕</button>
       `;
       const mode = row.querySelector('.test-rule-mode');
       const value = row.querySelector('.test-rule-value');
       mode.addEventListener('change', () => {
-        value.step = mode.value === 'percentage' ? '1' : '1';
-        value.max = mode.value === 'percentage' ? '100' : '';
+        value.step = '1';
+        value.max = (mode.value === 'percentage' || mode.value === 'Porcentagem') ? '100' : '';
+        updateTopicDistributionSummary();
+      });
+      value.addEventListener('input', () => {
+        updateTopicDistributionSummary();
       });
       mode.dispatchEvent(new Event('change'));
       container.appendChild(row);
+      updateTopicDistributionSummary();
     }
 
     function collectTestRules() {
-      return [...document.querySelectorAll('.test-rule-row')].map(row => ({
-        topic: row.querySelector('.test-rule-topic').value,
-        mode: row.querySelector('.test-rule-mode').value,
-        value: Math.max(0, Number(row.querySelector('.test-rule-value').value) || 0)
-      })).filter(r => r.topic);
+      return [...document.querySelectorAll('#test-rules-container > div, .test-rule-row, .topic-rule-row')].map(row => {
+        const topic = row.querySelector('.test-rule-topic')?.value || '';
+        const modeSelect = row.querySelector('select[name="topic-type"], .topic-type-select, .test-rule-mode');
+        const modeVal = modeSelect?.value || 'percentage';
+        const isPct = (modeVal === 'percentage' || modeVal === 'Porcentagem' || modeVal === 'percent');
+        const valInput = row.querySelector('input[type="number"], .test-rule-value');
+        const value = Math.max(0, Number(valInput?.value) || 0);
+        return {
+          topic,
+          mode: isPct ? 'percentage' : 'count',
+          type: isPct ? 'Porcentagem' : 'Quantidade',
+          value
+        };
+      }).filter(r => r.topic);
     }
 
     function saveTestFromForm(e, editId) {
@@ -1342,6 +1579,7 @@ const defaultQuestions = [
       const name = document.getElementById('test-name').value.trim();
       const level = document.getElementById('test-level').value.trim();
       const description = document.getElementById('test-description').value.trim();
+      const maxQuestions = Math.max(1, parseInt(document.getElementById('input-max-test-questions')?.value) || 50);
       const rules = collectTestRules();
 
       if (!name || !level) return;
@@ -1352,11 +1590,11 @@ const defaultQuestions = [
 
       if (editId) {
         const idx = activeTests.findIndex(t => t.id === editId);
-        if (idx !== -1) activeTests[idx] = { ...activeTests[idx], name, level, description, rules };
+        if (idx !== -1) activeTests[idx] = { ...activeTests[idx], name, level, description, maxQuestions, rules };
       } else {
         activeTests.push({
           id: 'test-' + Date.now() + '-' + Math.random().toString(36).slice(2, 7),
-          name, level, description, rules
+          name, level, description, maxQuestions, rules
         });
       }
 
@@ -1444,11 +1682,66 @@ const defaultQuestions = [
       }
     }
 
+    // ------------------------------------------------------------
+    // PAINEL DE CONFIGURAÇÃO DA NOTA DE CORTE NO ADMIN
+    // ------------------------------------------------------------
+    function renderCutoffAdminPanel() {
+      const adminTab = document.getElementById('admin-tab-discord') || document.querySelector('.admin-section') || document.body;
+      if (!adminTab) return;
+
+      let panel = document.getElementById('cutoff-config-panel');
+      if (!panel) {
+        panel = document.createElement('div');
+        panel.id = 'cutoff-config-panel';
+        panel.className = 'bg-slate-900/90 p-6 rounded-2xl border border-rose-900/40 shadow-xl space-y-4 my-6';
+        panel.innerHTML = `
+          <div class="flex items-center justify-between">
+            <h3 class="font-bold text-white text-sm uppercase tracking-wider flex items-center gap-2">
+              <span>🎯</span> Nota de Corte para Aprovação
+            </h3>
+            <span class="text-xs text-slate-400">Aplica-se aos resultados finais dos alunos e candidatos</span>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-end">
+            <div>
+              <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Mínimo para Aprovação (%):</label>
+              <input type="number" id="input-cutoff-value" min="0" max="100" value="${globalCutoffScore}" 
+                     class="w-full text-xs font-mono p-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white focus:outline-none focus:border-rose-500 font-bold">
+            </div>
+            <button type="button" onclick="updateCutoffSetting()" class="px-6 py-3 hero-gradient text-white text-xs font-black uppercase tracking-wider rounded-xl shadow transition hover:opacity-90">
+              💾 Salvar Nota de Corte
+            </button>
+          </div>
+        `;
+        adminTab.prepend(panel);
+      } else {
+        const input = document.getElementById('input-cutoff-value');
+        if (input) input.value = globalCutoffScore;
+      }
+    }
+
+    function updateCutoffSetting() {
+      const input = document.getElementById('input-cutoff-value');
+      const val = parseFloat(input?.value);
+      if (!isNaN(val) && val >= 0 && val <= 100) {
+        globalCutoffScore = val;
+        localStorage.setItem('conexao_quiz_cutoff', globalCutoffScore);
+        alert(`✅ Nota de corte alterada para ${globalCutoffScore}% com sucesso!`);
+      } else {
+        alert('❌ Insira uma porcentagem válida entre 0 e 100.');
+      }
+    }
+
     // ============================================================
-    // RESULTADO / PDF / DISCORD
+    // RESULTADO / PDF / DISCORD COM NOTA DE CORTE
     // ============================================================
 
     async function processAndSendResults() {
+      // Garante a leitura da nota de corte atualizada
+      const savedCutoff = localStorage.getItem('conexao_quiz_cutoff');
+      if (savedCutoff !== null && !isNaN(parseFloat(savedCutoff))) {
+        globalCutoffScore = parseFloat(savedCutoff);
+      }
+
       const nameInput = document.getElementById('candidate-name');
       const candidateName = nameInput.value.trim();
       const statusEl = document.getElementById('status-message');
@@ -1487,6 +1780,8 @@ const defaultQuestions = [
       });
 
       const percentage = totalMaxPoints > 0 ? Math.round((earnedPoints / totalMaxPoints) * 10000) / 100 : 0;
+      const approved = percentage >= globalCutoffScore;
+
       let level = "Iniciante / Não Recomendado";
       if (percentage >= 80) level = "Avançado / Apto Corporativo";
       else if (percentage >= 50) level = "Intermediário / Em Avaliação";
@@ -1499,7 +1794,7 @@ const defaultQuestions = [
       document.getElementById('pdf-date').textContent = `${dateStr} • ${testName}`;
       document.getElementById('pdf-questions-count').textContent = questions.length;
       document.getElementById('pdf-score-count').textContent = `${formatNumber(earnedPoints)} / ${formatNumber(totalMaxPoints)} pts`;
-      document.getElementById('pdf-percentage').textContent = `${formatNumber(percentage)}%`;
+      document.getElementById('pdf-percentage').textContent = `${formatNumber(percentage)}% (${approved ? 'APROVADO' : 'NÃO APROVADO'})`;
       document.getElementById('pdf-level-badge').textContent = `${level} • ${testLevel}`;
 
       const catBreakdownEl = document.getElementById('pdf-category-breakdown');
@@ -1539,15 +1834,16 @@ const defaultQuestions = [
         const pdfBlob = await html2pdf().set(opt).from(pdfElement).output('blob');
         const formData = new FormData();
         const mention = discordSettings.userId ? `<@${discordSettings.userId}>` : '';
+        const statusBadge = approved ? "🎉 **APROVADO**" : "❌ **NÃO APROVADO**";
         const payloadJson = {
           content: `📢 **Nova Avaliação Técnica Concluída - Conexão Provedor** ${mention}`,
           embeds: [{
             title: `📋 ${testName} — Candidato: ${candidateName}`,
-            description: `**Versão/Nível:** \`${testLevel}\`\n**Pontuação Ponderada:** \`${formatNumber(earnedPoints)} / ${formatNumber(totalMaxPoints)} pts\` (${formatNumber(percentage)}%)\n**Classificação RH:** \`${level}\`\n**Data:** \`${dateStr}\``,
-            color: percentage >= 80 ? 3066993 : (percentage >= 50 ? 16753920 : 15158332),
+            description: `**Resultado Final:** ${statusBadge} (Nota de Corte: ${globalCutoffScore}%)\n**Versão/Nível:** \`${testLevel}\`\n**Pontuação Ponderada:** \`${formatNumber(earnedPoints)} / ${formatNumber(totalMaxPoints)} pts\` (${formatNumber(percentage)}%)\n**Classificação RH:** \`${level}\`\n**Data:** \`${dateStr}\``,
+            color: approved ? 3066993 : 15158332,
             fields: Object.keys(catStats).map(cat => ({
               name: cat,
-              value: `${formatNumber(catStats[cat].earnedPoints)}/${formatNumber(catStats[cat].totalPoints)} pts (${formatNumber((catStats[cat].earnedPoints/catStats[cat].totalPoints)*100)}%)`,
+              value: `${formatNumber(catStats[cat].earnedPoints)}/${formatNumber(catStats[cat].totalPoints)} pts (${formatNumber((catStats[cat].earnedPoints / catStats[cat].totalPoints) * 100)}%)`,
               inline: true
             })),
             footer: { text: "Conexão Provedor de Internet • Anexo PDF do Relatório RH" },
@@ -1563,6 +1859,20 @@ const defaultQuestions = [
           document.getElementById('success-candidate-name').textContent = candidateName;
           document.getElementById('final-score-text').textContent = `${formatNumber(earnedPoints)} / ${formatNumber(totalMaxPoints)} pts (${formatNumber(percentage)}%)`;
           document.getElementById('final-level-text').textContent = `Teste: ${testName} • ${testLevel} • Classificação: ${level}`;
+
+          // Exibe status Aprovado / Não Aprovado com badge de destaque
+          const existingBadge = document.getElementById('cutoff-result-badge');
+          if (existingBadge) existingBadge.remove();
+
+          const badgeHtml = approved
+            ? `<div id="cutoff-result-badge" class="mt-4 p-4 bg-emerald-950/80 border border-emerald-500/50 rounded-xl text-emerald-400 font-black text-center text-sm shadow-xl">
+                 🎉 APROVADO! (Pontuação: ${formatNumber(percentage)}% | Mínimo exigido: ${globalCutoffScore}%)
+               </div>`
+            : `<div id="cutoff-result-badge" class="mt-4 p-4 bg-rose-950/80 border border-rose-500/50 rounded-xl text-rose-400 font-black text-center text-sm shadow-xl">
+                 ❌ NÃO APROVADO (Pontuação: ${formatNumber(percentage)}% | Mínimo exigido: ${globalCutoffScore}%)
+               </div>`;
+
+          document.getElementById('final-level-text').insertAdjacentHTML('afterend', badgeHtml);
           switchView('success');
         } else {
           throw new Error(`Servidor Discord retornou código HTTP ${response.status}`);
@@ -1576,6 +1886,10 @@ const defaultQuestions = [
       }
     }
 
+    // Exposição global
+    window.processAndSendResults = processAndSendResults;
+
   </script>
 </body>
+
 </html>
