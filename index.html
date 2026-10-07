@@ -325,6 +325,41 @@
           class="bg-slate-950 hover:bg-slate-900 text-rose-300 text-xs font-bold px-4 py-2.5 rounded-xl border border-rose-800 transition shadow">
           🚪 Sair do Painel
         </button>
+      <!-- PAINEL DE PERSISTÊNCIA & ARQUIVO DATA.JSON -->
+      <div class="bg-slate-900/90 p-5 rounded-2xl border border-rose-900/40 shadow-xl space-y-3">
+        <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-3">
+          <div>
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-base">📁</span>
+              <h3 class="font-bold text-white text-sm">Persistência de Dados & Arquivo data.json</h3>
+              <span id="file-sync-status-badge" class="text-[10px] font-black px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700">
+                Verificando sincronização...
+              </span>
+            </div>
+            <p class="text-[11px] text-slate-400 mt-1">
+              Todas as questões, tópicos, testes e nota de corte são atualizados continuamente. Vincule diretamente ao arquivo <code class="text-rose-400 font-mono">data.json</code> no computador para salvar automaticamente no disco a cada alteração.
+            </p>
+          </div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <button type="button" onclick="linkOrSelectDataJson()"
+              class="px-3.5 py-2 bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600 text-white rounded-xl text-xs font-bold shadow flex items-center gap-1.5 transition">
+              <span>📂</span> Vincular data.json (Auto-Save)
+            </button>
+            <button type="button" onclick="downloadDataJson()"
+              class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-bold border border-rose-900/30 flex items-center gap-1.5 transition">
+              <span>💾</span> Baixar data.json
+            </button>
+            <button type="button" onclick="triggerImportDataJson()"
+              class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-bold border border-rose-900/30 flex items-center gap-1.5 transition">
+              <span>📥</span> Importar JSON
+            </button>
+            <input type="file" id="input-import-datajson" accept=".json,application/json" class="hidden" onchange="handleImportFile(event)">
+          </div>
+        </div>
+        <div id="file-sync-details" class="text-[10px] text-slate-400 flex items-center gap-4 flex-wrap border-t border-slate-800/80 pt-2.5">
+          <span>📊 Banco: <strong id="file-questions-count" class="text-white">0</strong> questões • <strong id="file-tests-count" class="text-white">0</strong> testes</span>
+          <span id="file-last-saved" class="text-slate-400">⏱️ Último salvamento: —</span>
+        </div>
       </div>
 
       <!-- Navigation Tabs inside Admin -->
@@ -678,6 +713,8 @@
     let activeTests = [];
     let userAnswers = [];
     let currentTest = null;
+    let dataJsonFileHandle = null;
+    let lastSavedTime = null;
 
     let discordSettings = {
       webhook: "https://discord.com/api/webhooks/1551208352653123666/fqobobH5FtuOcYJ8bsb51DPCDfsagy2S9M3h39EhFCn9nJmX7pGKOrJ3lvgzDJXsmLY7",
@@ -692,8 +729,203 @@
       cutoff: 'conexao_quiz_cutoff'
     };
 
-    window.addEventListener('DOMContentLoaded', () => {
-      loadStoredData();
+    // IndexedDB para persistir permissão do data.json no computador
+    const IDB_NAME = 'ConexaoQuizDB';
+    const IDB_STORE = 'handles';
+
+    function openHandleDB() {
+      return new Promise((resolve) => {
+        if (!window.indexedDB) return resolve(null);
+        const req = indexedDB.open(IDB_NAME, 1);
+        req.onupgradeneeded = (e) => {
+          e.target.result.createObjectStore(IDB_STORE);
+        };
+        req.onsuccess = (e) => resolve(e.target.result);
+        req.onerror = () => resolve(null);
+      });
+    }
+
+    async function storeFileHandle(handle) {
+      try {
+        const db = await openHandleDB();
+        if (!db) return;
+        const tx = db.transaction(IDB_STORE, 'readwrite');
+        tx.objectStore(IDB_STORE).put(handle, 'dataJsonFile');
+      } catch (e) {
+        console.warn('Erro ao armazenar handle no IndexedDB:', e);
+      }
+    }
+
+    async function retrieveFileHandle() {
+      try {
+        const db = await openHandleDB();
+        if (!db) return null;
+        return new Promise((resolve) => {
+          const tx = db.transaction(IDB_STORE, 'readonly');
+          const req = tx.objectStore(IDB_STORE).get('dataJsonFile');
+          req.onsuccess = () => resolve(req.result || null);
+          req.onerror = () => resolve(null);
+        });
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function buildDataPayload() {
+      return {
+        version: 2,
+        savedAt: new Date().toISOString(),
+        cutoffScore: globalCutoffScore,
+        topics: activeTopics,
+        tests: activeTests,
+        questions: activeQuestions
+      };
+    }
+
+    async function saveToDiskFile() {
+      if (!dataJsonFileHandle) {
+        updateFileStatusBadge();
+        return;
+      }
+      try {
+        const opts = { mode: 'readwrite' };
+        if (typeof dataJsonFileHandle.queryPermission === 'function') {
+          const perm = await dataJsonFileHandle.queryPermission(opts);
+          if (perm !== 'granted') {
+            const reqPerm = await dataJsonFileHandle.requestPermission(opts);
+            if (reqPerm !== 'granted') {
+              updateFileStatusBadge(false, 'Permissão de escrita necessária');
+              return;
+            }
+          }
+        }
+        const writable = await dataJsonFileHandle.createWritable();
+        const jsonText = JSON.stringify(buildDataPayload(), null, 2);
+        await writable.write(jsonText);
+        await writable.close();
+        lastSavedTime = new Date().toLocaleTimeString('pt-BR');
+        updateFileStatusBadge(true);
+      } catch (err) {
+        console.warn('Erro ao salvar no arquivo data.json:', err);
+        updateFileStatusBadge(false, err.message);
+      }
+    }
+
+    async function linkOrSelectDataJson() {
+      try {
+        if (!('showSaveFilePicker' in window)) {
+          downloadDataJson();
+          alert('Seu navegador não suporta escrita direta via File System API. O arquivo data.json foi baixado.');
+          return;
+        }
+        const handle = await window.showSaveFilePicker({
+          suggestedName: 'data.json',
+          types: [{
+            description: 'Arquivo JSON de Dados (*.json)',
+            accept: { 'application/json': ['.json'] }
+          }]
+        });
+        dataJsonFileHandle = handle;
+        await storeFileHandle(handle);
+        await saveToDiskFile();
+        alert('🎉 Arquivo data.json vinculado com sucesso!\nA partir de agora, qualquer alteração em questões, tópicos, testes ou nota de corte será salva automaticamente no arquivo.');
+        updateFileStatusBadge(true);
+      } catch (err) {
+        if (err.name !== 'AbortError') {
+          console.error(err);
+          alert('Não foi possível vincular o arquivo: ' + err.message);
+        }
+      }
+    }
+
+    function downloadDataJson() {
+      const jsonText = JSON.stringify(buildDataPayload(), null, 2);
+      const blob = new Blob([jsonText], { type: 'application/json;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'data.json';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      lastSavedTime = new Date().toLocaleTimeString('pt-BR');
+      updateFileStatusBadge();
+    }
+
+    function triggerImportDataJson() {
+      const input = document.getElementById('input-import-datajson');
+      if (input) input.click();
+    }
+
+    function handleImportFile(event) {
+      const file = event.target.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const parsed = JSON.parse(e.target.result);
+          applyImportedData(parsed);
+          alert(`✅ Arquivo carregado com sucesso! ${activeQuestions.length} questões e ${activeTests.length} testes sincronizados.`);
+        } catch (err) {
+          alert('❌ Erro ao ler arquivo JSON: formato inválido ou corrompido.');
+        }
+        event.target.value = '';
+      };
+      reader.readAsText(file, 'UTF-8');
+    }
+
+    function applyImportedData(data) {
+      if (Array.isArray(data.questions) && data.questions.length) {
+        activeQuestions = data.questions;
+      }
+      if (Array.isArray(data.topics) && data.topics.length) {
+        activeTopics = data.topics;
+      }
+      if (Array.isArray(data.tests) && data.tests.length) {
+        activeTests = data.tests.map(normalizeTest);
+      }
+      if (data.cutoffScore !== undefined && !isNaN(parseFloat(data.cutoffScore))) {
+        globalCutoffScore = parseFloat(data.cutoffScore);
+        localStorage.setItem(STORAGE.cutoff, String(globalCutoffScore));
+      }
+      saveDataToStorage();
+      renderQuestions();
+      updateProgress();
+      renderAdminDashboard();
+      renderCutoffAdminPanel();
+      renderTestSelector();
+      if (activeTests.length) selectTest(activeTests[0].id, true);
+    }
+
+    function updateFileStatusBadge(success = null, errorMsg = '') {
+      const badge = document.getElementById('file-sync-status-badge');
+      const qCount = document.getElementById('file-questions-count');
+      const tCount = document.getElementById('file-tests-count');
+      const lastSaved = document.getElementById('file-last-saved');
+
+      if (qCount) qCount.textContent = activeQuestions.length;
+      if (tCount) tCount.textContent = activeTests.length;
+      if (lastSaved && lastSavedTime) lastSaved.textContent = `⏱️ Último salvamento: ${lastSavedTime}`;
+
+      if (!badge) return;
+
+      if (dataJsonFileHandle) {
+        if (success === false) {
+          badge.className = "text-[10px] font-black px-2.5 py-0.5 rounded-full bg-rose-950 text-rose-300 border border-rose-800";
+          badge.textContent = "⚠️ Erro ao gravar no data.json: " + (errorMsg || 'Permissão');
+        } else {
+          badge.className = "text-[10px] font-black px-2.5 py-0.5 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-800";
+          badge.textContent = "🟢 data.json conectado (Auto-save ativo)";
+        }
+      } else {
+        badge.className = "text-[10px] font-black px-2.5 py-0.5 rounded-full bg-amber-950 text-amber-300 border border-amber-800";
+        badge.textContent = "💾 Salvo no cache • Clique em 'Vincular' para sincronizar direto no disco";
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', async () => {
+      await loadStoredData();
       installUIExtensions();
       renderQuestions();
       updateProgress();
@@ -735,33 +967,52 @@
       return Number.isInteger(n) ? String(n) : n.toFixed(2).replace(/0+$/, '').replace(/\.$/, '');
     }
 
-    function loadStoredData() {
-      const savedCutoff = localStorage.getItem(STORAGE.cutoff) || localStorage.getItem('conexao_quiz_cutoff');
-      if (savedCutoff !== null && !isNaN(parseFloat(savedCutoff))) {
-        globalCutoffScore = parseFloat(savedCutoff);
-      }
-
-      const savedTopics = localStorage.getItem(STORAGE.topics);
+    async function loadStoredData() {
+      let loadedFromRemote = false;
       try {
-        activeTopics = savedTopics ? JSON.parse(savedTopics) : [...defaultTopics];
-      } catch { activeTopics = [...defaultTopics]; }
-      if (!Array.isArray(activeTopics) || !activeTopics.length) activeTopics = [...defaultTopics];
+        const resp = await fetch('./data.json?t=' + Date.now());
+        if (resp.ok) {
+          const data = await resp.json();
+          if (Array.isArray(data.questions) && data.questions.length) {
+            activeQuestions = data.questions;
+            if (Array.isArray(data.topics) && data.topics.length) activeTopics = data.topics;
+            if (Array.isArray(data.tests) && data.tests.length) activeTests = data.tests.map(normalizeTest);
+            if (data.cutoffScore !== undefined && !isNaN(parseFloat(data.cutoffScore))) {
+              globalCutoffScore = parseFloat(data.cutoffScore);
+            }
+            loadedFromRemote = true;
+          }
+        }
+      } catch (err) { }
 
-      const savedQuestions = localStorage.getItem(STORAGE.questions);
-      try {
-        activeQuestions = savedQuestions ? JSON.parse(savedQuestions) : [...defaultQuestions];
-      } catch { activeQuestions = [...defaultQuestions]; }
-      if (!Array.isArray(activeQuestions)) activeQuestions = [...defaultQuestions];
+      if (!loadedFromRemote) {
+        const savedCutoff = localStorage.getItem(STORAGE.cutoff) || localStorage.getItem('conexao_quiz_cutoff');
+        if (savedCutoff !== null && !isNaN(parseFloat(savedCutoff))) {
+          globalCutoffScore = parseFloat(savedCutoff);
+        }
 
-      const savedTests = localStorage.getItem(STORAGE.tests);
-      try {
-        activeTests = savedTests ? JSON.parse(savedTests) : [];
-      } catch { activeTests = []; }
+        const savedTopics = localStorage.getItem(STORAGE.topics);
+        try {
+          activeTopics = savedTopics ? JSON.parse(savedTopics) : [...defaultTopics];
+        } catch { activeTopics = [...defaultTopics]; }
+        if (!Array.isArray(activeTopics) || !activeTopics.length) activeTopics = [...defaultTopics];
 
-      if (!Array.isArray(activeTests) || !activeTests.length) {
-        activeTests = [makeDefaultTest()];
-      } else {
-        activeTests = activeTests.map(normalizeTest);
+        const savedQuestions = localStorage.getItem(STORAGE.questions);
+        try {
+          activeQuestions = savedQuestions ? JSON.parse(savedQuestions) : [...defaultQuestions];
+        } catch { activeQuestions = [...defaultQuestions]; }
+        if (!Array.isArray(activeQuestions)) activeQuestions = [...defaultQuestions];
+
+        const savedTests = localStorage.getItem(STORAGE.tests);
+        try {
+          activeTests = savedTests ? JSON.parse(savedTests) : [];
+        } catch { activeTests = []; }
+
+        if (!Array.isArray(activeTests) || !activeTests.length) {
+          activeTests = [makeDefaultTest()];
+        } else {
+          activeTests = activeTests.map(normalizeTest);
+        }
       }
 
       const savedDiscord = localStorage.getItem(STORAGE.discord);
@@ -775,6 +1026,15 @@
       if (userIdEl) userIdEl.value = discordSettings.userId || '';
 
       userAnswers = new Array(activeQuestions.length).fill(null);
+
+      try {
+        const savedHandle = await retrieveFileHandle();
+        if (savedHandle) {
+          dataJsonFileHandle = savedHandle;
+        }
+      } catch (e) { }
+
+      updateFileStatusBadge();
     }
 
     function makeDefaultTest() {
@@ -818,6 +1078,10 @@
       localStorage.setItem(STORAGE.questions, JSON.stringify(activeQuestions));
       localStorage.setItem(STORAGE.topics, JSON.stringify(activeTopics));
       localStorage.setItem(STORAGE.tests, JSON.stringify(activeTests));
+      localStorage.setItem(STORAGE.cutoff, String(globalCutoffScore));
+
+      saveToDiskFile();
+      updateFileStatusBadge();
     }
 
     function restoreDefaultQuestions() {
@@ -850,6 +1114,9 @@
         welcome.querySelector('.relative.z-10')?.appendChild(box);
       }
 
+      const currentId = currentTest ? currentTest.id : (activeTests[0]?.id || '');
+      const countDisplay = activeQuestionsForQuiz ? activeQuestionsForQuiz.length : (currentTest?.maxQuestions || 50);
+
       box.innerHTML = `
         <div class="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-3 items-end">
           <div>
@@ -859,15 +1126,15 @@
             <select id="candidate-test-select"
               onchange="selectTest(this.value)"
               class="w-full text-sm px-4 py-3 bg-slate-950 border border-rose-900/60 rounded-xl text-white focus:outline-none focus:border-rose-500 font-medium">
-              ${activeTests.map(t => `<option value="${escapeHtml(t.id)}">${escapeHtml(t.name)} — ${escapeHtml(t.level)}</option>`).join('')}
+              ${activeTests.map(t => `<option value="${escapeHtml(t.id)}" ${t.id === currentId ? 'selected' : ''}>${escapeHtml(t.name)} — ${escapeHtml(t.level)}</option>`).join('')}
             </select>
           </div>
           <div class="bg-slate-950 border border-rose-900/40 rounded-xl px-4 py-3 text-xs text-slate-300">
             <span class="text-rose-300 font-bold">Questões desta versão:</span>
-            <strong id="candidate-test-question-count" class="text-white">0</strong>
+            <strong id="candidate-test-question-count" class="text-white">${countDisplay}</strong>
           </div>
         </div>
-        <p id="candidate-test-description" class="text-[11px] text-slate-400 mt-2"></p>
+        <p id="candidate-test-description" class="text-[11px] text-slate-400 mt-2">${escapeHtml(currentTest?.description || (currentTest ? `Nível: ${currentTest.level}` : ''))}</p>
       `;
     }
 
@@ -961,6 +1228,17 @@
           selectedPool.push(q);
         });
       });
+
+      // Se sobrou espaço para atingir totalMax por causa de arredondamento de porcentagem ou regras parciais, preenche com questões restantes do banco
+      if (selectedPool.length < totalMax && (allQuestions || []).length > selectedPool.length) {
+        const remaining = (allQuestions || []).filter(q => !usedIds.has(q.id));
+        const needed = totalMax - selectedPool.length;
+        const fillPicked = (typeof weightedSample === 'function') ? weightedSample(remaining, needed) : remaining.slice(0, needed);
+        fillPicked.forEach(q => {
+          usedIds.add(q.id);
+          selectedPool.push(q);
+        });
+      }
 
       // Embaralha a ordem final do teste
       for (let i = selectedPool.length - 1; i > 0; i--) {
@@ -1146,6 +1424,16 @@
       });
       document.getElementById(`view-${viewName}`)?.classList.remove('hidden-screen');
       window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // Ao alternar para o quiz, garante que as perguntas estejam sincronizadas com a versão do teste selecionada
+      if (viewName === 'quiz' && currentTest) {
+        if (!activeQuestionsForQuiz || activeQuestionsForQuiz.length !== currentTest.maxQuestions) {
+          selectTest(currentTest.id, true);
+        } else {
+          renderQuestions();
+          updateProgress();
+        }
+      }
     }
 
     function checkCompletionBeforeSubmit() {
@@ -1216,6 +1504,7 @@
       renderQuestionsTable();
       renderTopicsGrid();
       renderTestSelector();
+      updateFileStatusBadge();
     }
 
     function renderQuestionsTable() {
@@ -1611,12 +1900,14 @@
         return;
       }
 
+      let targetId = editId;
       if (editId) {
         const idx = activeTests.findIndex(t => t.id === editId);
         if (idx !== -1) activeTests[idx] = { ...activeTests[idx], name, level, description, maxQuestions, rules };
       } else {
+        targetId = 'test-' + Date.now() + '-' + Math.random().toString(36).slice(2, 7);
         activeTests.push({
-          id: 'test-' + Date.now() + '-' + Math.random().toString(36).slice(2, 7),
+          id: targetId,
           name, level, description, maxQuestions, rules
         });
       }
@@ -1625,6 +1916,10 @@
       renderAdminDashboard();
       renderTestsAdmin();
       renderTestSelector();
+
+      // Sincroniza imediatamente o teste ativo e regenera o quiz com a nova quantidade de questões
+      const activeTestToSelect = (currentTest && currentTest.id === targetId) ? targetId : (currentTest?.id || targetId);
+      selectTest(activeTestToSelect, true);
     }
 
     function duplicateTest(testId) {
@@ -1638,6 +1933,7 @@
       renderAdminDashboard();
       renderTestsAdmin();
       renderTestSelector();
+      selectTest(copy.id, true);
     }
 
     function deleteTest(testId) {
@@ -1777,7 +2073,7 @@
       const val = parseFloat(input?.value);
       if (!isNaN(val) && val >= 0 && val <= 100) {
         globalCutoffScore = val;
-        localStorage.setItem('conexao_quiz_cutoff', String(globalCutoffScore));
+        saveDataToStorage();
         if (statusEl) {
           statusEl.className = 'text-xs p-3 rounded-xl font-bold border bg-emerald-950 text-emerald-300 border-emerald-800';
           statusEl.textContent = `✅ Nota de corte salva com sucesso: ${globalCutoffScore}% — candidatos precisarão atingir pelo menos ${globalCutoffScore}% para serem aprovados.`;
